@@ -42,7 +42,7 @@ call vundle#end()
 filetype plugin indent on
 
 set termguicolors
-colorscheme Seoulism
+colorscheme seoulism
 ````
 
 Run:
@@ -51,8 +51,8 @@ Run:
 
 ### Manual
 
-* Vim: `~/.vim/colors/Seoulism.vim`
-* Neovim: `~/.config/nvim/colors/Seoulism.vim`
+* Vim: `~/.vim/colors/seoulism.vim`
+* Neovim: `~/.config/nvim/colors/seoulism.vim`
 
 ```vim
 set termguicolors

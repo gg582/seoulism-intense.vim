@@ -61,7 +61,7 @@ endif
 
 call s:hi('Normal', '#ecece9', '#101114', '255', '233', 'NONE')
 call s:hi('NormalNC', '#bebeba', '#101114', '250', '233', 'NONE')
-call s:hi('Comment', '#373c44', 'NONE', '237', 'NONE', 'italic')
+call s:hi('Comment', '#6f747b', 'NONE', '243', 'NONE', 'italic')
 call s:hi('Constant', '#688dee', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('String', '#f6c940', 'NONE', '221', 'NONE', 'NONE')
 call s:hi('Character', '#ffde78', 'NONE', '222', 'NONE', 'NONE')

@@ -81,6 +81,18 @@ function! s:RealTimeCheck() abort
 
     if l:total == 0 | return | endif
 
+    " Compute percentages
+    let l:p_wood  = (l:stats['WOOD']  * 100.0) / l:total
+    let l:p_fire  = (l:stats['FIRE']  * 100.0) / l:total
+    let l:p_earth = (l:stats['EARTH'] * 100.0) / l:total
+    let l:p_metal = (l:stats['METAL'] * 100.0) / l:total
+    let l:p_water = (l:stats['WATER'] * 100.0) / l:total
+
+    let l:mix_msg = printf(
+        \ ' | Mix: WOOD %.1f%%%% FIRE %.1f%%%% EARTH %.1f%%%% METAL %.1f%%%% WATER %.1f%%%%',
+        \ l:p_wood, l:p_fire, l:p_earth, l:p_metal, l:p_water
+        \ )
+
     " 1. Analyze Structural Profile (Real-time info)
     let l:profile = 'Balanced'
     if l:stats['WATER'] > (l:total * 0.4)
@@ -108,7 +120,7 @@ function! s:RealTimeCheck() abort
     endfor
 
     " 3. Output (avoid spamming the command line)
-    let l:msg = '[Seoulism] Profile: ' . l:profile . l:conflict_msg
+    let l:msg = '[Seoulism] Profile: ' . l:profile . l:mix_msg . l:conflict_msg
     if !exists('b:seoulism_last_msg') | let b:seoulism_last_msg = '' | endif
     if l:msg !=# b:seoulism_last_msg
         let b:seoulism_last_msg = l:msg

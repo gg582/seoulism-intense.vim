@@ -1,4 +1,3 @@
-````markdown
 # Seoulism
 
 A Vim and Neovim colorscheme inspired by Korean color tradition and modern Seoul light.
@@ -20,7 +19,7 @@ Best with:
 ```vim
 set termguicolors
 colorscheme seoulism
-````
+```
 
 ---
 

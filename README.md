@@ -92,7 +92,7 @@ Run:
 
 ```vim
 set termguicolors
-colorscheme Seoulism
+colorscheme seoulism
 ```
 
 ## Code Tendency Checker

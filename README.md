@@ -15,7 +15,7 @@ Seoulism takes Korean color sources and translates them into a clean dark UI pal
 
 I have spent some time developing **Seoulism**, a Vim theme that approaches Eastern aesthetics from a systemic and structural perspective. My goal was to move away from purely mystical or exotic interpretations of the tradition.
 
-While the "Five Directional Colors" (오방색, 五方色) originated in broader East Asian philosophy(by Zou Yan), its true value lies in how it was localized and reconfigured into a rigorous system of order within Korean culture. By stripping away the mystical layers, I found a profound structural and cognitive-scientific core. This theme is an exploration of that hidden logic. It showcases the systemic thinking inherent in the Korean intellectual tradition.
+While the "Five Directional Colors" (오방색, 五方色) originated in broader East Asian philosophy(by Zou Yan, especially China), its true value lies in how it was localized and reconfigured into a rigorous system of order within Korean culture. By stripping away the mystical layers, I found a profound structural and cognitive-scientific core. This theme is an exploration of that hidden logic. It showcases the systemic thinking inherent in the Korean intellectual tradition.
 
 **Beyond the "Zen" Cliché**
 

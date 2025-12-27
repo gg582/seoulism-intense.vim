@@ -48,6 +48,10 @@ function! s:hi(group, guifg, guibg, ctermfg, ctermbg, attr) abort
         \ 'ctermfg=' . a:ctermfg . ' ctermbg=' . a:ctermbg
 endfunction
 
+" --- Fundamental Definition: Birth (Jade) ---
+" Define this early so other groups can link to it.
+call s:hi('FuncKey', '#2aa394', 'NONE', '36', 'NONE', 'bold')
+
 " Undercurl colors (best-effort):
 if has('nvim')
   try
@@ -149,6 +153,12 @@ call s:hi('DiagnosticUnderlineWarn', 'NONE', 'NONE', 'NONE', 'NONE', 'undercurl'
 call s:hi('DiagnosticUnderlineInfo', 'NONE', 'NONE', 'NONE', 'NONE', 'undercurl')
 call s:hi('DiagnosticUnderlineHint', 'NONE', 'NONE', 'NONE', 'NONE', 'undercurl')
 
+" --- Systemic Override (Birth Anchor) ---
+" Placing legacy links before Treesitter to set the baseline
+hi! link StorageClass FuncKey
+hi! link Structure FuncKey
+hi! link Function FuncKey
+
 " Treesitter links:
 silent! hi! link @comment Comment
 silent! hi! link @string String
@@ -162,7 +172,7 @@ silent! hi! link @constant.builtin Constant
 silent! hi! link @function Function
 silent! hi! link @function.builtin Function
 silent! hi! link @keyword Keyword
-silent! hi! link @keyword.function Keyword
+" REPEAT: Do NOT link @keyword.function to Keyword here to avoid purple override.
 silent! hi! link @keyword.return Keyword
 silent! hi! link @conditional Conditional
 silent! hi! link @repeat Repeat
@@ -190,14 +200,6 @@ hi! link EndOfBuffer NonText
 hi! link CursorLineSign SignColumn
 hi! link CursorLineFold FoldColumn
 
-" Define a dedicated group for function definition keywords using c6 (Jade)
-call s:hi('FuncKey', '#2aa394', 'NONE', '36', 'NONE', 'bold')
-
-" Universal link for Vim's legacy syntax (handles 'function', 'def', etc.)
-hi! link StorageClass FuncKey
-hi! link Structure FuncKey
-hi! link Function FuncKey
-
 " Neovim terminal palette:
 if has('nvim')
   let g:terminal_color_0  = '#101114'
@@ -216,7 +218,26 @@ if has('nvim')
   let g:terminal_color_13 = '#f06f67'
   let g:terminal_color_14 = '#5bbfb0'
   let g:terminal_color_15 = '#fffffc'
+  " Neovim specific overrides
   silent! hi! link @keyword.function FuncKey
   silent! hi! link @keyword.method FuncKey
   silent! hi! link @function FuncKey
 endif
+
+" --- THE UNSTOPPABLE JADE FORCE (Vim 9.1 Absolute Override) ---
+" This uses 'matchadd' which lives in a higher layer than the syntax engine.
+function! s:ForceSeoulismJade() abort
+  " Clear existing matches to prevent memory leaks
+  if exists('w:seoulism_jade_match')
+    silent! call matchdelete(w:seoulism_jade_match)
+  endif
+  " Force 'func' and 'function name' into Jade(c6)
+  " This bypasses the entire syntax engine and paints directly on the screen.
+  let w:seoulism_jade_match = matchadd('FuncKey', '\<func\>\|\%(\<void\>\|\<int\>\|\<char\>\)\s\+\zs\w\+\ze\s*(')
+endfunction
+
+augroup SeoulismFinalVictory
+  autocmd!
+  " Trigger the force-paint every time a buffer is entered or syntax is loaded
+  autocmd BufEnter,WinEnter,Syntax go,c,cpp,rust,python call s:hi('FuncKey', '#2aa394', 'NONE', '36', 'NONE', 'bold') | call s:hi('Function', '#5bbfb0', 'NONE', '73', 'NONE', 'NONE') | call s:ForceSeoulismJade()
+augroup END

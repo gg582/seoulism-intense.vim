@@ -39,6 +39,7 @@ If you find the neon-saturated contrast of contemporary themes too noisy for dee
 
 ### A Chain of Colors
 ![Visualizer](./visualizer.png)
+![Pentagon](./pentagon_cycle.png)
 This diagram illustrates the cognitive transformation from ancestral elemental anchors to modern UI tokens.
 
 ### What inspired the colors

@@ -149,19 +149,6 @@ call s:hi('DiagnosticUnderlineWarn', 'NONE', 'NONE', 'NONE', 'NONE', 'undercurl'
 call s:hi('DiagnosticUnderlineInfo', 'NONE', 'NONE', 'NONE', 'NONE', 'undercurl')
 call s:hi('DiagnosticUnderlineHint', 'NONE', 'NONE', 'NONE', 'NONE', 'undercurl')
 
-" Define a dedicated group for function definition keywords using c6 (Jade)
-call s:hi('FuncKey', '#2aa394', 'NONE', '36', 'NONE', 'bold')
-
-" Universal link for Vim's legacy syntax (handles 'function', 'def', etc.)
-hi! link StorageClass FuncKey
-hi! link Structure FuncKey
-
-" Specific override for Neovim Treesitter to isolate function keywords from other purple keywords
-if has('nvim')
-    silent! hi! link @keyword.function FuncKey
-    silent! hi! link @keyword.method FuncKey
-endif
-
 " Treesitter links:
 silent! hi! link @comment Comment
 silent! hi! link @string String
@@ -203,6 +190,14 @@ hi! link EndOfBuffer NonText
 hi! link CursorLineSign SignColumn
 hi! link CursorLineFold FoldColumn
 
+" Define a dedicated group for function definition keywords using c6 (Jade)
+call s:hi('FuncKey', '#2aa394', 'NONE', '36', 'NONE', 'bold')
+
+" Universal link for Vim's legacy syntax (handles 'function', 'def', etc.)
+hi! link StorageClass FuncKey
+hi! link Structure FuncKey
+hi! link Function FuncKey
+
 " Neovim terminal palette:
 if has('nvim')
   let g:terminal_color_0  = '#101114'
@@ -221,4 +216,7 @@ if has('nvim')
   let g:terminal_color_13 = '#f06f67'
   let g:terminal_color_14 = '#5bbfb0'
   let g:terminal_color_15 = '#fffffc'
+  silent! hi! link @keyword.function FuncKey
+  silent! hi! link @keyword.method FuncKey
+  silent! hi! link @function FuncKey
 endif

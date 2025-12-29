@@ -1,5 +1,5 @@
 " =============================================================================
-" Seoulism Elemental Overcoming Checker (Real-time Analysis)
+" Seoulism Structural Balance Checker (Real-time Analysis)
 " =============================================================================
 
 if exists('g:loaded_seoulism_checker') | finish | endif
@@ -11,7 +11,7 @@ if !exists('g:seoulism_opp_threshold') | let g:seoulism_opp_threshold = 10.0 | e
 
 " Sampling / UI knobs
 if !exists('g:seoulism_sample_step') | let g:seoulism_sample_step = 10 | endif
-if !exists('g:seoulism_sign_text') | let g:seoulism_sign_text = '☯' | endif
+if !exists('g:seoulism_sign_text') | let g:seoulism_sign_text = '◆' | endif
 if !exists('g:seoulism_force_updatetime') | let g:seoulism_force_updatetime = 0 | endif
 
 " Scope:
@@ -27,19 +27,23 @@ if g:seoulism_force_updatetime
     set updatetime=500
 endif
 
-highlight SeoulismWarn ctermfg=Yellow guifg=Yellow
+highlight SeoulismWarn ctermfg=180 guifg=#e5c15a
 execute 'sign define SeoulismSign text=' . g:seoulism_sign_text . ' texthl=SeoulismWarn'
 
 let s:elements = {
-    \ 'WOOD':  ['Function', 'Identifier'],
-    \ 'FIRE':  ['Statement', 'Conditional', 'Repeat', 'Exception'],
-    \ 'EARTH': ['Constant', 'String', 'Number', 'Boolean', 'Float'],
-    \ 'METAL': ['Type', 'StorageClass', 'Structure', 'Typedef'],
-    \ 'WATER': ['Comment', 'Special', 'Delimiter']
+    \ 'FUNCTION': ['Function', 'Identifier'],
+    \ 'CONTROL':  ['Statement', 'Conditional', 'Repeat', 'Exception'],
+    \ 'DATA':     ['Constant', 'String', 'Number', 'Boolean', 'Float'],
+    \ 'TYPE':     ['Type', 'StorageClass', 'Structure', 'Typedef'],
+    \ 'META':     ['Comment', 'Special', 'Delimiter']
     \ }
 
-let s:overcomes = {
-    \ 'WOOD':  'EARTH', 'EARTH': 'WATER', 'WATER': 'FIRE', 'FIRE':  'METAL', 'METAL': 'WOOD'
+let s:dominance = {
+    \ 'FUNCTION': 'DATA',
+    \ 'DATA':     'META',
+    \ 'META':     'CONTROL',
+    \ 'CONTROL':  'TYPE',
+    \ 'TYPE':     'FUNCTION'
     \ }
 
 function! s:Clamp01to100Float(x) abort
@@ -56,7 +60,7 @@ function! s:SetWarnCfg(arg) abort
 endfunction
 
 function! s:ScanRange(first, last) abort
-    let l:stats = {'WOOD': 0, 'FIRE': 0, 'EARTH': 0, 'METAL': 0, 'WATER': 0}
+    let l:stats = {'FUNCTION': 0, 'CONTROL': 0, 'DATA': 0, 'TYPE': 0, 'META': 0}
     let l:total = 0
 
     for l:lnum in range(a:first, a:last)
@@ -120,7 +124,7 @@ function! s:RealTimeCheck() abort
         if !exists('b:seoulism_tick')
             let b:seoulism_tick = -1
             let b:seoulism_scan_pos = 1
-            let b:seoulism_buf_stats = {'WOOD': 0, 'FIRE': 0, 'EARTH': 0, 'METAL': 0, 'WATER': 0}
+            let b:seoulism_buf_stats = {'FUNCTION': 0, 'CONTROL': 0, 'DATA': 0, 'TYPE': 0, 'META': 0}
             let b:seoulism_buf_total = 0
             let b:seoulism_scan_done = 0
         endif
@@ -129,7 +133,7 @@ function! s:RealTimeCheck() abort
         if b:seoulism_tick !=# b:changedtick
             let b:seoulism_tick = b:changedtick
             let b:seoulism_scan_pos = 1
-            let b:seoulism_buf_stats = {'WOOD': 0, 'FIRE': 0, 'EARTH': 0, 'METAL': 0, 'WATER': 0}
+            let b:seoulism_buf_stats = {'FUNCTION': 0, 'CONTROL': 0, 'DATA': 0, 'TYPE': 0, 'META': 0}
             let b:seoulism_buf_total = 0
             let b:seoulism_scan_done = 0
         endif
@@ -181,15 +185,15 @@ function! s:RealTimeCheck() abort
     endif
 
     " Compute percentages
-    let l:p_wood  = (l:stats['WOOD']  * 100.0) / l:total
-    let l:p_fire  = (l:stats['FIRE']  * 100.0) / l:total
-    let l:p_earth = (l:stats['EARTH'] * 100.0) / l:total
-    let l:p_metal = (l:stats['METAL'] * 100.0) / l:total
-    let l:p_water = (l:stats['WATER'] * 100.0) / l:total
+    let l:p_function = (l:stats['FUNCTION'] * 100.0) / l:total
+    let l:p_control  = (l:stats['CONTROL']  * 100.0) / l:total
+    let l:p_data     = (l:stats['DATA']     * 100.0) / l:total
+    let l:p_type     = (l:stats['TYPE']     * 100.0) / l:total
+    let l:p_meta     = (l:stats['META']     * 100.0) / l:total
 
     let l:mix_msg = printf(
-        \ ' | Mix: WOOD %.1f%% FIRE %.1f%% EARTH %.1f%% METAL %.1f%% WATER %.1f%%',
-        \ l:p_wood, l:p_fire, l:p_earth, l:p_metal, l:p_water
+        \ ' | Mix: FUNC %.1f%% CTRL %.1f%% DATA %.1f%% TYPE %.1f%% META %.1f%%',
+        \ l:p_function, l:p_control, l:p_data, l:p_type, l:p_meta
         \ )
 
     if g:seoulism_scope ==# 'buffer' && exists('b:seoulism_scan_done') && !b:seoulism_scan_done
@@ -199,27 +203,27 @@ function! s:RealTimeCheck() abort
 
     " 1) Structural profile
     let l:profile = 'Balanced'
-    if l:stats['WATER'] > (l:total * 0.4)
-        let l:profile = 'Documentation-heavy (Header-like)'
-    elseif l:stats['FIRE'] > (l:total * 0.3)
-        let l:profile = 'Logic-intensive (Control-flow)'
-    elseif l:stats['EARTH'] > (l:total * 0.4)
-        let l:profile = 'Data-centric (Values/Constants)'
-    elseif l:stats['METAL'] > (l:total * 0.3)
-        let l:profile = 'Definition-heavy (Typedef/Struct)'
-    elseif l:stats['WOOD'] > (l:total * 0.3)
-        let l:profile = 'Reference-rich (API/Functions)'
+    if l:stats['META'] > (l:total * 0.4)
+        let l:profile = 'Annotation-heavy (Comments/Delimiters)'
+    elseif l:stats['CONTROL'] > (l:total * 0.3)
+        let l:profile = 'Flow-heavy (Control-paths)'
+    elseif l:stats['DATA'] > (l:total * 0.4)
+        let l:profile = 'Data-centric (Values/Literals)'
+    elseif l:stats['TYPE'] > (l:total * 0.3)
+        let l:profile = 'Definition-heavy (Types/Structs)'
+    elseif l:stats['FUNCTION'] > (l:total * 0.3)
+        let l:profile = 'Reference-heavy (Calls/Identifiers)'
     endif
 
-    " 2) Overcoming detection
+    " 2) Dominance detection
     let l:conflict_msg = ''
-    for [l:attacker, l:victim] in items(s:overcomes)
-        let l:p_att = (l:stats[l:attacker] * 100.0) / l:total
-        let l:p_vic = (l:stats[l:victim] * 100.0) / l:total
-        if (l:p_att - l:p_vic) > g:seoulism_opp_threshold
+    for [l:leader, l:follower] in items(s:dominance)
+        let l:p_lead = (l:stats[l:leader] * 100.0) / l:total
+        let l:p_follow = (l:stats[l:follower] * 100.0) / l:total
+        if (l:p_lead - l:p_follow) > g:seoulism_opp_threshold
             " Place sign on current cursor line (not window first line)
             execute 'sign place 999 group=SeoulismOpp line=' . line('.') . ' name=SeoulismSign buffer=' . bufnr('%')
-            let l:conflict_msg = printf(' | Overcome: %s > %s', l:attacker, l:victim)
+            let l:conflict_msg = printf(' | Dominance: %s > %s', l:leader, l:follower)
             break
         endif
     endfor

@@ -10,13 +10,13 @@ def draw_seoulism_chain():
     # 1. Data Schema: (Direction, Element, Traditional Color, Trad Hex, Seoulism Token, Seoulism Hex, Cognitive Role)
     # This maps the ancestral systemic logic to the actual Vim palette provided.
     chains = [
-        ("Birth", "Wood", "Blue/Jade", "#0000FF", "Jade (c6)", "#2aa394", "Format / Function"),
-        ("Dread", "Fire", "Red", "#FF0000", "Red (c1)", "#ea3c36", "Alert / Error"),
-        ("Origin", "Earth", "Yellow", "#FFFF00", "Gold (c3)", "#f6c940", "Literal / Data"),
-        ("Structure", "Metal", "White", "#FFFFFF", "Foreground", "#ecece9", "Base / Structure"),
-        ("Void", "Water", "Black", "#000000", "Background", "#101114", "Space / Void"),
+        ("Birth", "Wood", "Blue/Jade", "#0000FF", "Jade (c6)", "#3aa39a", "Format / Function"),
+        ("Dread", "Fire", "Red", "#FF0000", "Red (c1)", "#e05a55", "Alert / Error"),
+        ("Origin", "Earth", "Yellow", "#FFFF00", "Gold (c3)", "#e5c15a", "Literal / Data"),
+        ("Structure", "Metal", "White", "#FFFFFF", "Foreground", "#d8d7d2", "Base / Structure"),
+        ("Void", "Water", "Black", "#000000", "Background", "#181a1f", "Space / Void"),
         # Intermediary color representing the systemic framework
-        ("Wisdom", "Polaris", "Purple", "#800080", "Purple (c5)", "#8749ad", "Keyword / Syntax")
+        ("Wisdom", "Polaris", "Purple", "#800080", "Purple (c5)", "#9a6fd6", "Keyword / Syntax")
     ]
 
     G = nx.DiGraph()
@@ -42,23 +42,23 @@ def draw_seoulism_chain():
             elif j == 3: # Seoulism implementation stage
                 node_colors.append(pal_hex)
             else: # Neutral tones for conceptual labels
-                node_colors.append("#464e56") # Using c0 from your palette
+                node_colors.append("#5f6770") # Using c0 from your palette
 
             # Creating the sequential links (The Chain)
             if j > 0:
                 G.add_edge(f"{i}_{j-1}", node_id)
 
     # 3. Visualization Configuration using Seoulism palette colors
-    plt.figure(figsize=(16, 9), facecolor='#070709') # BackgroundFaint
+    plt.figure(figsize=(16, 9), facecolor='#121318') # BackgroundFaint
     ax = plt.gca()
-    ax.set_facecolor('#070709')
+    ax.set_facecolor('#121318')
 
     # Drawing the "Chains" (Edges)
-    nx.draw_networkx_edges(G, pos, edge_color='#242630', arrowsize=20, width=1.2) # BackgroundIntense
+    nx.draw_networkx_edges(G, pos, edge_color='#2b2e36', arrowsize=20, width=1.2) # BackgroundIntense
 
     # Drawing the Nodes
     nx.draw_networkx_nodes(G, pos, node_color=node_colors, node_size=3200, 
-                           edgecolors='#bebeba', linewidths=0.5) # ForegroundFaint
+                           edgecolors='#b7b6b2', linewidths=0.5) # ForegroundFaint
 
     # Label Rendering with contrast-aware coloring
     for node, (x, y) in pos.items():
@@ -70,9 +70,9 @@ def draw_seoulism_chain():
         stage_idx = int(node.split('_')[1])
         if stage_idx in [2, 3]:
             # Simple brightness check: Dark text for light colors (Yellow/White/Jade)
-            text_color = '#101114' if any(c in hex_color.lower() for c in ['f', 'e', 'd']) else '#ecece9'
+            text_color = '#181a1f' if any(c in hex_color.lower() for c in ['f', 'e', 'd']) else '#d8d7d2'
         else:
-            text_color = '#bebeba'
+            text_color = '#b7b6b2'
         
         plt.text(x, y, labels[node], fontsize=8, ha='center', va='center', 
                  fontweight='bold', color=text_color, wrap=True)
@@ -80,11 +80,11 @@ def draw_seoulism_chain():
     # Header Labels for the Cognitive Stages
     headers = ["Direction", "Element", "Trad. Anchor", "Seoulism Token", "Cognitive Role"]
     for i, header in enumerate(headers):
-        plt.text(i * 2.2, 0.8, header, fontsize=11, color='#f6c940', # Gold c3
+        plt.text(i * 2.2, 0.8, header, fontsize=11, color='#e5c15a', # Gold c3
                  ha='center', fontweight='extra bold')
 
     plt.title("Systemic Cognitive Mapping: From Elemental Logic to Seoulism", 
-              color='#ecece9', fontsize=15, pad=40, fontweight='bold')
+              color='#d8d7d2', fontsize=15, pad=40, fontweight='bold')
     
     plt.axis('off')
     plt.tight_layout()

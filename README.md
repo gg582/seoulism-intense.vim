@@ -61,6 +61,7 @@ If neon-saturated themes feel too loud for long sessions, Seoulism aims to stay 
 ![Pentagon](./pentagon_cycle.png)
 
 These diagrams illustrate the cognitive transformation from ancestral elemental anchors to modern UI tokens.
+Basic structure is a mixture between Asian astronomy and Asian color system.
 
 ---
 
@@ -69,6 +70,7 @@ These diagrams illustrate the cognitive transformation from ancestral elemental 
 * **Traditional Korean five-color system (오방색)**
   A framework around five symbolic colors: blue, red, yellow, white, and black.
   Seoulism uses this as a guide for balanced accents and clear hierarchy.
+  *To Chinese people: Although it was originated from China, we have our own adaptation of colors.*
 
 * **Indigo dyeing**
   Deep blues shaped by fabric dye texture rather than flat digital blue.

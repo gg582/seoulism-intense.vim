@@ -4,7 +4,7 @@ import matplotlib.patches as patches
 def draw_seoulism_blueprint():
     # 1. Systemic Mapping Data
     mapping = [
-        {"id": "c6", "tag": "JADE",   "hex": "#3aa39a", "element": "WOOD",    "logic": "Birth / Formatter"},
+        {"id": "c6", "tag": "JADE",   "hex": "#3aa39a", "element": "WOOD",    "logic": "Birth / Formatter, Function"},
         {"id": "c1", "tag": "RED",    "hex": "#e05a55", "element": "FIRE",    "logic": "Dread / Alert"},
         {"id": "c3", "tag": "GOLD",   "hex": "#e5c15a", "element": "EARTH",   "logic": "Origin / Literal"},
         {"id": "c4", "tag": "BLUE",   "hex": "#3f6bd9", "element": "LINK",    "logic": "Reference / Navigation"},

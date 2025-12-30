@@ -4,7 +4,7 @@ A Vim and Neovim colorscheme inspired by Korean color tradition and modern Seoul
 
 ![Preview](./preview.png)
 
-Seoulism translates Korean color sources into a clean dark UI palette with strong contrast—quiet enough for deep work, sharp enough for structure.
+Seoulism translates Korean color sources into a clean dark UI palette with strong contrast. Quiet enough for deep work, sharp enough for structure.
 
 Best with:
 
@@ -41,7 +41,7 @@ This theme is not about "oriental minimalism." It treats color as functional UI 
 
 #### The Principle of "Scene First, Emotion Later" (선경후정, 先景後情)
 
-In this hierarchy, code is the "Scene"—the functional reality—and is rendered with maximum clarity. Comments (human annotation) are intentionally receded so that sentiment never competes with structure.
+In this hierarchy, code is the "Scene"--the functional reality--and is rendered with maximum clarity. Comments (human annotation) are intentionally receded so that sentiment never competes with structure.
 
 #### Pine Ink Black
 
@@ -49,7 +49,7 @@ Korean visual preference often leans toward matte black with a faint blue cast r
 
 #### A living legacy
 
-This is not presented as a museum relic. The system lives on as an implicit logic of order—visible today in modern Korean visual culture and engineering sensibilities.
+This is not presented as a museum relic. The system lives on as an implicit logic of order--visible today in modern Korean visual culture and engineering sensibilities.
 
 If neon-saturated themes feel too loud for long sessions, Seoulism aims to stay grounded, readable, and calm.
 
@@ -79,7 +79,7 @@ Basic structure is a mixture between Asian astronomy and Asian color system.
   Highlights inspired by mineral/metal-like pigments seen in traditional decorative work.
 
 * **Safflower red dye**
-  Reds tuned to feel warm and vivid—more like natural dye than “error-only” red.
+  Reds tuned to feel warm and vivid--more like natural dye than "error-only" red.
 
 * **Pine ash black**
   Matte black tuned with a subtle blue glint.

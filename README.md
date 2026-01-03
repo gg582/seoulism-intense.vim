@@ -158,6 +158,7 @@ It reads your code as a structural mix and reports a dominant tendency profile.
 
 ```vim
 :wopp                 " turn on the tendency checker
+" let g:seoulism_warn_opp = 0 to disable auto-check
 :noopp                " turn off the tendency checker
 :warncfg <0-100>      " set the sensitivity (percent)
 ```

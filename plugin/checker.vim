@@ -1,43 +1,40 @@
 " =============================================================================
-" Seoulism Structural Balance Checker (Real-time Analysis)
+" Seoulism Structural Balance Checker (Optimized for Clarity)
 " =============================================================================
+" This script analyzes code structure based on the 'Five Directional Colors'
+" and 'Scene First, Emotion Later' philosophy of the Seoulism theme.
 
 if exists('g:loaded_seoulism_checker') | finish | endif
 let g:loaded_seoulism_checker = 1
 
-" Core switches
+" --- Configuration ---
 if !exists('g:seoulism_warn_opp') | let g:seoulism_warn_opp = 1 | endif
-if !exists('g:seoulism_opp_threshold') | let g:seoulism_opp_threshold = 10.0 | endif
+" Higher threshold reduces false positives from structural noise.
+if !exists('g:seoulism_opp_threshold') | let g:seoulism_opp_threshold = 25.0 | endif
 
-" Sampling / UI knobs
-if !exists('g:seoulism_sample_step') | let g:seoulism_sample_step = 10 | endif
+" --- Sampling Settings ---
+" Reduced step size to capture short keywords (if/for) more accurately.
+if !exists('g:seoulism_sample_step') | let g:seoulism_sample_step = 2 | endif
 if !exists('g:seoulism_sign_text') | let g:seoulism_sign_text = '◆' | endif
-if !exists('g:seoulism_force_updatetime') | let g:seoulism_force_updatetime = 0 | endif
 
-" Scope:
-"   'context' : cursor-centered ±g:seoulism_context_lines (default, human-friendly)
-"   'window'  : visible window (w0..w$)
-"   'buffer'  : whole buffer (incremental scan per tick to stay real-time)
+" --- Scope Mapping ---
 if !exists('g:seoulism_scope') | let g:seoulism_scope = 'context' | endif
 if !exists('g:seoulism_context_lines') | let g:seoulism_context_lines = 80 | endif
-if !exists('g:seoulism_chunk_lines') | let g:seoulism_chunk_lines = 200 | endif
-
-if g:seoulism_force_updatetime
-    " Setting global options in a plugin can be intrusive; keep it opt-in.
-    set updatetime=500
-endif
 
 highlight SeoulismWarn ctermfg=180 guifg=#e5c15a
 execute 'sign define SeoulismSign text=' . g:seoulism_sign_text . ' texthl=SeoulismWarn'
 
+" Elements categorized by Wu Xing (Five Elements) logic
+" Note: Delimiters are excluded from META to prevent skewed 'Annotation-heavy' results.
 let s:elements = {
     \ 'FUNCTION': ['Function', 'Identifier'],
     \ 'CONTROL':  ['Statement', 'Conditional', 'Repeat', 'Exception'],
-    \ 'DATA':     ['Constant', 'String', 'Number', 'Boolean', 'Float'],
-    \ 'TYPE':     ['Type', 'StorageClass', 'Structure', 'Typedef'],
-    \ 'META':     ['Comment', 'Special', 'Delimiter']
+    \ 'DATA':      ['Constant', 'String', 'Number', 'Boolean', 'Float'],
+    \ 'TYPE':      ['Type', 'StorageClass', 'Structure', 'Typedef'],
+    \ 'META':      ['Comment', 'Special']
     \ }
 
+" Generative cycle for dominance checking (e.g., WOOD -> EARTH)
 let s:dominance = {
     \ 'FUNCTION': 'DATA',
     \ 'DATA':     'META',
@@ -46,40 +43,23 @@ let s:dominance = {
     \ 'TYPE':     'FUNCTION'
     \ }
 
-function! s:Clamp01to100Float(x) abort
-    let l:v = a:x
-    if l:v < 0.0 | let l:v = 0.0 | endif
-    if l:v > 100.0 | let l:v = 100.0 | endif
-    return l:v
-endfunction
-
-function! s:SetWarnCfg(arg) abort
-    let l:v = str2float(a:arg)
-    let g:seoulism_opp_threshold = s:Clamp01to100Float(l:v)
-    echo printf('[Seoulism] warncfg=%.1f (higher = stricter, less output)', g:seoulism_opp_threshold)
-endfunction
-
 function! s:ScanRange(first, last) abort
     let l:stats = {'FUNCTION': 0, 'CONTROL': 0, 'DATA': 0, 'TYPE': 0, 'META': 0}
     let l:total = 0
 
     for l:lnum in range(a:first, a:last)
+        let l:line_str = getline(l:lnum)
+        if empty(trim(l:line_str)) | continue | endif " Skip empty lines for cleaner stats
+
         let l:width = col([l:lnum, '$'])
-
-        " If the line is too short, still try once at column 1
-        if l:width <= 1
-            let l:width = 1
-        endif
-
         for l:cnum in range(1, l:width, g:seoulism_sample_step)
             let l:hi_id = synID(l:lnum, l:cnum, 1)
             let l:hi_name = synIDattr(synIDtrans(l:hi_id), 'name')
 
-            " Some buffers return empty names for plain whitespace; skip those.
-            if l:hi_name ==# '' | continue | endif
+            if l:hi_name ==# '' || l:hi_name ==# 'Delimiter' | continue | endif
 
-            let l:matched = 0
             for [l:el, l:groups] in items(s:elements)
+                let l:matched = 0
                 for l:group in l:groups
                     if l:hi_name =~# l:group
                         let l:stats[l:el] += 1
@@ -92,164 +72,58 @@ function! s:ScanRange(first, last) abort
             endfor
         endfor
     endfor
-
     return [l:stats, l:total]
-endfunction
-
-function! s:GetScopeRange() abort
-    if g:seoulism_scope ==# 'buffer'
-        return [1, line('$'), 'buffer']
-    elseif g:seoulism_scope ==# 'window'
-        return [line('w0'), line('w$'), 'window']
-    else
-        " default: context around cursor
-        let l:cur = line('.')
-        let l:first = l:cur - g:seoulism_context_lines
-        let l:last  = l:cur + g:seoulism_context_lines
-        if l:first < 1 | let l:first = 1 | endif
-        if l:last > line('$') | let l:last = line('$') | endif
-        return [l:first, l:last, 'context']
-    endif
 endfunction
 
 function! s:RealTimeCheck() abort
     if !g:seoulism_warn_opp | return | endif
-    if !exists('g:syntax_on') && &syntax ==# '' | return | endif
 
-    " Clear previous sign (grouped to avoid collisions)
+    let l:cur = line('.')
+    let l:first = max([1, l:cur - g:seoulism_context_lines])
+    let l:last  = min([line('$'), l:cur + g:seoulism_context_lines])
+
+    let [l:stats, l:total] = s:ScanRange(l:first, l:last)
+    if l:total == 0 | return | endif
+
+    " Calculate percentages for UI reporting
+    let l:p = {}
+    for l:k in keys(l:stats)
+        let l:p[l:k] = (l:stats[l:k] * 100.0) / l:total
+    endfor
+
+    " --- Refined Profile Logic ---
+    " Increased thresholds to better reflect actual code tendencies.
+    let l:profile = 'Balanced'
+    if l:p['META'] > 60.0    | let l:profile = 'Annotation-heavy'
+    elseif l:p['CONTROL'] > 35.0 | let l:profile = 'Flow-heavy'
+    elseif l:p['DATA'] > 50.0    | let l:profile = 'Data-centric'
+    elseif l:p['TYPE'] > 40.0    | let l:profile = 'Definition-heavy'
+    endif
+
+    " --- Dominance & Sign Placement ---
+    let l:dom_msg = ''
     silent! execute 'sign unplace * group=SeoulismOpp buffer=' . bufnr('%')
 
-    " Buffer-scope incremental scan state (keeps real-time feel)
-    if g:seoulism_scope ==# 'buffer'
-        if !exists('b:seoulism_tick')
-            let b:seoulism_tick = -1
-            let b:seoulism_scan_pos = 1
-            let b:seoulism_buf_stats = {'FUNCTION': 0, 'CONTROL': 0, 'DATA': 0, 'TYPE': 0, 'META': 0}
-            let b:seoulism_buf_total = 0
-            let b:seoulism_scan_done = 0
-        endif
-
-        " Reset when buffer changed
-        if b:seoulism_tick !=# b:changedtick
-            let b:seoulism_tick = b:changedtick
-            let b:seoulism_scan_pos = 1
-            let b:seoulism_buf_stats = {'FUNCTION': 0, 'CONTROL': 0, 'DATA': 0, 'TYPE': 0, 'META': 0}
-            let b:seoulism_buf_total = 0
-            let b:seoulism_scan_done = 0
-        endif
-
-        let l:first = b:seoulism_scan_pos
-        let l:last  = min([line('$'), b:seoulism_scan_pos + g:seoulism_chunk_lines - 1])
-
-        let [l:chunk_stats, l:chunk_total] = s:ScanRange(l:first, l:last)
-
-        if l:chunk_total > 0
-            for l:k in keys(l:chunk_stats)
-                let b:seoulism_buf_stats[l:k] += l:chunk_stats[l:k]
-            endfor
-            let b:seoulism_buf_total += l:chunk_total
-        endif
-
-        " Advance scan
-        if l:last >= line('$')
-            let b:seoulism_scan_pos = 1
-            let b:seoulism_scan_done = 1
-        else
-            let b:seoulism_scan_pos = l:last + 1
-        endif
-
-        let l:stats = b:seoulism_buf_stats
-        let l:total = b:seoulism_buf_total
-        let l:scope_label = 'buffer'
-    else
-        let [l:first, l:last, l:scope_label] = s:GetScopeRange()
-        let [l:stats, l:total] = s:ScanRange(l:first, l:last)
-
-        " If you were on a blank area and got no samples, fall back to window scan once.
-        if l:total == 0 && l:scope_label !=# 'window'
-            let [l:stats, l:total] = s:ScanRange(line('w0'), line('w$'))
-            let l:scope_label = 'window'
-        endif
-    endif
-
-    if l:total == 0
-        " Nothing to sample (e.g., very short buffer or no syntax groups)
-        " Avoid spamming; only echo if it changes.
-        let l:msg = '[Seoulism] No samples (scope=' . l:scope_label . ').'
-        if !exists('b:seoulism_last_msg') | let b:seoulism_last_msg = '' | endif
-        if l:msg !=# b:seoulism_last_msg
-            let b:seoulism_last_msg = l:msg
-            echo l:msg
-        endif
-        return
-    endif
-
-    " Compute percentages
-    let l:p_function = (l:stats['FUNCTION'] * 100.0) / l:total
-    let l:p_control  = (l:stats['CONTROL']  * 100.0) / l:total
-    let l:p_data     = (l:stats['DATA']     * 100.0) / l:total
-    let l:p_type     = (l:stats['TYPE']     * 100.0) / l:total
-    let l:p_meta     = (l:stats['META']     * 100.0) / l:total
-
-    let l:mix_msg = printf(
-        \ ' | Mix: FUNC %.1f%% CTRL %.1f%% DATA %.1f%% TYPE %.1f%% META %.1f%%',
-        \ l:p_function, l:p_control, l:p_data, l:p_type, l:p_meta
-        \ )
-
-    if g:seoulism_scope ==# 'buffer' && exists('b:seoulism_scan_done') && !b:seoulism_scan_done
-        let l:scan_pct = float2nr((b:seoulism_scan_pos * 100.0) / max([1, line('$')]))
-        let l:mix_msg .= printf(' | Scan %d%%', l:scan_pct)
-    endif
-
-    " 1) Structural profile
-    let l:profile = 'Balanced'
-    if l:stats['META'] > (l:total * 0.4)
-        let l:profile = 'Annotation-heavy (Comments/Delimiters)'
-    elseif l:stats['CONTROL'] > (l:total * 0.3)
-        let l:profile = 'Flow-heavy (Control-paths)'
-    elseif l:stats['DATA'] > (l:total * 0.4)
-        let l:profile = 'Data-centric (Values/Literals)'
-    elseif l:stats['TYPE'] > (l:total * 0.3)
-        let l:profile = 'Definition-heavy (Types/Structs)'
-    elseif l:stats['FUNCTION'] > (l:total * 0.3)
-        let l:profile = 'Reference-heavy (Calls/Identifiers)'
-    endif
-
-    " 2) Dominance detection
-    let l:conflict_msg = ''
     for [l:leader, l:follower] in items(s:dominance)
-        let l:p_lead = (l:stats[l:leader] * 100.0) / l:total
-        let l:p_follow = (l:stats[l:follower] * 100.0) / l:total
-        if (l:p_lead - l:p_follow) > g:seoulism_opp_threshold
-            " Place sign on current cursor line (not window first line)
+        if (l:p[l:leader] - l:p[l:follower]) > g:seoulism_opp_threshold
             execute 'sign place 999 group=SeoulismOpp line=' . line('.') . ' name=SeoulismSign buffer=' . bufnr('%')
-            let l:conflict_msg = printf(' | Dominance: %s > %s', l:leader, l:follower)
+            let l:dom_msg = printf(' | Dominance: %s > %s', l:leader, l:follower)
             break
         endif
     endfor
 
-    " 3) Output (avoid spamming command line)
-    let l:msg = '[Seoulism] Scope: ' . l:scope_label . ' | Profile: ' . l:profile . l:mix_msg . l:conflict_msg
-    if !exists('b:seoulism_last_msg') | let b:seoulism_last_msg = '' | endif
-    if l:msg !=# b:seoulism_last_msg
+    let l:msg = printf('[Seoulism] %s | Profile: %s | FUNC %.1f%% CTRL %.1f%% DATA %.1f%% TYPE %.1f%% META %.1f%%%s',
+        \ g:seoulism_scope, l:profile, l:p['FUNCTION'], l:p['CONTROL'], l:p['DATA'], l:p['TYPE'], l:p['META'], l:dom_msg)
+
+    if !exists('b:seoulism_last_msg') || l:msg !=# b:seoulism_last_msg
         let b:seoulism_last_msg = l:msg
         echo l:msg
     endif
 endfunction
 
-" Commands
-command! Opp      let g:seoulism_warn_opp = 1 | call s:RealTimeCheck()
-command! NoOpp    let g:seoulism_warn_opp = 0 | silent! execute 'sign unplace * group=SeoulismOpp buffer=' . bufnr('%') | echo '[Seoulism] Disabled.'
-command! -nargs=1 WarnCfg call s:SetWarnCfg(<q-args>)
-
-command! OppCtx   let g:seoulism_scope = 'context' | let g:seoulism_warn_opp = 1 | call s:RealTimeCheck()
-command! OppWin   let g:seoulism_scope = 'window'  | let g:seoulism_warn_opp = 1 | call s:RealTimeCheck()
-command! OppBuf   let g:seoulism_scope = 'buffer'  | let g:seoulism_warn_opp = 1 | call s:RealTimeCheck()
-
-" Convenience abbreviations
-cnoreabbrev wopp Opp
-cnoreabbrev noopp NoOpp
-cnoreabbrev warncfg WarnCfg
+" Commands & Autocmds
+command! Opp let g:seoulism_warn_opp = 1 | call s:RealTimeCheck()
+command! NoOpp let g:seoulism_warn_opp = 0 | silent! execute 'sign unplace * group=SeoulismOpp buffer=' . bufnr('%')
 
 augroup SeoulismRealTime
     autocmd!

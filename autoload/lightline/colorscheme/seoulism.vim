@@ -1,87 +1,65 @@
-" seoulism lightline colorscheme
-" File: autoload/lightline/colorscheme/seoulism.vim
+" --- Lightline diagnostics: ALE + coc.nvim ---
+" Show combined counts (ALE + coc) on the right.
+" Hide when all zero.
 
-if exists('g:lightline#colorscheme#seoulism#palette')
-  finish
-endif
+function! LightlineCocDiag(kind) abort
+  if !exists('*coc#rpc#ready') || !coc#rpc#ready()
+    return 0
+  endif
 
-let s:palette = {}
+  " coc#status() is string; use diagnostics API for counts
+  if exists('*CocAction')
+    try
+      let l:info = CocAction('diagnosticInfo')
+      if type(l:info) == v:t_dict
+        if a:kind ==# 'E' | return get(l:info, 'error', 0) | endif
+        if a:kind ==# 'W' | return get(l:info, 'warning', 0) | endif
+        if a:kind ==# 'I' | return get(l:info, 'information', 0) | endif
+        if a:kind ==# 'H' | return get(l:info, 'hint', 0) | endif
+      endif
+    catch
+    endtry
+  endif
 
-" Base colors (GUI + cterm)
-let s:bg         = ['#181a1f', 233]
-let s:bg_faint   = ['#121318', 232]
-let s:bg_intense = ['#2b2e36', 235]
-
-let s:fg         = ['#d8d7d2', 255]
-let s:fg_faint   = ['#b7b6b2', 250]
-let s:fg_intense = ['#efeeea', 231]
-
-" Accents from seoulism
-let s:red        = ['#e05a55', 203]
-let s:red_soft   = ['#e77e79', 210]
-let s:yellow     = ['#e5c15a', 221]
-let s:blue       = ['#3f6bd9',  26]
-let s:jade       = ['#3aa39a',  36]
-
-" Helper to create a segment
-function! s:seg(fg, bg, attr) abort
-  " Return format: [ guifg, guibg, ctermfg, ctermbg, attr ]
-  return [a:fg[0], a:bg[0], a:fg[1], a:bg[1], a:attr]
+  return 0
 endfunction
 
-let s:p = {
-\ 'normal':   {},
-\ 'insert':   {},
-\ 'visual':   {},
-\ 'replace':  {},
-\ 'inactive': {},
-\ 'tabline':  {},
-\ }
+function! LightlineAleDiag(kind) abort
+  if !exists('g:loaded_ale') || !exists('*ale#statusline#Count')
+    return 0
+  endif
 
-" NORMAL:
-" Pull red aggressively: mode block + far-right block use red backgrounds.
-" Keep text readable: use dark text on red.
-let s:p.normal.left   = [ s:seg(s:bg, s:red, 'bold'), s:seg(s:fg, s:bg_intense, 'NONE') ]
-let s:p.normal.middle = [ s:seg(s:fg_faint, s:bg, 'NONE') ]
-let s:p.normal.right  = [ s:seg(s:fg, s:bg_intense, 'NONE'), s:seg(s:bg, s:red, 'bold') ]
-let s:p.normal.error  = [ s:seg(s:bg, s:red_soft, 'bold') ]
-let s:p.normal.warning= [ s:seg(s:bg, s:yellow, 'bold') ]
+  let l:counts = ale#statusline#Count(bufnr(''))
+  if type(l:counts) != v:t_dict
+    return 0
+  endif
 
-" INSERT:
-" Still keep insert distinct (jade), but keep a red block on the far-right for consistency.
-let s:p.insert.left   = [ s:seg(s:bg, s:jade, 'bold'), s:seg(s:fg, s:bg_intense, 'NONE') ]
-let s:p.insert.middle = [ s:seg(s:fg_faint, s:bg, 'NONE') ]
-let s:p.insert.right  = [ s:seg(s:fg, s:bg_intense, 'NONE'), s:seg(s:bg, s:red, 'bold') ]
-let s:p.insert.error  = s:p.normal.error
-let s:p.insert.warning= s:p.normal.warning
+  if a:kind ==# 'E' | return get(l:counts, 'error', 0) | endif
+  if a:kind ==# 'W' | return get(l:counts, 'warning', 0) | endif
+  if a:kind ==# 'I' | return get(l:counts, 'info', 0) | endif
+  if a:kind ==# 'H' | return get(l:counts, 'style_error', 0) + get(l:counts, 'style_warning', 0) | endif
+  return 0
+endfunction
 
-" VISUAL:
-" Blue mode block, but keep red far-right.
-let s:p.visual.left   = [ s:seg(s:bg, s:blue, 'bold'), s:seg(s:fg, s:bg_intense, 'NONE') ]
-let s:p.visual.middle = [ s:seg(s:fg_faint, s:bg, 'NONE') ]
-let s:p.visual.right  = [ s:seg(s:fg, s:bg_intense, 'NONE'), s:seg(s:bg, s:red, 'bold') ]
-let s:p.visual.error  = s:p.normal.error
-let s:p.visual.warning= s:p.normal.warning
+function! LightlineDiag() abort
+  let l:e = LightlineAleDiag('E') + LightlineCocDiag('E')
+  let l:w = LightlineAleDiag('W') + LightlineCocDiag('W')
+  let l:i = LightlineAleDiag('I') + LightlineCocDiag('I')
+  let l:h = LightlineAleDiag('H') + LightlineCocDiag('H')
 
-" REPLACE:
-" Strong red on both ends.
-let s:p.replace.left   = [ s:seg(s:bg, s:red, 'bold'), s:seg(s:fg, s:bg_intense, 'NONE') ]
-let s:p.replace.middle = [ s:seg(s:fg_faint, s:bg, 'NONE') ]
-let s:p.replace.right  = [ s:seg(s:fg, s:bg_intense, 'NONE'), s:seg(s:bg, s:red, 'bold') ]
-let s:p.replace.error  = s:p.normal.error
-let s:p.replace.warning= s:p.normal.warning
+  let l:parts = []
+  if l:e > 0 | call add(l:parts, 'E:' . l:e) | endif
+  if l:w > 0 | call add(l:parts, 'W:' . l:w) | endif
+  if l:i > 0 | call add(l:parts, 'I:' . l:i) | endif
+  if l:h > 0 | call add(l:parts, 'H:' . l:h) | endif
 
-" INACTIVE:
-let s:p.inactive.left   = [ s:seg(s:fg_faint, s:bg_faint, 'NONE'), s:seg(s:fg_faint, s:bg_faint, 'NONE') ]
-let s:p.inactive.middle = [ s:seg(s:fg_faint, s:bg_faint, 'NONE') ]
-let s:p.inactive.right  = [ s:seg(s:fg_faint, s:bg_faint, 'NONE'), s:seg(s:fg_faint, s:bg_faint, 'NONE') ]
+  return empty(l:parts) ? '' : join(l:parts, ' ')
+endfunction
 
-" TABLINE:
-let s:p.tabline.left   = [ s:seg(s:fg_faint, s:bg_faint, 'NONE') ]
-let s:p.tabline.tabsel = [ s:seg(s:fg_intense, s:bg_intense, 'bold') ]
-let s:p.tabline.middle = [ s:seg(s:fg_faint, s:bg_faint, 'NONE') ]
-let s:p.tabline.right  = [ s:seg(s:fg_faint, s:bg_faint, 'NONE') ]
-let s:p.tabline.fill   = [ s:seg(s:fg_faint, s:bg_faint, 'NONE') ]
-
-let g:lightline#colorscheme#seoulism#palette = lightline#colorscheme#flatten(s:p)
+" Tell lightline to refresh when diagnostics change
+augroup LightlineDiagnostics
+  autocmd!
+  autocmd User CocDiagnosticChange,CocStatusChange call lightline#update()
+  autocmd User ALELintPost call lightline#update()
+augroup END
 

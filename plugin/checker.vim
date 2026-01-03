@@ -124,6 +124,9 @@ endfunction
 " Commands & Autocmds
 command! Opp let g:seoulism_warn_opp = 1 | call s:RealTimeCheck()
 command! NoOpp let g:seoulism_warn_opp = 0 | silent! execute 'sign unplace * group=SeoulismOpp buffer=' . bufnr('%')
+cnoreabbrev wopp Opp
+cnoreabbrev noopp NoOpp
+cnoreabbrev warncfg WarnCfg
 
 augroup SeoulismRealTime
     autocmd!

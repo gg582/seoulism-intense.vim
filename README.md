@@ -87,6 +87,9 @@ Basic structure is a mixture between Asian astronomy and Asian color system.
 * **Reflective selection**
   Visual selection turns into a bright reflective white, like a spotlight on a paper-like canvas.
 
+  * **A forgotten color, Purple**
+  A hue anchored at the center of the vacuum. It serves as a psychic anchor where "Operational Heat" meets "Structural Rigidity" (Logic Agility).
+
 ---
 
 ## Install

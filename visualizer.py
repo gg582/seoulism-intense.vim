@@ -11,7 +11,7 @@ def draw_seoulism_chain():
     # This maps the ancestral systemic logic to the actual Vim palette provided.
     chains = [
         ("Birth", "Wood", "Blue/Jade", "#0000FF", "Jade (c6)", "#3aa39a", "Format / Function"),
-        ("Dread", "Fire", "Red", "#FF0000", "Red (c1)", "#e05a55", "Alert / Error"),
+        ("Dread", "Fire", "Red", "#FF0000", "Red (c1)", "#e05a55", "Alert / Error / Syntax"),
         ("Origin", "Earth", "Yellow", "#FFFF00", "Gold (c3)", "#e5c15a", "Literal / Data"),
         ("Structure", "Metal", "White", "#FFFFFF", "Foreground", "#d8d7d2", "Base / Structure"),
         ("Void", "Water", "Black", "#000000", "Background", "#181a1f", "Space / Void"),

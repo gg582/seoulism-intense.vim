@@ -44,17 +44,7 @@ def draw_systemic_divergence():
     render_layer(ax1, "trad", "CANONICAL PROTOCOL")
     render_layer(ax2, "seoul", "SEOULISM SYSTEM", is_seoul=True)
 
-    # Traditional Earth (0,0) -> Seoulism Earth (vertices[2])
-    target_idx = 2
-    ax2.annotate("", xy=vertices[target_idx], xytext=(0, 0),
-                 arrowprops=dict(arrowstyle="-|>", color='#e05a55', lw=3, alpha=0.8, 
-                                 shrinkA=30, shrinkB=25), zorder=12)
-
-    ax2.text(vertices[target_idx][0]*0.5, vertices[target_idx][1]*0.5 - 0.2, 
-             "RELOCATION\nVECTOR", color='#e05a55', fontsize=12, fontweight='black', 
-             ha='center', va='top', bbox=dict(facecolor='#121318', edgecolor='none', alpha=0.9), zorder=13)
-
-    plt.figtext(0.5, 0.05, "DIVERGENCE: THE EARTH(c3) DISPLACED FROM THE CENTER AXIS", 
+    plt.figtext(0.5, 0.05, "DIVERGENCE: Color dimmed, no hierarchy between colors", 
                 color='#8f959c', fontsize=12, ha='center', fontweight='bold')
 
     plt.savefig('pentagon_cycle.png', facecolor='#121318', dpi=300, bbox_inches='tight')

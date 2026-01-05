@@ -11,7 +11,6 @@ def draw_systemic_divergence():
         {"id": "METAL", "trad": "#FFFFFF", "seoul": "#d8d7d2", "token": "fg"},
         {"id": "WATER", "trad": "#000000", "seoul": "#181a1f", "token": "bg"}
     ]
-    polaris = {"id": "POLARIS", "trad": "#800080", "seoul": "#9a6fd6", "token": "c5"}
 
     # 2. Geometry
     radius = 1.0
@@ -41,12 +40,6 @@ def draw_systemic_divergence():
             is_light = any(c in col.lower() for c in ['f', 'e', 'd'])
             ax.text(x, y, f"{node['id']}\n{node['token'] if is_seoul else ''}", 
                     ha='center', va='center', fontsize=9, fontweight='black', color='#181a1f' if is_light else '#d8d7d2', zorder=6)
-
-        # Polaris Core
-        p_col = polaris[key]
-        ax.add_patch(plt.Circle((0, 0), 0.25, facecolor=p_col, edgecolor='#b7b6b2', linewidth=1.5, zorder=10))
-        ax.text(0, 0, f"{polaris['id']}\n{polaris['token'] if is_seoul else ''}".strip(), 
-                ha='center', va='center', fontsize=10, fontweight='black', color='#d8d7d2', zorder=11)
 
     render_layer(ax1, "trad", "CANONICAL PROTOCOL")
     render_layer(ax2, "seoul", "SEOULISM SYSTEM", is_seoul=True)

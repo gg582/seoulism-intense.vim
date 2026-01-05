@@ -28,7 +28,7 @@ let s:palette.c3_i = '#f0d487'
 let s:palette.c4 = '#3f6bd9'
 let s:palette.c4_f = '#2f4fa3'
 let s:palette.c4_i = '#6f8ee6'
-let s:palette.c5 = '#9a6fd6'
+let s:palette.c5 = '#e05a55'
 let s:palette.c5_f = '#7d55aa'
 let s:palette.c5_i = '#b58be3'
 let s:palette.c6 = '#3aa39a'
@@ -77,10 +77,10 @@ call s:hi('Function', '#6bc0b6', 'NONE', '73', 'NONE', 'NONE')
 call s:hi('Statement', '#7d55aa', 'NONE', '97', 'NONE', 'NONE')
 call s:hi('Conditional', '#7d55aa', 'NONE', '97', 'NONE', 'NONE')
 call s:hi('Repeat', '#7d55aa', 'NONE', '97', 'NONE', 'NONE')
-call s:hi('Label', '#9a6fd6', 'NONE', '134', 'NONE', 'NONE')
+call s:hi('Label', '#e05a55', 'NONE', '134', 'NONE', 'NONE')
 call s:hi('Operator', '#d8d7d2', 'NONE', '255', 'NONE', 'NONE')
 call s:hi('Keyword', '#7d55aa', 'NONE', '97', 'NONE', 'NONE')
-call s:hi('Exception', '#9a6fd6', 'NONE', '134', 'NONE', 'NONE')
+call s:hi('Exception', '#e05a55', 'NONE', '134', 'NONE', 'NONE')
 call s:hi('PreProc', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('Include', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('Define', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
@@ -121,7 +121,7 @@ call s:hi('PmenuSbar', 'NONE', '#2b2e36', 'NONE', '235', 'NONE')
 call s:hi('PmenuThumb', 'NONE', '#5f6770', 'NONE', '239', 'NONE')
 call s:hi('Visual', 'NONE', '#2f4fa3', 'NONE', '25', 'NONE')
 call s:hi('Search', '#181a1f', '#b29245', '233', '137', 'bold')
-call s:hi('IncSearch', '#181a1f', '#9a6fd6', '233', '134', 'bold')
+call s:hi('IncSearch', '#181a1f', '#e05a55', '233', '134', 'bold')
 call s:hi('MatchParen', '#efeeea', '#2b2e36', '231', '235', 'bold')
 call s:hi('Directory', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('Title', '#e2e1dd', 'NONE', '254', 'NONE', 'bold')
@@ -203,7 +203,7 @@ hi! link CursorLineFold FoldColumn
 " Neovim terminal palette:
 if has('nvim')
   let g:terminal_color_0  = '#181a1f'
-  let g:terminal_color_1  = '#9a6fd6'
+  let g:terminal_color_1  = '#e05a55'
   let g:terminal_color_2  = '#3abf86'
   let g:terminal_color_3  = '#e5c15a'
   let g:terminal_color_4  = '#3f6bd9'

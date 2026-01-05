@@ -16,7 +16,6 @@ def draw_seoulism_chain():
         ("Structure", "Metal", "White", "#FFFFFF", "Foreground", "#d8d7d2", "Base / Structure"),
         ("Void", "Water", "Black", "#000000", "Background", "#181a1f", "Space / Void"),
         # Intermediary color representing the systemic framework
-        ("Wisdom", "Polaris", "Purple", "#800080", "Purple (c5)", "#9a6fd6", "Keyword / Syntax")
     ]
 
     G = nx.DiGraph()

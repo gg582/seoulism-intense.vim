@@ -13,7 +13,6 @@ let s:fg_i     = ['#efeeea', 231]
 let s:red      = ['#e05a55', 203]
 let s:red_dim  = ['#b24a45', 131]
 
-let s:purple   = ['#7d55aa', 97]
 let s:blue     = ['#3f6bd9', 26]
 let s:jade     = ['#3aa39a', 36]
 let s:green    = ['#3abf86', 35]
@@ -49,7 +48,7 @@ let s:p.insert.right = s:p.normal.right
 
 " --- Visual Mode ---
 let s:p.visual = {}
-let s:p.visual.left = [ s:seg(s:bg, s:purple, 'bold'), s:seg(s:fg, s:bg_int) ]
+let s:p.visual.left = [ s:seg(s:bg, s:red_dim, 'bold'), s:seg(s:fg, s:bg_int) ]
 let s:p.visual.middle = s:p.normal.middle
 let s:p.visual.right = s:p.normal.right
 

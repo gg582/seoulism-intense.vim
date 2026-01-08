@@ -127,7 +127,7 @@ function! s:ForceSeoulismJade() abort
   if exists('w:seoulism_jade_match')
     silent! call matchdelete(w:seoulism_jade_match)
   endif
-  let w:seoulism_jade_match = matchadd('FuncKey', '\<func\>\|\%(\<void\>\|\<int\>\|\<char\>\)\s\+\zs\w\+\ze\s*(')
+  let w:seoulism_jade_match = matchadd('FuncKey', '\<func\>\|\<\w\+\>\s\+\zs\w\+\ze\s*(')
 endfunction
 
 augroup SeoulismFinal

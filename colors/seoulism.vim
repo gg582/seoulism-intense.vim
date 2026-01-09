@@ -53,7 +53,7 @@ endif
 " Basic UI
 call s:hi('Normal', '#a6a598', s:palette.bg, '255', '233', 'NONE')
 call s:hi('NormalNC', '#b7b6b2', s:palette.bg, '250', '233', 'NONE')
-call s:hi('Comment', '#8f959c', 'NONE', '243', 'NONE', 'italic')
+call s:hi('Comment', '#7f85ac', 'NONE', '243', 'NONE', 'italic')
 call s:hi('Constant', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('String', '#e5c15a', 'NONE', '221', 'NONE', 'NONE')
 call s:hi('Character', '#f0d487', 'NONE', '222', 'NONE', 'NONE')

@@ -41,7 +41,7 @@ def draw_seoulism_blueprint():
         ax.text(16, y + 3, item['id'].upper(), color='#a6a598',
                 fontsize=11, va='center', weight='bold', family='monospace')
 
-        ax.text(25, y + 3, item['hex'], color='#8f959c',
+        ax.text(25, y + 3, item['hex'], color='#7f85ac',
                 fontsize=10, va='center', family='monospace')
 
         # Logic Mapping

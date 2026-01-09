@@ -22,7 +22,7 @@ def draw_systemic_divergence():
     def render_layer(ax, key, title, is_seoul=False):
         ax.set_facecolor('#07070a')
         ax.set_xlim(-1.7, 1.7), ax.set_ylim(-1.7, 1.7), ax.axis('off')
-        ax.set_title(title, color='#8f959c', fontsize=18, fontweight='black', pad=40)
+        ax.set_title(title, color='#7f85ac', fontsize=18, fontweight='black', pad=40)
 
         # Cycles
         for i in range(5):
@@ -45,7 +45,7 @@ def draw_systemic_divergence():
     render_layer(ax2, "seoul", "SEOULISM SYSTEM", is_seoul=True)
 
     plt.figtext(0.5, 0.05, "DIVERGENCE: Color dimmed, no hierarchy between colors", 
-                color='#8f959c', fontsize=12, ha='center', fontweight='bold')
+                color='#7f85ac', fontsize=12, ha='center', fontweight='bold')
 
     plt.savefig('pentagon_cycle.png', facecolor='#07070a', dpi=300, bbox_inches='tight')
 

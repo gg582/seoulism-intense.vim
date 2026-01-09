@@ -7,7 +7,7 @@ def draw_seoulism_blueprint():
         {"id": "c6", "tag": "JADE",   "hex": "#3aa39a", "element": "WOOD",    "logic": "Birth / Formatter, Function"},
         {"id": "c1", "tag": "RED",    "hex": "#e05a55", "element": "FIRE",    "logic": "Dread / Alert / Syntax"},
         {"id": "c3", "tag": "GOLD",   "hex": "#e5c15a", "element": "EARTH",   "logic": "Origin / Literal"},
-        {"id": "c4", "tag": "BLUE",   "hex": "#3f6bd9", "element": "LINK",    "logic": "Reference / Navigation"},
+        {"id": "c4", "tag": "BLUE",   "hex": "#3f6bd9", "element": "WOOD(LINK)",    "logic": "Reference / Navigation"},
         {"id": "m1", "tag": "WHITE",  "hex": "#d8d7d2", "element": "METAL",   "logic": "Structure / Type"},
         {"id": "fg", "tag": "BASE",   "hex": "#d8d7d2", "element": "CORE",    "logic": "Content / Neutral"},
         {"id": "c0", "tag": "SHADOW", "hex": "#5f6770", "element": "VOID",    "logic": "Shadow / Meta"},

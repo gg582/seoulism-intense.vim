@@ -8,7 +8,7 @@ def draw_systemic_divergence():
         {"id": "WOOD",  "trad": "#0000FF", "seoul": "#3aa39a", "token": "c6"},
         {"id": "FIRE",  "trad": "#FF0000", "seoul": "#e05a55", "token": "c1"},
         {"id": "EARTH", "trad": "#FFFF00", "seoul": "#e5c15a", "token": "c3"}, # Index 2
-        {"id": "METAL", "trad": "#FFFFFF", "seoul": "#b7b6b2", "token": "m1"},
+        {"id": "METAL", "trad": "#FFFFFF", "seoul": "#efeeea", "token": "m1"},
         {"id": "WATER", "trad": "#000000", "seoul": "#111116", "token": "bg"}
     ]
 

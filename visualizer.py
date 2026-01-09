@@ -13,7 +13,7 @@ def draw_seoulism_chain():
         ("Birth", "Wood", "Blue/Jade", "#0000FF", "Jade (c6)", "#3aa39a", "Format / Function"),
         ("Dread", "Fire", "Red", "#FF0000", "Red (c1)", "#e05a55", "Alert / Error / Syntax"),
         ("Origin", "Earth", "Yellow", "#FFFF00", "Gold (c3)", "#e5c15a", "Literal / Data"),
-        ("Structure", "Metal", "White", "#FFFFFF", "Metal (m1)", "#b7b6b2", "Base / Structure"),
+        ("Structure", "Metal", "White", "#FFFFFF", "Metal (m1)", "#efeeea", "Base / Structure"),
         ("Void", "Water", "Black", "#000000", "Background", "#111116", "Space / Void"),
         # Intermediary color representing the systemic framework
     ]

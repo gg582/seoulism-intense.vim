@@ -26,7 +26,7 @@ let s:palette.c7 = '#d4d3cf' " Off-white
 
 let s:palette.fg = '#d8d7d2'
 let s:palette.fg_faint = '#b7b6b2'
-let s:palette.m1 = '#b7b6b2' " Metal (Structure)"
+let s:palette.m1 = '#efeeea' " Metal (Structure)"
 let s:palette.fg_intense = '#efeeea'
 
 function! s:hi(group, guifg, guibg, ctermfg, ctermbg, attr) abort
@@ -78,10 +78,10 @@ call s:hi('Include', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('Define', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('Macro', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('PreCondit', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
-call s:hi('Type', s:palette.m1, 'NONE', '250', 'NONE', 'NONE')
-call s:hi('StorageClass', s:palette.m1, 'NONE', '250', 'NONE', 'NONE')
-call s:hi('Structure', s:palette.m1, 'NONE', '250', 'NONE', 'NONE')
-call s:hi('Typedef', s:palette.m1, 'NONE', '250', 'NONE', 'NONE')
+call s:hi('Type', s:palette.m1, 'NONE', '231', 'NONE', 'italic')
+call s:hi('StorageClass', s:palette.m1, 'NONE', '231', 'NONE', 'italic')
+call s:hi('Structure', s:palette.m1, 'NONE', '231', 'NONE', 'italic')
+call s:hi('Typedef', s:palette.m1, 'NONE', '231', 'NONE', 'italic')
 call s:hi('Special', '#3aa39a', 'NONE', '36', 'NONE', 'NONE')
 call s:hi('Delimiter', '#5f6770', 'NONE', '239', 'NONE', 'NONE')
 call s:hi('Error', '#e77e79', s:palette.bg, '203', '233', 'bold')

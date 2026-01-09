@@ -14,8 +14,8 @@ def draw_seoulism_blueprint():
     ]
 
     # 2. Architectonic Layout
-    bg_main = '#181a1f'
-    bg_base = '#121318'
+    bg_main = '#111116'
+    bg_base = '#07070a'
 
     fig, ax = plt.subplots(figsize=(12, 9), facecolor=bg_base)
     ax.set_facecolor(bg_main)
@@ -55,7 +55,6 @@ def draw_seoulism_blueprint():
 
     plt.tight_layout()
     plt.savefig('preview.png', facecolor=bg_base, dpi=300)
-    plt.show()
 
 if __name__ == "__main__":
     draw_seoulism_blueprint()

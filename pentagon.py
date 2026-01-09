@@ -9,7 +9,7 @@ def draw_systemic_divergence():
         {"id": "FIRE",  "trad": "#FF0000", "seoul": "#e05a55", "token": "c1"},
         {"id": "EARTH", "trad": "#FFFF00", "seoul": "#e5c15a", "token": "c3"}, # Index 2
         {"id": "METAL", "trad": "#FFFFFF", "seoul": "#d8d7d2", "token": "fg"},
-        {"id": "WATER", "trad": "#000000", "seoul": "#181a1f", "token": "bg"}
+        {"id": "WATER", "trad": "#000000", "seoul": "#111116", "token": "bg"}
     ]
 
     # 2. Geometry
@@ -17,10 +17,10 @@ def draw_systemic_divergence():
     angles = np.linspace(np.pi/2, np.pi/2 - 2*np.pi, 6)[:-1]
     vertices = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 11), facecolor='#121318')
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 11), facecolor='#07070a')
 
     def render_layer(ax, key, title, is_seoul=False):
-        ax.set_facecolor('#121318')
+        ax.set_facecolor('#07070a')
         ax.set_xlim(-1.7, 1.7), ax.set_ylim(-1.7, 1.7), ax.axis('off')
         ax.set_title(title, color='#8f959c', fontsize=18, fontweight='black', pad=40)
 
@@ -47,8 +47,7 @@ def draw_systemic_divergence():
     plt.figtext(0.5, 0.05, "DIVERGENCE: Color dimmed, no hierarchy between colors", 
                 color='#8f959c', fontsize=12, ha='center', fontweight='bold')
 
-    plt.savefig('pentagon_cycle.png', facecolor='#121318', dpi=300, bbox_inches='tight')
-    plt.show()
+    plt.savefig('pentagon_cycle.png', facecolor='#07070a', dpi=300, bbox_inches='tight')
 
 if __name__ == "__main__":
     draw_systemic_divergence()

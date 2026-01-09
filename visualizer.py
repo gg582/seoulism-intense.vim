@@ -14,7 +14,7 @@ def draw_seoulism_chain():
         ("Dread", "Fire", "Red", "#FF0000", "Red (c1)", "#e05a55", "Alert / Error / Syntax"),
         ("Origin", "Earth", "Yellow", "#FFFF00", "Gold (c3)", "#e5c15a", "Literal / Data"),
         ("Structure", "Metal", "White", "#FFFFFF", "Foreground", "#d8d7d2", "Base / Structure"),
-        ("Void", "Water", "Black", "#000000", "Background", "#181a1f", "Space / Void"),
+        ("Void", "Water", "Black", "#000000", "Background", "#111116", "Space / Void"),
         # Intermediary color representing the systemic framework
     ]
 
@@ -48,9 +48,9 @@ def draw_seoulism_chain():
                 G.add_edge(f"{i}_{j-1}", node_id)
 
     # 3. Visualization Configuration using Seoulism palette colors
-    plt.figure(figsize=(16, 9), facecolor='#121318') # BackgroundFaint
+    plt.figure(figsize=(16, 9), facecolor='#07070a') # BackgroundFaint
     ax = plt.gca()
-    ax.set_facecolor('#121318')
+    ax.set_facecolor('#07070a')
 
     # Drawing the "Chains" (Edges)
     nx.draw_networkx_edges(G, pos, edge_color='#2b2e36', arrowsize=20, width=1.2) # BackgroundIntense
@@ -87,7 +87,7 @@ def draw_seoulism_chain():
     
     plt.axis('off')
     plt.tight_layout()
-    plt.show()
+    plt.savefig('visualizer.png', facecolor='#07070a', dpi=300)
 
 if __name__ == "__main__":
     draw_seoulism_chain()

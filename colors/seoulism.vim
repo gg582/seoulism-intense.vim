@@ -24,7 +24,7 @@ let s:palette.c5 = '#e05a55' " Accent Red
 let s:palette.c6 = '#3aa39a' " Jade (Functional)
 let s:palette.c7 = '#d4d3cf' " Off-white
 
-let s:palette.fg = '#d8d7d2'
+let s:palette.fg = '#c6c5c0'
 let s:palette.fg_faint = '#b7b6b2'
 let s:palette.m1 = '#efeeea' " Metal (Structure)"
 let s:palette.fg_intense = '#efeeea'
@@ -51,7 +51,7 @@ if has('nvim')
 endif
 
 " Basic UI
-call s:hi('Normal', '#d8d7d2', s:palette.bg, '255', '233', 'NONE')
+call s:hi('Normal', '#c6c5c0', s:palette.bg, '255', '233', 'NONE')
 call s:hi('NormalNC', '#b7b6b2', s:palette.bg, '250', '233', 'NONE')
 call s:hi('Comment', '#8f959c', 'NONE', '243', 'NONE', 'italic')
 call s:hi('Constant', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
@@ -60,7 +60,7 @@ call s:hi('Character', '#f0d487', 'NONE', '222', 'NONE', 'NONE')
 call s:hi('Number', '#e5c15a', 'NONE', '221', 'NONE', 'NONE')
 call s:hi('Boolean', '#f0d487', 'NONE', '222', 'NONE', 'NONE')
 call s:hi('Float', '#e5c15a', 'NONE', '221', 'NONE', 'NONE')
-call s:hi('Identifier', '#d8d7d2', 'NONE', '255', 'NONE', 'NONE')
+call s:hi('Identifier', '#c6c5c0', 'NONE', '255', 'NONE', 'NONE')
 call s:hi('Function', '#6bc0b6', 'NONE', '73', 'NONE', 'NONE')
 
 " Logic & Control Flow (Vermilion)
@@ -72,7 +72,7 @@ call s:hi('Label', '#e05a55', 'NONE', '167', 'NONE', 'NONE')
 call s:hi('Exception', '#e77e79', 'NONE', '203', 'NONE', 'bold')
 
 " Programming Constructs
-call s:hi('Operator', '#d8d7d2', 'NONE', '255', 'NONE', 'NONE')
+call s:hi('Operator', '#c6c5c0', 'NONE', '255', 'NONE', 'NONE')
 call s:hi('PreProc', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('Include', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('Define', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
@@ -91,9 +91,9 @@ call s:hi('Todo', s:palette.bg, '#e5c15a', '233', '221', 'bold')
 call s:hi('CursorLine', 'NONE', '#2b2e36', 'NONE', '235', 'NONE')
 call s:hi('LineNr', '#5f6770', s:palette.bg, '239', '233', 'NONE')
 call s:hi('CursorLineNr', '#f0d487', '#2b2e36', '222', '235', 'bold')
-call s:hi('StatusLine', '#d8d7d2', '#2b2e36', '255', '235', 'bold')
+call s:hi('StatusLine', '#c6c5c0', '#2b2e36', '255', '235', 'bold')
 call s:hi('StatusLineNC', '#b7b6b2', '#121318', '250', '232', 'NONE')
-call s:hi('Pmenu', '#d8d7d2', '#2b2e36', '255', '235', 'NONE')
+call s:hi('Pmenu', '#c6c5c0', '#2b2e36', '255', '235', 'NONE')
 call s:hi('PmenuSel', '#efeeea', '#2f4fa3', '231', '25', 'bold')
 call s:hi('Visual', 'NONE', '#2f4fa3', 'NONE', '25', 'NONE')
 call s:hi('Search', s:palette.bg, '#b29245', '233', '137', 'bold')

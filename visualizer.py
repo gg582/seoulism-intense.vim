@@ -13,7 +13,7 @@ def draw_seoulism_chain():
         ("Birth", "Wood", "Blue/Jade", "#0000FF", "Jade (c6)", "#3aa39a", "Format / Function"),
         ("Dread", "Fire", "Red", "#FF0000", "Red (c1)", "#e05a55", "Alert / Error / Syntax"),
         ("Origin", "Earth", "Yellow", "#FFFF00", "Gold (c3)", "#e5c15a", "Literal / Data"),
-        ("Structure", "Metal", "White", "#FFFFFF", "Foreground", "#d8d7d2", "Base / Structure"),
+        ("Structure", "Metal", "White", "#FFFFFF", "Metal (m1)", "#b7b6b2", "Base / Structure"),
         ("Void", "Water", "Black", "#000000", "Background", "#111116", "Space / Void"),
         # Intermediary color representing the systemic framework
     ]
@@ -69,7 +69,7 @@ def draw_seoulism_chain():
         stage_idx = int(node.split('_')[1])
         if stage_idx in [2, 3]:
             # Simple brightness check: Dark text for light colors (Yellow/White/Jade)
-            text_color = '#181a1f' if any(c in hex_color.lower() for c in ['f', 'e', 'd']) else '#d8d7d2'
+            text_color = '#181a1f' if (0.2126*int(hex_color[1:3],16) + 0.7152*int(hex_color[3:5],16) + 0.0722*int(hex_color[5:7],16)) > 135 else '#d8d7d2'
         else:
             text_color = '#b7b6b2'
         

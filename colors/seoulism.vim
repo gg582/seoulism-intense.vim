@@ -26,6 +26,7 @@ let s:palette.c7 = '#d4d3cf' " Off-white
 
 let s:palette.fg = '#d8d7d2'
 let s:palette.fg_faint = '#b7b6b2'
+let s:palette.m1 = '#b7b6b2' " Metal (Structure)"
 let s:palette.fg_intense = '#efeeea'
 
 function! s:hi(group, guifg, guibg, ctermfg, ctermbg, attr) abort

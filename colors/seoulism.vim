@@ -10,9 +10,9 @@ let g:colors_name = 'seoulism'
 set background=dark
 
 let s:palette = {}
-let s:palette.bg = '#13151a'
-let s:palette.bg_faint = '#111217'
-let s:palette.bg_intense = '#272a32'
+let s:palette.bg = '#091116'
+let s:palette.bg_faint = '#05070a'
+let s:palette.bg_intense = '#171a22'
 
 " Primary Spectrum
 let s:palette.c0 = '#5f6770' " Charcoal

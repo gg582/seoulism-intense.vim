@@ -50,8 +50,8 @@ if has('nvim')
 endif
 
 " Basic UI
-call s:hi('Normal', '#d8d7d2', '#181a1f', '255', '233', 'NONE')
-call s:hi('NormalNC', '#b7b6b2', '#181a1f', '250', '233', 'NONE')
+call s:hi('Normal', '#d8d7d2', s:palette.bg, '255', '233', 'NONE')
+call s:hi('NormalNC', '#b7b6b2', s:palette.bg, '250', '233', 'NONE')
 call s:hi('Comment', '#8f959c', 'NONE', '243', 'NONE', 'italic')
 call s:hi('Constant', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
 call s:hi('String', '#e5c15a', 'NONE', '221', 'NONE', 'NONE')
@@ -83,19 +83,19 @@ call s:hi('Structure', '#3f6bd9', 'NONE', '26', 'NONE', 'NONE')
 call s:hi('Typedef', '#3f6bd9', 'NONE', '26', 'NONE', 'NONE')
 call s:hi('Special', '#3aa39a', 'NONE', '36', 'NONE', 'NONE')
 call s:hi('Delimiter', '#5f6770', 'NONE', '239', 'NONE', 'NONE')
-call s:hi('Error', '#e77e79', '#181a1f', '203', '233', 'bold')
-call s:hi('Todo', '#181a1f', '#e5c15a', '233', '221', 'bold')
+call s:hi('Error', '#e77e79', s:palette.bg, '203', '233', 'bold')
+call s:hi('Todo', s:palette.bg, '#e5c15a', '233', '221', 'bold')
 
 " Editor UI Elements
 call s:hi('CursorLine', 'NONE', '#2b2e36', 'NONE', '235', 'NONE')
-call s:hi('LineNr', '#5f6770', '#181a1f', '239', '233', 'NONE')
+call s:hi('LineNr', '#5f6770', s:palette.bg, '239', '233', 'NONE')
 call s:hi('CursorLineNr', '#f0d487', '#2b2e36', '222', '235', 'bold')
 call s:hi('StatusLine', '#d8d7d2', '#2b2e36', '255', '235', 'bold')
 call s:hi('StatusLineNC', '#b7b6b2', '#121318', '250', '232', 'NONE')
 call s:hi('Pmenu', '#d8d7d2', '#2b2e36', '255', '235', 'NONE')
 call s:hi('PmenuSel', '#efeeea', '#2f4fa3', '231', '25', 'bold')
 call s:hi('Visual', 'NONE', '#2f4fa3', 'NONE', '25', 'NONE')
-call s:hi('Search', '#181a1f', '#b29245', '233', '137', 'bold')
+call s:hi('Search', s:palette.bg, '#b29245', '233', '137', 'bold')
 
 " Treesitter Integration
 silent! hi! link @keyword Keyword
@@ -106,7 +106,7 @@ silent! hi! link @variable Identifier
 silent! hi! link @function.builtin Function
 
 if has('nvim')
-  let g:terminal_color_0  = '#181a1f'
+  let g:terminal_color_0  = s:palette.bg
   let g:terminal_color_1  = '#e05a55'
   let g:terminal_color_2  = '#3abf86'
   let g:terminal_color_3  = '#e5c15a'

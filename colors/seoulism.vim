@@ -135,3 +135,45 @@ augroup SeoulismFinal
   autocmd!
   autocmd BufEnter,WinEnter,Syntax go,c,cpp,rust,python call s:hi('FuncKey', '#3aa39a', 'NONE', '36', 'NONE', 'bold') | call s:ForceSeoulismJade()
 augroup END
+
+" =============================================================================
+" SEOULISM ENHANCEMENT: Universal Type Highlighting
+" Focus: Ensuring 'cJSON', 'structs', and custom typedefs are painted as 'Type'.
+" This block works for both Neovim (Treesitter/LSP) and Classic Vim.
+" =============================================================================
+
+function! s:ApplyUniversalTypeFix() abort
+  " 1. Classic Vim / Regex-based Fallback
+  " Target: Words starting with Uppercase (cJSON, MyType) or ending with _t (size_t)
+  " These are commonly used for types in C, C++, Go, and Rust.
+  syntax match seoulismCustomType /\v<[A-Z][a-zA-Z0-9_]+>/ display
+  syntax match seoulismCustomType /\v<\w+_t>/ display
+  highlight! link seoulismCustomType Type
+
+  " 2. Neovim Specific: Treesitter & LSP Linking
+  " Maps granular TS nodes to the main 'Type' group defined in your palette.
+  if has('nvim')
+    highlight! link @type                Type
+    highlight! link @type.builtin        Type
+    highlight! link @type.definition     Type
+    highlight! link @lsp.type.type       Type
+    highlight! link @lsp.type.struct     Type
+    highlight! link @lsp.type.enum       Type
+    highlight! link @lsp.type.typedef    Type
+    highlight! link @storageclass        StorageClass
+    highlight! link @structure           Structure
+  endif
+endfunction
+
+augroup SeoulismTypeFix
+  autocmd!
+  " Apply to common typed languages
+  autocmd FileType c,cpp,go,rust,java,python call s:ApplyUniversalTypeFix()
+  " Re-apply on colorscheme change to prevent overriding
+  autocmd ColorScheme seoulism call s:ApplyUniversalTypeFix()
+augroup END
+
+" Force refresh for the current buffer
+if exists('syntax_on')
+  call s:ApplyUniversalTypeFix()
+endif

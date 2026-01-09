@@ -10,9 +10,9 @@ let g:colors_name = 'seoulism'
 set background=dark
 
 let s:palette = {}
-let s:palette.bg = '#181a1f'
-let s:palette.bg_faint = '#121318'
-let s:palette.bg_intense = '#2b2e36'
+let s:palette.bg = '#13151a'
+let s:palette.bg_faint = '#111217'
+let s:palette.bg_intense = '#272a32'
 
 " Primary Spectrum
 let s:palette.c0 = '#5f6770' " Charcoal
@@ -120,15 +120,15 @@ if has('nvim')
   silent! hi! link @keyword.function FuncKey
   silent! hi! link @keyword.method FuncKey
   silent! hi! link @function FuncKey
+else
+  " Jade Force Paint
+  function! s:ForceSeoulismJade() abort
+    if exists('w:seoulism_jade_match')
+      silent! call matchdelete(w:seoulism_jade_match)
+    endif
+    let w:seoulism_jade_match = matchadd('FuncKey', '\<func\>\|\<\w\+\>\s\+\zs\w\+\ze\s*(')
+  endfunction
 endif
-
-" Jade Force Paint
-function! s:ForceSeoulismJade() abort
-  if exists('w:seoulism_jade_match')
-    silent! call matchdelete(w:seoulism_jade_match)
-  endif
-  let w:seoulism_jade_match = matchadd('FuncKey', '\<func\>\|\<\w\+\>\s\+\zs\w\+\ze\s*(')
-endfunction
 
 augroup SeoulismFinal
   autocmd!

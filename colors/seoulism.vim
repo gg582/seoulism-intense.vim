@@ -183,3 +183,26 @@ if has('nvim')
 endif
 
 call s:ForceSeoulismTypes()
+
+" =============================================================================
+" Semantic & Language Server Protocol Groups
+" =============================================================================
+" Variable Scopes (Wood/Jade logic)
+call s:hi('LspVariable', s:p.fg, 'NONE', '255', 'NONE', 'NONE')
+call s:hi('LspParameter', '#6bc0b6', 'NONE', '73', 'NONE', 'italic')
+
+" Logic flow in LSP (Fire/Vermilion logic)
+call s:hi('LspKeyword', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('LspControlFlow', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+
+" Static & Constants (Earth/Ochre logic)
+call s:hi('LspStaticVariable', s:p.ochre, 'NONE', '221', 'NONE', 'bold')
+call s:hi('LspEnumMember', s:p.ochre, 'NONE', '221', 'NONE', 'NONE')
+
+" Types & Interfaces (Metal/White logic)
+call s:hi('LspInterface', s:p.fg_bright, 'NONE', '231', 'NONE', 'bold')
+call s:hi('LspStruct', s:p.fg_bright, 'NONE', '231', 'NONE', 'italic')
+
+" Errors & Hints (Sharp Diagnostics)
+call s:hi('LspErrorText', '#e77e79', 'NONE', '203', 'NONE', 'underline')
+call s:hi('LspWarningText', s:p.gold, 'NONE', '222', 'NONE', 'underline')

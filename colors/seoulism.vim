@@ -1,6 +1,5 @@
 " seoulism.vim - colorscheme
-" A dark theme inspired by traditional East Asian cardinal palettes.
-" Focus: Vermilion structural anchors and Jade functional highlights.
+" Systemic dark theme based on cardinal color hierarchy.
 
 hi clear
 if exists('syntax_on')
@@ -9,25 +8,28 @@ endif
 let g:colors_name = 'seoulism'
 set background=dark
 
-let s:palette = {}
-let s:palette.bg = '#111116'
-let s:palette.bg_faint = '#07070a'
-let s:palette.bg_intense = '#1a1a22'
+" =============================================================================
+" Palette
+" =============================================================================
+let s:p = {}
+let s:p.bg           = '#111116'
+let s:p.bg_sub       = '#07070a'
+let s:p.bg_alt       = '#1a1a22'
+let s:p.bg_sel       = '#2f4fa3'
 
-" Primary Spectrum
-let s:palette.c0 = '#5f6770' " Charcoal
-let s:palette.c1 = '#e05a55' " Vermilion (Primary Structural)
-let s:palette.c2 = '#3abf86' " Emerald
-let s:palette.c3 = '#e5c15a' " Ochre
-let s:palette.c4 = '#3f6bd9' " Royal Blue
-let s:palette.c5 = '#e05a55' " Accent Red
-let s:palette.c6 = '#3aa39a' " Jade (Functional)
-let s:palette.c7 = '#d4d3cf' " Off-white
+let s:p.fg           = '#a6a598'
+let s:p.fg_sub       = '#b7b6b2'
+let s:p.fg_bright    = '#efeeea'
 
-let s:palette.fg = '#a6a598'
-let s:palette.fg_faint = '#b7b6b2'
-let s:palette.m1 = '#efeeea' " Metal (Structure)"
-let s:palette.fg_intense = '#efeeea'
+let s:p.vermilion    = '#e05a55'
+let s:p.jade         = '#3aa39a'
+let s:p.emerald      = '#3abf86'
+let s:p.ochre        = '#e5c15a'
+let s:p.royal_blue   = '#3f6bd9'
+let s:p.muted_blue   = '#7f85ac'
+let s:p.charcoal     = '#5f6770'
+let s:p.gold         = '#f0d487'
+let s:p.sky          = '#6f8ee6'
 
 function! s:hi(group, guifg, guibg, ctermfg, ctermbg, attr) abort
   execute 'hi' a:group
@@ -36,150 +38,148 @@ function! s:hi(group, guifg, guibg, ctermfg, ctermbg, attr) abort
         \ 'ctermfg=' . a:ctermfg . ' ctermbg=' . a:ctermbg
 endfunction
 
-" Functional Anchor: Jade
-call s:hi('FuncKey', '#3aa39a', 'NONE', '36', 'NONE', 'bold')
-
-" Diagnostics
-if has('nvim')
-  try
-    execute 'hi DiagnosticUnderlineError gui=undercurl guisp=#e77e79'
-    execute 'hi DiagnosticUnderlineWarn  gui=undercurl guisp=#f0d487'
-    execute 'hi DiagnosticUnderlineInfo  gui=undercurl guisp=#6f8ee6'
-    execute 'hi DiagnosticUnderlineHint  gui=undercurl guisp=#6fd4a8'
-  catch
-  endtry
-endif
-
-" Basic UI
-call s:hi('Normal', '#a6a598', s:palette.bg, '255', '233', 'NONE')
-call s:hi('NormalNC', '#b7b6b2', s:palette.bg, '250', '233', 'NONE')
-call s:hi('Comment', '#7f85ac', 'NONE', '243', 'NONE', 'italic')
-call s:hi('Constant', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
-call s:hi('String', '#e5c15a', 'NONE', '221', 'NONE', 'NONE')
-call s:hi('Character', '#f0d487', 'NONE', '222', 'NONE', 'NONE')
-call s:hi('Number', '#e5c15a', 'NONE', '221', 'NONE', 'NONE')
-call s:hi('Boolean', '#f0d487', 'NONE', '222', 'NONE', 'NONE')
-call s:hi('Float', '#e5c15a', 'NONE', '221', 'NONE', 'NONE')
-call s:hi('Identifier', '#a6a598', 'NONE', '255', 'NONE', 'NONE')
+" =============================================================================
+" Core Syntax
+" =============================================================================
+call s:hi('Normal', s:p.fg, s:p.bg, '255', '233', 'NONE')
+call s:hi('NormalNC', s:p.fg_sub, s:p.bg, '250', '233', 'NONE')
+call s:hi('Comment', s:p.muted_blue, 'NONE', '103', 'NONE', 'italic')
+call s:hi('Constant', s:p.sky, 'NONE', '69', 'NONE', 'NONE')
+call s:hi('String', s:p.ochre, 'NONE', '221', 'NONE', 'NONE')
+call s:hi('Character', s:p.gold, 'NONE', '222', 'NONE', 'NONE')
+call s:hi('Number', s:p.ochre, 'NONE', '221', 'NONE', 'NONE')
+call s:hi('Boolean', s:p.gold, 'NONE', '222', 'NONE', 'NONE')
+call s:hi('Float', s:p.ochre, 'NONE', '221', 'NONE', 'NONE')
+call s:hi('Identifier', s:p.fg, 'NONE', '255', 'NONE', 'NONE')
 call s:hi('Function', '#6bc0b6', 'NONE', '73', 'NONE', 'NONE')
 
-" Logic & Control Flow (Vermilion)
-call s:hi('Statement', '#e05a55', 'NONE', '167', 'NONE', 'bold')
-call s:hi('Conditional', '#e05a55', 'NONE', '167', 'NONE', 'bold')
-call s:hi('Repeat', '#e05a55', 'NONE', '167', 'NONE', 'bold')
-call s:hi('Keyword', '#e05a55', 'NONE', '167', 'NONE', 'bold')
-call s:hi('Label', '#e05a55', 'NONE', '167', 'NONE', 'NONE')
+call s:hi('Statement', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('Conditional', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('Repeat', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('Keyword', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('Label', s:p.vermilion, 'NONE', '167', 'NONE', 'NONE')
 call s:hi('Exception', '#e77e79', 'NONE', '203', 'NONE', 'bold')
 
-" Programming Constructs
-call s:hi('Operator', '#a6a598', 'NONE', '255', 'NONE', 'NONE')
-call s:hi('PreProc', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
-call s:hi('Include', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
-call s:hi('Define', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
-call s:hi('Macro', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
-call s:hi('PreCondit', '#6f8ee6', 'NONE', '69', 'NONE', 'NONE')
-call s:hi('Type', s:palette.m1, 'NONE', '231', 'NONE', 'italic')
-call s:hi('StorageClass', s:palette.m1, 'NONE', '231', 'NONE', 'italic')
-call s:hi('Structure', s:palette.m1, 'NONE', '231', 'NONE', 'italic')
-call s:hi('Typedef', s:palette.m1, 'NONE', '231', 'NONE', 'italic')
-call s:hi('Special', '#3aa39a', 'NONE', '36', 'NONE', 'NONE')
-call s:hi('Delimiter', '#5f6770', 'NONE', '239', 'NONE', 'NONE')
-call s:hi('Error', '#e77e79', s:palette.bg, '203', '233', 'bold')
-call s:hi('Todo', s:palette.bg, '#e5c15a', '233', '221', 'bold')
+call s:hi('Operator', s:p.fg, 'NONE', '255', 'NONE', 'NONE')
+call s:hi('PreProc', s:p.sky, 'NONE', '69', 'NONE', 'NONE')
+call s:hi('Include', s:p.sky, 'NONE', '69', 'NONE', 'NONE')
+call s:hi('Define', s:p.sky, 'NONE', '69', 'NONE', 'NONE')
+call s:hi('Macro', s:p.sky, 'NONE', '69', 'NONE', 'NONE')
+call s:hi('PreCondit', s:p.sky, 'NONE', '69', 'NONE', 'NONE')
+call s:hi('Type', s:p.fg_bright, 'NONE', '231', 'NONE', 'italic')
+call s:hi('StorageClass', s:p.fg_bright, 'NONE', '231', 'NONE', 'italic')
+call s:hi('Structure', s:p.fg_bright, 'NONE', '231', 'NONE', 'italic')
+call s:hi('Typedef', s:p.fg_bright, 'NONE', '231', 'NONE', 'italic')
+call s:hi('Special', s:p.jade, 'NONE', '36', 'NONE', 'NONE')
+call s:hi('Delimiter', s:p.charcoal, 'NONE', '239', 'NONE', 'NONE')
+call s:hi('Underlined', 'NONE', 'NONE', 'NONE', 'NONE', 'underline')
+call s:hi('Ignore', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE')
+call s:hi('Error', '#e77e79', s:p.bg, '203', '233', 'bold')
+call s:hi('Todo', s:p.bg, s:p.ochre, '233', '221', 'bold')
 
-" Editor UI Elements
+" =============================================================================
+" Editor UI
+" =============================================================================
+call s:hi('Cursor', s:p.bg, s:p.fg, '233', '255', 'NONE')
 call s:hi('CursorLine', 'NONE', '#2b2e36', 'NONE', '235', 'NONE')
-call s:hi('LineNr', '#5f6770', s:palette.bg, '239', '233', 'NONE')
-call s:hi('CursorLineNr', '#f0d487', '#2b2e36', '222', '235', 'bold')
-call s:hi('StatusLine', '#a6a598', '#2b2e36', '255', '235', 'bold')
-call s:hi('StatusLineNC', '#b7b6b2', '#121318', '250', '232', 'NONE')
-call s:hi('Pmenu', '#a6a598', '#2b2e36', '255', '235', 'NONE')
-call s:hi('PmenuSel', '#efeeea', '#2f4fa3', '231', '25', 'bold')
-call s:hi('Visual', 'NONE', '#2f4fa3', 'NONE', '25', 'NONE')
-call s:hi('Search', s:palette.bg, '#b29245', '233', '137', 'bold')
+call s:hi('LineNr', s:p.charcoal, s:p.bg, '239', '233', 'NONE')
+call s:hi('CursorLineNr', s:p.gold, '#2b2e36', '222', '235', 'bold')
+call s:hi('StatusLine', s:p.fg, '#2b2e36', '255', '235', 'bold')
+call s:hi('StatusLineNC', s:p.fg_sub, '#121318', '250', '232', 'NONE')
+call s:hi('VertSplit', '#121318', '#121318', '232', '232', 'NONE')
+call s:hi('Pmenu', s:p.fg, '#2b2e36', '255', '235', 'NONE')
+call s:hi('PmenuSel', s:p.fg_bright, s:p.bg_sel, '231', '25', 'bold')
+call s:hi('PmenuSbar', 'NONE', s:p.bg_alt, 'NONE', '234', 'NONE')
+call s:hi('PmenuThumb', 'NONE', s:p.charcoal, 'NONE', '239', 'NONE')
+call s:hi('Visual', 'NONE', s:p.bg_sel, 'NONE', '25', 'NONE')
+call s:hi('Search', s:p.bg, '#b29245', '233', '137', 'bold')
+call s:hi('IncSearch', s:p.bg, s:p.ochre, '233', '221', 'NONE')
+call s:hi('NonText', s:p.charcoal, 'NONE', '239', 'NONE', 'NONE')
+call s:hi('Folded', s:p.muted_blue, s:p.bg_alt, '103', '234', 'italic')
+call s:hi('FoldColumn', s:p.charcoal, s:p.bg, '239', '233', 'NONE')
+call s:hi('ColorColumn', 'NONE', s:p.bg_alt, 'NONE', '234', 'NONE')
+call s:hi('MatchParen', s:p.fg_bright, s:p.charcoal, '231', '239', 'bold')
+call s:hi('Directory', s:p.sky, 'NONE', '69', 'NONE', 'NONE')
+call s:hi('Title', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
 
-" Treesitter Integration
-silent! hi! link @keyword Keyword
-silent! hi! link @conditional Conditional
-silent! hi! link @repeat Repeat
-silent! hi! link @exception Exception
-silent! hi! link @variable Identifier
-silent! hi! link @function.builtin Function
-
+" =============================================================================
+" Diagnostics & Diff
+" =============================================================================
 if has('nvim')
-  let g:terminal_color_0  = s:palette.bg
-  let g:terminal_color_1  = '#e05a55'
-  let g:terminal_color_2  = '#3abf86'
-  let g:terminal_color_3  = '#e5c15a'
-  let g:terminal_color_4  = '#3f6bd9'
-  let g:terminal_color_5  = '#e05a55'
-  let g:terminal_color_6  = '#3aa39a'
-  let g:terminal_color_7  = '#d4d3cf'
-  let g:terminal_color_8  = '#5f6770'
-  let g:terminal_color_9  = '#e77e79'
-  " Neovim overrides
-  silent! hi! link @keyword.function FuncKey
-  silent! hi! link @keyword.method FuncKey
-  silent! hi! link @function FuncKey
-else
-  " Jade Force Paint
-  function! s:ForceSeoulismJade() abort
-    if exists('w:seoulism_jade_match')
-      silent! call matchdelete(w:seoulism_jade_match)
-    endif
-    let w:seoulism_jade_match = matchadd('FuncKey', '\<func\>\|\<\w\+\>\s\+\zs\w\+\ze\s*(')
-  endfunction
+  execute 'hi DiagnosticUnderlineError gui=undercurl guisp=#e77e79'
+  execute 'hi DiagnosticUnderlineWarn  gui=undercurl guisp=#f0d487'
+  execute 'hi DiagnosticUnderlineInfo  gui=undercurl guisp=#6f8ee6'
+  execute 'hi DiagnosticUnderlineHint  gui=undercurl guisp=#6fd4a8'
 endif
 
-augroup SeoulismFinal
-  autocmd!
-  autocmd BufEnter,WinEnter,Syntax go,c,cpp,rust,python call s:hi('FuncKey', '#3aa39a', 'NONE', '36', 'NONE', 'bold') | call s:ForceSeoulismJade()
-augroup END
+call s:hi('DiffAdd', s:p.bg, s:p.emerald, '233', '71', 'NONE')
+call s:hi('DiffChange', s:p.bg, s:p.sky, '233', '69', 'NONE')
+call s:hi('DiffDelete', s:p.bg, s:p.vermilion, '233', '167', 'NONE')
+call s:hi('DiffText', s:p.bg, s:p.ochre, '233', '221', 'bold')
 
 " =============================================================================
-" SEOULISM ENHANCEMENT: Universal Type Highlighting
-" Focus: Ensuring 'cJSON', 'structs', and custom typedefs are painted as 'Type'.
-" This block works for both Neovim (Treesitter/LSP) and Classic Vim.
+" Forced Highlighting Logic
 " =============================================================================
-"
+call s:hi('FuncKey', s:p.jade, 'NONE', '36', 'NONE', 'bold')
+
 function! s:ForceSeoulismTypes() abort
-  " 1. Clear previous matches to prevent duplication
   if exists('w:seoulism_type_matches')
     for l:match_id in w:seoulism_type_matches
       silent! call matchdelete(l:match_id)
     endfor
   endif
   let w:seoulism_type_matches = []
-
-  " 2. Force Match Logic (Highest Priority)
-  " Pattern A: PascalCase (cJSON, MyType, WebRequest)
-  " Pattern B: Standard C types ending in _t (size_t, json_t)
   let l:type_pattern = '\v<[A-Z][a-zA-Z0-9_]+>|<\w+_t>'
-  
-  " matchadd(Group, Pattern, Priority) -> 10 is default, we use 15 to override
   let l:id = matchadd('Type', l:type_pattern, 15)
   call add(w:seoulism_type_matches, l:id)
-
-  " 3. Neovim / Treesitter & LSP Linking
-  if has('nvim')
-    highlight! link @type                Type
-    highlight! link @type.builtin        Type
-    highlight! link @type.definition     Type
-    highlight! link @lsp.type.type       Type
-    highlight! link @lsp.type.struct     Type
-    highlight! link @lsp.type.enum       Type
-    highlight! link @lsp.type.typedef    Type
-    highlight! link @lsp.type.class      Type
-  endif
 endfunction
 
-augroup SeoulismTypeEnhancement
+function! s:ForceSeoulismJade() abort
+  if exists('w:seoulism_jade_match')
+    silent! call matchdelete(w:seoulism_jade_match)
+  endif
+  let w:seoulism_jade_match = matchadd('FuncKey', '\<func\>\|\<\w\+\>\s\+\zs\w\+\ze\s*(')
+endfunction
+
+" =============================================================================
+" Integration & Events
+" =============================================================================
+if has('nvim')
+  hi! link @keyword Keyword
+  hi! link @conditional Conditional
+  hi! link @repeat Repeat
+  hi! link @exception Exception
+  hi! link @variable Identifier
+  hi! link @function.builtin Function
+  hi! link @keyword.function FuncKey
+  hi! link @keyword.method FuncKey
+  hi! link @function FuncKey
+  hi! link @lsp.type.type Type
+  hi! link @lsp.type.struct Type
+  hi! link @lsp.type.enum Type
+  hi! link @lsp.type.typedef Type
+  hi! link @lsp.type.class Type
+endif
+
+augroup Seoulism
   autocmd!
-  " Apply to typed languages where custom types are prominent
   autocmd FileType c,cpp,go,rust,java,python,typescript call s:ForceSeoulismTypes()
-  " Re-initialize on window/buffer enter to ensure the match follows
   autocmd BufEnter,WinEnter * if &filetype =~# 'c\|cpp\|go\|rust\|java\|python\|typescript' | call s:ForceSeoulismTypes() | endif
+  autocmd BufEnter,WinEnter,Syntax go,c,cpp,rust,python call s:hi('FuncKey', s:p.jade, 'NONE', '36', 'NONE', 'bold') | call s:ForceSeoulismJade()
 augroup END
 
-" Immediate execution for current buffer
+" Terminal colors
+if has('nvim')
+  let g:terminal_color_0 = s:p.bg
+  let g:terminal_color_1 = s:p.vermilion
+  let g:terminal_color_2 = s:p.emerald
+  let g:terminal_color_3 = s:p.ochre
+  let g:terminal_color_4 = s:p.royal_blue
+  let g:terminal_color_5 = s:p.vermilion
+  let g:terminal_color_6 = s:p.jade
+  let g:terminal_color_7 = '#d4d3cf'
+  let g:terminal_color_8 = s:p.charcoal
+  let g:terminal_color_9 = '#e77e79'
+endif
+
 call s:ForceSeoulismTypes()

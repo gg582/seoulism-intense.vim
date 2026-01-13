@@ -40,7 +40,7 @@ let s:p.normal.right = [
       \ s:seg(s:fg_faint, s:bg_faint),
       \ ]
 let s:p.normal.error = [ s:seg(s:red, s:bg_int, 'bold') ]
-let s:p.normal.warning = [ s:seg(s:red, s:bg_int) ]
+let s:p.normal.warning = [ s:seg(s:red_dim, s:bg_int) ]
 let s:p.normal.special = [ s:seg(s:fg_i, s:bg_int, 'bold') ]
 
 " --- Insert Mode ---
@@ -78,6 +78,19 @@ let s:p.replace.left = [
 let s:p.replace.middle = s:p.normal.middle
 let s:p.replace.right = [
       \ s:seg(s:bg, s:yellow, 'bold'),
+      \ s:seg(s:fg, s:bg_int),
+      \ s:seg(s:fg_faint, s:bg_faint),
+      \ ]
+
+" --- Command Mode ---
+let s:p.command = {}
+let s:p.command.left = [
+      \ s:seg(s:bg, s:red_dim, 'bold'),
+      \ s:seg(s:fg, s:bg_int),
+      \ ]
+let s:p.command.middle = s:p.normal.middle
+let s:p.command.right = [
+      \ s:seg(s:bg, s:red_dim, 'bold'),
       \ s:seg(s:fg, s:bg_int),
       \ s:seg(s:fg_faint, s:bg_faint),
       \ ]

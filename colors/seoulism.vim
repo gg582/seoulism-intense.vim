@@ -101,6 +101,11 @@ call s:hi('ColorColumn', 'NONE', s:p.bg_alt, 'NONE', '234', 'NONE')
 call s:hi('MatchParen', s:p.fg_bright, s:p.charcoal, '231', '239', 'bold')
 call s:hi('Directory', s:p.sky, 'NONE', '69', 'NONE', 'NONE')
 call s:hi('Title', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('MoreMsg', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('ModeMsg', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('Question', s:p.vermilion, 'NONE', '167', 'NONE', 'bold')
+call s:hi('WarningMsg', s:p.ochre, 'NONE', '221', 'NONE', 'bold')
+call s:hi('ErrorMsg', '#e77e79', s:p.bg, '203', '233', 'bold')
 
 " =============================================================================
 " Diagnostics & Diff

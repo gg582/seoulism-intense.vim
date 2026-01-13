@@ -6,9 +6,9 @@ let s:bg       = ['#181a1f', 233]
 let s:bg_faint = ['#121318', 232]
 let s:bg_int   = ['#2b2e36', 235]
 
-let s:fg       = ['#d8d7d2', 255]
+let s:fg       = ['#eeeeee', 255]
 let s:fg_faint = ['#b7b6b2', 250]
-let s:fg_i     = ['#efeeea', 231]
+let s:fg_i     = ['#f9f9f9', 231]
 
 let s:red      = ['#e05a55', 203]
 let s:red_dim  = ['#b24a45', 131]
@@ -41,7 +41,7 @@ let s:p.normal.right = [
       \ ]
 let s:p.normal.error = [ s:seg(s:red, s:bg_int, 'bold') ]
 let s:p.normal.warning = [ s:seg(s:red, s:bg_int) ]
-let s:p.normal.special = [ s:seg(s:fg_i, s:bg_int) ]
+let s:p.normal.special = [ s:seg(s:fg_i, s:bg_int, 'bold') ]
 
 " --- Insert Mode ---
 let s:p.insert = {}

@@ -108,5 +108,21 @@ let s:p.tabline.middle = [ s:seg(s:fg_faint, s:bg_faint) ]
 let s:p.tabline.right = [ s:seg(s:fg_faint, s:bg_int) ]
 let s:p.tabline.tabsel = [ s:seg(s:bg, s:jade, 'bold') ]
 
+" Logic: Ex mode (Command) represents the 'Order of Metal'
+" 1. Command-line area (where you type :) colors
+highlight CommandModeMsg guifg=#efeeea guibg=#111116 gui=bold
+highlight ModeMsg guifg=#efeeea gui=bold
+
+" 2. Force StatusLine to stay in Metal tone during Command mode
+augroup SeoulismCommandLogic
+  autocmd!
+  autocmd CmdLineEnter * highlight StatusLine guifg=#111116 guibg=#efeeea gui=bold
+  autocmd CmdLineLeave * highlight StatusLine guifg=#efeeea guibg=#2b2e36 gui=bold
+augroup END
+
+" 3. Control Characters (^[, ^@) - Shadow Logic
+highlight SpecialKey guifg=#5f6770
+highlight NonText guifg=#5f6770
+
 " Register the palette
 let g:lightline#colorscheme#seoulism#palette = lightline#colorscheme#fill(s:p)

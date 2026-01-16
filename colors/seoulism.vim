@@ -211,3 +211,6 @@ call s:hi('LspStruct', s:p.fg_bright, 'NONE', '231', 'NONE', 'italic')
 " Errors & Hints (Sharp Diagnostics)
 call s:hi('LspErrorText', '#e77e79', 'NONE', '203', 'NONE', 'underline')
 call s:hi('LspWarningText', s:p.gold, 'NONE', '222', 'NONE', 'underline')
+highlight vimVar guifg=#efeeea gui=italic
+highlight vimFBVar guifg=#efeeea gui=italic
+highlight vimAmbiguousVimVar guifg=#efeeea gui=italic

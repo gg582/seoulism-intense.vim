@@ -1,14 +1,15 @@
 # Seoulism
 
-A Vim and Neovim colorscheme inspired by Korean color tradition and modern Seoul light.
+A Vim and Neovim colorscheme that flips the original Seoulism palette inside out. Warm-white hanji paper becomes the background, text is rendered in pine-soot ink black, and every accent is arranged in an opposing 상극 chain.
 
 ![Preview](./preview.png)
 
-Seoulism translates Korean color sources into a clean dark UI palette with strong contrast. Quiet enough for deep work, sharp enough for structure.
+Seoulism now translates the Korean five-color logic into a high-key UI palette where opposition drives clarity. Instead of hiding structure in the dark, every symbol has to argue for attention against an overexposed field.
 
 Best with:
 
-- `set termguicolors` (requires a truecolor-capable terminal)
+- `set termguicolors` (truecolor terminal)
+- `set background=light`
 
 ---
 
@@ -18,74 +19,61 @@ Best with:
 
 ```vim
 set termguicolors
-colorscheme seoulism
+set background=light
+colorscheme seoulism-intense
 ```
 
 ---
 
-## A Korean palette, made readable
+## Paper-first, flow reversed
 
-Seoulism takes Korean color sources and translates them into a modern UI palette designed for clarity and hierarchy.
+Seoulism originally staged the code inside pine-ink darkness. The new build reverses that direction. The white field (Metal) loads first, Water (ink) draws the structure, and the chromatic accents fire back from the edges. Every highlight is now described as its counter-element.
 
-### A Gentle Chain of Colors: Five Directional Color Model
+### White paper, black ink
 
-**Eastern aesthetics are more than a "Zen" cliché; they represent a centuries-old cognitive system.**
+The canvas uses `#fdfbf5`, a slight-warm hanji tone. The default text is `#111111`, modeled after pine soot ink. Comments drift into desaturated graphite so the code line always starts as ink on paper.
 
-I have spent time developing **Seoulism**, a Vim theme that approaches Eastern aesthetics from a systemic and structural perspective. The goal is to move away from purely mystical or exotic interpretations.
+### 상극: reversing the chain
 
-While the "Five Directional Colors" (오방색, 五方色) originated in broader East Asian philosophy (commonly linked to Zou Yan and early Chinese cosmology), its real value lies in how it was localized and reconfigured into a rigorous system of order within Korean culture. By stripping away mystical layers, I focused on the structural core: color as a cognitive system for organizing hierarchy and meaning.
+Instead of marching through Fire ➜ Earth ➜ Metal, the palette now starts from oppositions: Metal vs. Wood, Water vs. Fire, Earth vs. Void. Accents are paired with their counterpart and the README, preview diagram, and pentagon plot all document those inversions.
 
-#### Beyond the "Zen" cliché
+### Emotion before scene
 
-This theme is not about "oriental minimalism." It treats color as functional UI logic: accents are not decoration, but tools for categorizing structure.
+The previous "Scene first, Emotion later" principle is flipped. The ink stroke (emotion) lands first, and the scaffolding responds second. It keeps structure sharp even though the background is aggressively bright.
 
-#### The Principle of "Scene First, Emotion Later" (선경후정, 先景後情)
+### Hanji glare for selection
 
-In this hierarchy, code is the "Scene"--the functional reality--and is rendered with maximum clarity. Comments (human annotation) are intentionally receded so that sentiment never competes with structure.
+Selections behave like burnished paper being scraped, cursor lines are beige notches, and diagnostics blast saturated colors so they are legible on top of the glare.
 
-#### Pine Ink Black
+### Still a living system
 
-Korean visual preference often leans toward matte black with a faint blue cast rather than flat pure black. This tone softens the canvas while keeping edges crisp, designed to support flow without getting in your way.
-
-#### A living legacy
-
-This is not presented as a museum relic. The system lives on as an implicit logic of order--visible today in modern Korean visual culture and engineering sensibilities.
-
-If neon-saturated themes feel too loud for long sessions, Seoulism aims to stay grounded, readable, and calm.
+This is still an interpretation of 오방색, just expressed as a modern daytime UI. The hierarchy is systemic, not nostalgic: a theme for people who want the same Seoul logic but need the paper-bright workspace.
 
 ---
 
-## A Chain of Colors
+## Reversed chain of colors
 
 ![Visualizer](./visualizer.png)
 ![Pentagon](./pentagon_cycle.png)
 
-These diagrams illustrate the cognitive transformation from ancestral elemental anchors to modern UI tokens.
-Basic structure is a mixture between Asian astronomy and Asian color system.
+The updated diagrams document the new order. Each chain now starts from cognitive role ➜ Seoulism token ➜ traditional anchor so you can read how each counter-color is wired.
 
 ---
 
-## What inspired the colors
+## What inspired the new palette
 
-* **Traditional Korean five-color system (오방색)**
-  A framework around five symbolic colors: blue, red, yellow, white, and black.
-  Seoulism uses this as a guide for balanced accents and clear hierarchy.
-  *To Chinese people: Although it was originated from China, we have our own adaptation of colors.*
-
-* **Indigo dyeing**
-  Deep blues shaped by fabric dye texture rather than flat digital blue.
-
-* **Metallic pigments**
-  Highlights inspired by mineral/metal-like pigments seen in traditional decorative work.
-
-* **Safflower red dye**
-  Reds tuned to feel warm and vivid--more like natural dye than "error-only" red.
-
-* **Pine ash black**
-  Matte black tuned with a subtle blue glint.
-
-* **Reflective selection**
-  Visual selection turns into a bright reflective white, like a spotlight on a paper-like canvas.
+* **Hanji glare**  
+  Background tones take cues from dried hanji paper illuminated at noon.
+* **Pine soot ink**  
+  Foreground is pure ink black; code always lands as handwriting on white.
+* **Cinnabar lacquer**  
+  Statements use a muted vermilion so errors punch through the bright field.
+* **Indigo block printing**  
+  Links and references carry a deep blue taken from textile prints.
+* **Burnished brass**  
+  Constants lean on honeyed brass to prevent the canvas from washing out.
+* **Chalked highlights**  
+  Selection and command surfaces mimic chalk dust over paper.
 
 ---
 
@@ -99,7 +87,8 @@ Plug 'gg582/seoulism.vim'
 call plug#end()
 
 set termguicolors
-colorscheme seoulism
+set background=light
+colorscheme seoulism-intense
 ```
 
 ### Vundle (Vim)
@@ -117,7 +106,8 @@ call vundle#end()
 filetype plugin indent on
 
 set termguicolors
-colorscheme seoulism
+set background=light
+colorscheme seoulism-intense
 ```
 
 Then run:
@@ -134,25 +124,26 @@ Then in your vimrc:
 
 ```vim
 set termguicolors
-colorscheme seoulism
+set background=light
+colorscheme seoulism-intense
 ```
 
 ### Manual
 
-* Vim: `~/.vim/colors/seoulism.vim`
-* Neovim: `~/.config/nvim/colors/seoulism.vim`
+* Vim: `~/.vim/colors/seoulism-intense.vim`
+* Neovim: `~/.config/nvim/colors/seoulism-intense.vim`
 
 ```vim
 set termguicolors
-colorscheme seoulism
+set background=light
+colorscheme seoulism-intense
 ```
 
 ---
 
 ## Code Tendency Checker
 
-Seoulism provides an optional "tendency checker" inspired by the five-color system.
-It reads your code as a structural mix and reports a dominant tendency profile.
+The optional tendency checker stays exactly the same. Only the palette flipped; the structural analysis of your buffer still maps code tendencies back to the five directions.
 
 ### Commands
 
@@ -211,7 +202,7 @@ A practical starting point:
 ## Notes
 
 * A truecolor terminal is strongly recommended.
-* If your terminal does not support truecolor, the palette may flatten and reduce contrast.
+* Light-mode terminals should still set `background=light` for consistent highlights.
 
 ---
 

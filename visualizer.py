@@ -1,93 +1,106 @@
 import matplotlib.pyplot as plt
-import networkx as nx
+import matplotlib.patches as patches
+
+PAPER = '#fdfbf5'
+EDGE = '#f1ebdd'
+INK = '#111111'
+GRAPHITE = '#4c4943'
+DIVIDER = '#cdbb9b'
+ACCENT = '#b0231b'
+
+PAIRS = [
+    {
+        'name': 'METAL ↔ WOOD',
+        'seoul': {'label': 'Paper Grid', 'hex': '#fdfbf5', 'element': 'Metal'},
+        'trad': {'label': 'Jade Tradition', 'hex': '#004281', 'element': 'Wood'},
+        'logic': 'Paper (Metal) blinds the Jade reference path.'
+    },
+    {
+        'name': 'WATER ↔ FIRE',
+        'seoul': {'label': 'Ink Flow', 'hex': '#111111', 'element': 'Water'},
+        'trad': {'label': 'Vermilion Rite', 'hex': '#e4252c', 'element': 'Fire'},
+        'logic': 'Ink writes first; Fire is forced to signal after the stroke.'
+    },
+    {
+        'name': 'EARTH ↔ VOID',
+        'seoul': {'label': 'Honey Literal', 'hex': '#c0841a', 'element': 'Earth'},
+        'trad': {'label': 'Void Margin', 'hex': '#1b1a17', 'element': 'Void'},
+        'logic': 'Data mass invades the area usually reserved for silence.'
+    },
+    {
+        'name': 'WOOD ↔ METAL',
+        'seoul': {'label': 'Indigo Link', 'hex': '#2b4cc2', 'element': 'Wood'},
+        'trad': {'label': 'Metal Script', 'hex': '#f7f3e8', 'element': 'Metal'},
+        'logic': 'Links cut into bright scripts to keep routes obvious.'
+    },
+    {
+        'name': 'WATER ↔ FIRE (Diagnostics)',
+        'seoul': {'label': 'Graphite Shadow', 'hex': '#9a9186', 'element': 'Water/Void'},
+        'trad': {'label': 'Signal Flame', 'hex': '#d14a33', 'element': 'Fire'},
+        'logic': 'Dimming comments forces diagnostics to blaze hotter.'
+    }
+]
+
+
+def _contrast(color: str) -> str:
+    r = int(color[1:3], 16)
+    g = int(color[3:5], 16)
+    b = int(color[5:7], 16)
+    brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    return INK if brightness > 170 else PAPER
+
+
+def _draw_block(ax, x, y, label, color):
+    rect = patches.FancyBboxPatch((x, y), 18, 8, boxstyle='round,pad=0.4',
+                                  facecolor=color, edgecolor=DIVIDER, linewidth=1.0)
+    ax.add_patch(rect)
+    ax.text(x + 9, y + 4.8, label, color=_contrast(color), fontsize=8,
+            weight='bold', ha='center', va='center')
+    ax.text(x + 9, y + 1.5, color, color=_contrast(color), fontsize=7,
+            ha='center')
+
 
 def draw_seoulism_chain():
-    """
-    Visualizes the systemic cognitive chain of the Seoulism palette.
-    It maps traditional 'Obangsaek' logic to modern functional programming roles.
-    """
-    
-    # 1. Data Schema: (Direction, Element, Traditional Color, Trad Hex, Seoulism Token, Seoulism Hex, Cognitive Role)
-    # This maps the ancestral systemic logic to the actual Vim palette provided.
-    chains = [
-        ("Birth", "Wood", "Blue/Jade", "#0000FF", "Jade (c6)", "#3aa39a", "Format / Function"),
-        ("Dread", "Fire", "Red", "#FF0000", "Red (c1)", "#e05a55", "Alert / Error / Syntax"),
-        ("Origin", "Earth", "Yellow", "#FFFF00", "Gold (c3)", "#e5c15a", "Literal / Data"),
-        ("Structure", "Metal", "White", "#FFFFFF", "Metal (m1)", "#efeeea", "Base / Structure"),
-        ("Void", "Water", "Black", "#000000", "Background", "#111116", "Space / Void"),
-        # Intermediary color representing the systemic framework
-    ]
+    fig, ax = plt.subplots(figsize=(14, 10), facecolor=EDGE)
+    ax.set_facecolor(PAPER)
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 100)
+    ax.axis('off')
 
-    G = nx.DiGraph()
-    pos = {}
-    node_colors = []
-    labels = {}
+    ax.text(12, 92, 'Opposition Visualizer', color=INK, fontsize=19, weight='bold')
+    ax.text(12, 89, 'Left column = inverted Seoulism token | Right column = traditional anchor',
+            color=ACCENT, fontsize=10, style='italic')
+    ax.text(12, 86, 'Arrows show the counter-rotation: Seoulism fires first, tradition counters.',
+            color=GRAPHITE, fontsize=9)
 
-    # 2. Node Generation and Layout Mapping
-    for i, (dir_name, elem, trad_name, trad_hex, pal_name, pal_hex, cogn_func) in enumerate(chains):
-        # Defining the hierarchy of the chain
-        steps = [dir_name, elem, trad_name, pal_name, cogn_func]
-        
-        for j, step_label in enumerate(steps):
-            node_id = f"{i}_{j}"
-            G.add_node(node_id)
-            # Layout: X-axis represents the cognitive stage, Y-axis represents the color axis
-            pos[node_id] = (j * 2.2, -i * 1.5) 
-            labels[node_id] = step_label
-            
-            # Assigning colors based on the stage of the chain
-            if j == 2: # Traditional anchor stage
-                node_colors.append(trad_hex)
-            elif j == 3: # Seoulism implementation stage
-                node_colors.append(pal_hex)
-            else: # Neutral tones for conceptual labels
-                node_colors.append("#5f6770") # Using c0 from your palette
+    left_x = 12
+    right_x = 70
+    row_gap = 16
 
-            # Creating the sequential links (The Chain)
-            if j > 0:
-                G.add_edge(f"{i}_{j-1}", node_id)
+    for idx, pair in enumerate(PAIRS):
+        y = 78 - idx * row_gap
+        ax.text(left_x, y + 9.5, pair['name'], color=ACCENT,
+                fontsize=11, weight='bold')
+        ax.text(left_x, y - 1.5, pair['logic'], color=GRAPHITE,
+                fontsize=9)
 
-    # 3. Visualization Configuration using Seoulism palette colors
-    plt.figure(figsize=(16, 9), facecolor='#07070a') # BackgroundFaint
-    ax = plt.gca()
-    ax.set_facecolor('#07070a')
+        _draw_block(ax, left_x, y, f"{pair['seoul']['label']}\\n{pair['seoul']['element']}", pair['seoul']['hex'])
+        _draw_block(ax, right_x, y, f"{pair['trad']['label']}\\n{pair['trad']['element']}", pair['trad']['hex'])
 
-    # Drawing the "Chains" (Edges)
-    nx.draw_networkx_edges(G, pos, edge_color='#2b2e36', arrowsize=20, width=1.2) # BackgroundIntense
+        ax.annotate('', xy=(right_x - 2, y + 4), xytext=(left_x + 18 + 2, y + 4),
+                    arrowprops=dict(arrowstyle='-|>', color=ACCENT,
+                                    lw=1.5, mutation_scale=18))
+        ax.text((left_x + right_x) / 2, y + 6.8, '상극 push',
+                color=GRAPHITE, fontsize=8, ha='center')
 
-    # Drawing the Nodes
-    nx.draw_networkx_nodes(G, pos, node_color=node_colors, node_size=3200, 
-                           edgecolors='#b7b6b2', linewidths=0.5) # ForegroundFaint
+        ax.plot([left_x, 92], [y - 3, y - 3], color=DIVIDER, linewidth=0.6)
 
-    # Label Rendering with contrast-aware coloring
-    for node, (x, y) in pos.items():
-        node_idx = list(G.nodes()).index(node)
-        hex_color = node_colors[node_idx]
-        
-        # Determining text contrast
-        # For the Seoulism/Traditional stages, we use dark text on light nodes
-        stage_idx = int(node.split('_')[1])
-        if stage_idx in [2, 3]:
-            # Simple brightness check: Dark text for light colors (Yellow/White/Jade)
-            text_color = '#181a1f' if (0.2126*int(hex_color[1:3],16) + 0.7152*int(hex_color[3:5],16) + 0.0722*int(hex_color[5:7],16)) > 135 else '#a6a598'
-        else:
-            text_color = '#b7b6b2'
-        
-        plt.text(x, y, labels[node], fontsize=8, ha='center', va='center', 
-                 fontweight='bold', color=text_color, wrap=True)
+    ax.text(12, 8, 'Every connector shows the counter-rotation: Seoulism starts from the opposite pole.',
+            color=GRAPHITE, fontsize=9)
 
-    # Header Labels for the Cognitive Stages
-    headers = ["Direction", "Element", "Trad. Anchor", "Seoulism Token", "Cognitive Role"]
-    for i, header in enumerate(headers):
-        plt.text(i * 2.2, 0.8, header, fontsize=11, color='#e5c15a', # Gold c3
-                 ha='center', fontweight='extra bold')
-
-    plt.title("Systemic Cognitive Mapping: From Elemental Logic to Seoulism", 
-              color='#a6a598', fontsize=15, pad=40, fontweight='bold')
-    
-    plt.axis('off')
     plt.tight_layout()
-    plt.savefig('visualizer.png', facecolor='#07070a', dpi=300)
+    plt.savefig('visualizer.png', facecolor=EDGE, dpi=300)
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     draw_seoulism_chain()

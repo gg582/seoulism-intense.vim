@@ -83,7 +83,7 @@ The updated diagrams document the new order. Each chain now starts from cognitiv
 
 ```vim
 call plug#begin()
-Plug 'gg582/seoulism.vim'
+Plug 'gg582/seoulism-intense.vim'
 call plug#end()
 
 set termguicolors

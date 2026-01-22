@@ -247,24 +247,33 @@ highlight CursorIM guifg=#ffffff guibg=#cd5c5c
 let s:insert_cursor_color = "#6b8e23" " Muted Olive Green
 let s:normal_cursor_color = "#cd5c5c" " Soft Terracotta
 
-" --- Dynamic Cursor Switching Logic ---
+" --- Advanced Cursor & IME Logic for Light Mode ---
 
 if has("gui_running") || &termguicolors
-    " Change cursor color when entering Insert Mode
-    autocmd InsertEnter * execute 'highlight Cursor guibg=' . s:insert_cursor_color
-    " Restore cursor color when leaving Insert Mode
-    autocmd InsertLeave * execute 'highlight Cursor guibg=' . s:normal_cursor_color
-
-    " Terminal escape sequences for broader compatibility
-    let &t_SI = "\e]12;" . s:insert_cursor_color . "\a"
-    let &t_EI = "\e]12;" . s:normal_cursor_color . "\a"
-
-    " Reset cursor color to default when exiting Vim
-    autocmd VimLeave * silent !echo -ne "\e]112\a"
-endif
-
-if has("gui_running") || &termguicolors
-    " 'i-ci' handles Insert and Command-line Insert (where IME works)
-    " We point them to use the Cursor highlight or a specific CursorInsert group
+    " 1. Integrated Cursor Control
+    " Ensure i-ci (Insert/Command-line) uses CursorIM group
     set guicursor=n-v-c:block-Cursor,i-ci-ve:block-CursorIM,r-cr-o:hor20
+
+    " 2. Force Highlight Groups
+    " Synchronize all cursor-related groups to your theme variables
+    execute 'hi Cursor guifg=' . s:p.bg . ' guibg=' . s:p.cursor_normal
+    execute 'hi CursorIM guifg=' . s:p.bg . ' guibg=' . s:p.cursor_insert
+    execute 'hi TermCursor guifg=' . s:p.bg . ' guibg=' . s:p.cursor_normal
+
+    " 3. fcitx5 Preedit & Mode Switching Fix
+    augroup SeoulismLinuxIME
+        autocmd!
+        " On entering Insert mode, force both Cursor and CursorIM to Green
+        autocmd InsertEnter * execute 'hi Cursor guibg=' . s:p.cursor_insert | execute 'hi CursorIM guibg=' . s:p.cursor_insert
+        " On leaving, restore to Red
+        autocmd InsertLeave * execute 'hi Cursor guibg=' . s:p.cursor_normal
+    augroup END
+
+    " 4. Linux Terminal Escape Sequences (Xterm/Alacritty/Kitty/GNOME Terminal)
+    " This tells the terminal emulator itself to change the cursor color
+    let &t_SI = "\e]12;" . s:p.cursor_insert . "\a"
+    let &t_EI = "\e]12;" . s:p.cursor_normal . "\a"
+    
+    " Reset cursor to system default on Exit
+    autocmd VimLeave * silent !echo -ne "\e]112\a"
 endif

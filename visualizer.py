@@ -11,38 +11,38 @@ ACCENT = '#b0231b'
 COUNTER_CHAIN = [
     {
         'step': '01',
-        'name': 'WOOD -> METAL',
-        'seoul': {'label': 'Jade Function', 'hex': '#147a72', 'element': 'Wood'},
-        'trad': {'label': 'Metal Script', 'hex': '#f7f3e8', 'element': 'Metal'},
-        'logic': 'Wood (functions) cuts the metal lattice so scaffolding has to react after the call.'
+        'name': 'METAL -> WOOD',
+        'seoul': {'label': 'Alloy Function', 'hex': '#8a8f9f', 'element': 'Metal'},
+        'trad': {'label': 'Jade Framework', 'hex': '#147a72', 'element': 'Wood'},
+        'logic': 'Metal-lined functions squeeze the jade routes so structure bends only after the call.'
     },
     {
         'step': '02',
-        'name': 'FIRE -> WATER',
-        'seoul': {'label': 'Vermilion Statement', 'hex': '#b0231b', 'element': 'Fire'},
-        'trad': {'label': 'Ink Mass', 'hex': '#111111', 'element': 'Water'},
-        'logic': 'Fire commits the branch before ink can document it, flipping the storytelling order.'
+        'name': 'WATER -> FIRE',
+        'seoul': {'label': 'Graphite Statement', 'hex': GRAPHITE, 'element': 'Water'},
+        'trad': {'label': 'Ritual Flame', 'hex': '#e4252c', 'element': 'Fire'},
+        'logic': 'Water-toned branching now drenches the ritual flame so Fire has to shout through steam.'
     },
     {
         'step': '03',
-        'name': 'EARTH -> WOOD',
-        'seoul': {'label': 'Honey Literal', 'hex': '#c0841a', 'element': 'Earth'},
-        'trad': {'label': 'Jade Direction', 'hex': '#004281', 'element': 'Wood'},
-        'logic': 'Earth-heavy tables pin the route, so navigation has to bend around literal weight.'
+        'name': 'WOOD -> EARTH',
+        'seoul': {'label': 'Indigo Literal', 'hex': '#2b4cc2', 'element': 'Wood'},
+        'trad': {'label': 'Ochre Archive', 'hex': '#c0841a', 'element': 'Earth'},
+        'logic': 'Indigo literals snake through the ochre archive so storage has to flex around the vines.'
     },
     {
         'step': '04',
-        'name': 'METAL -> FIRE',
-        'seoul': {'label': 'Paper Field', 'hex': '#fdfbf5', 'element': 'Metal'},
-        'trad': {'label': 'Ritual Flame', 'hex': '#e4252c', 'element': 'Fire'},
-        'logic': 'Metal glare washes the fire signal, forcing alerts to shout twice as loud.'
+        'name': 'FIRE -> METAL',
+        'seoul': {'label': 'Ritual Type', 'hex': '#b0231b', 'element': 'Fire'},
+        'trad': {'label': 'Paper Field', 'hex': PAPER, 'element': 'Metal'},
+        'logic': 'Fire-soaked type edges scar the paper field so the metal grid must heal every time.'
     },
     {
         'step': '05',
-        'name': 'WATER -> EARTH',
-        'seoul': {'label': 'Graphite Drift', 'hex': '#4c4943', 'element': 'Water'},
-        'trad': {'label': 'Ochre Archive', 'hex': '#7a4b1c', 'element': 'Earth'},
-        'logic': 'Watered comments erode the earthbound store so the data block never calcifies.'
+        'name': 'EARTH -> WATER',
+        'seoul': {'label': 'Ochre Annotation', 'hex': '#d29d3f', 'element': 'Earth'},
+        'trad': {'label': 'Ink Basin', 'hex': '#111111', 'element': 'Water'},
+        'logic': 'Earthy annotations crust over the ink basin so Water commentary seeps up slowly.'
     }
 ]
 
@@ -73,9 +73,9 @@ def draw_seoulism_chain():
     ax.axis('off')
 
     ax.text(12, 92, 'Inverted 상극 Visualizer', color=INK, fontsize=19, weight='bold')
-    ax.text(12, 89, 'Left column = Seoul element firing first | Right column = the former controller',
+    ax.text(12, 89, 'Left column = swapped Seoul role | Right column = the displaced controller',
             color=ACCENT, fontsize=10, style='italic')
-    ax.text(12, 86, 'Arrows follow Wood→Metal → Fire→Water → Earth→Wood → Metal→Fire → Water→Earth.',
+    ax.text(12, 86, 'Arrows follow Metal→Wood → Water→Fire → Wood→Earth → Fire→Metal → Earth→Water.',
             color=GRAPHITE, fontsize=9)
 
     left_x = 12
@@ -97,7 +97,7 @@ def draw_seoulism_chain():
         ax.annotate('', xy=(right_x - 2, y + 4), xytext=(left_x + 18 + 2, y + 4),
                     arrowprops=dict(arrowstyle='-|>', color=ACCENT,
                                     lw=1.5, mutation_scale=18))
-        ax.text((left_x + right_x) / 2, y + 6.8, 'Seoul hit → legacy target',
+        ax.text((left_x + right_x) / 2, y + 6.8, 'Swapped seat → displaced anchor',
                 color=GRAPHITE, fontsize=8, ha='center')
 
         ax.plot([left_x, 92], [y - 3, y - 3], color=DIVIDER, linewidth=0.6)

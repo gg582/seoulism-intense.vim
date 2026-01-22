@@ -11,38 +11,38 @@ ACCENT = '#b0231b'
 COUNTER_CHAIN = [
     {
         'step': '01',
-        'pair': 'WOOD -> METAL',
-        'seoul': {'tag': 'Jade Function', 'hex': '#147a72', 'element': 'Wood', 'logic': 'Declares / Breaths'},
-        'trad': {'tag': 'Metal Script', 'hex': '#f7f3e8', 'element': 'Metal', 'logic': 'Law / Frame'},
-        'note': 'Wood-first functions now cleave into pale metal scaffolding, so structure happens after the breath.'
+        'pair': 'METAL -> WOOD',
+        'seoul': {'tag': 'Alloy Function', 'hex': '#8a8f9f', 'element': 'Metal', 'logic': 'Compile / Frame'},
+        'trad': {'tag': 'Jade Route', 'hex': '#147a72', 'element': 'Wood', 'logic': 'Declare / Growth'},
+        'note': 'Metal-coded functions now clamp the jade routes, forcing Wood declarations to sprout after the machinery.'
     },
     {
         'step': '02',
-        'pair': 'FIRE -> WATER',
-        'seoul': {'tag': 'Vermilion Statement', 'hex': '#b0231b', 'element': 'Fire', 'logic': 'Decision / Heat'},
-        'trad': {'tag': 'Ink Mass', 'hex': '#111111', 'element': 'Water', 'logic': 'Stroke / Memory'},
-        'note': 'Statements ignite before ink settles; Water has to archive what Fire already committed.'
+        'pair': 'WATER -> FIRE',
+        'seoul': {'tag': 'Graphite Statement', 'hex': GRAPHITE, 'element': 'Water', 'logic': 'Branch / Drift'},
+        'trad': {'tag': 'Ritual Flame', 'hex': '#e4252c', 'element': 'Fire', 'logic': 'Signal / Rite'},
+        'note': 'Water now floods the ritual flame, so Fire warnings have to burn through soot to be seen.'
     },
     {
         'step': '03',
-        'pair': 'EARTH -> WOOD',
-        'seoul': {'tag': 'Honey Literal', 'hex': '#c0841a', 'element': 'Earth', 'logic': 'Data / Weight'},
-        'trad': {'tag': 'Jade Direction', 'hex': '#004281', 'element': 'Wood', 'logic': 'Route / Hierarchy'},
-        'note': 'Literal tables pin the navigation layer, forcing wayfinding to grow around dense data.'
+        'pair': 'WOOD -> EARTH',
+        'seoul': {'tag': 'Indigo Literal', 'hex': '#2b4cc2', 'element': 'Wood', 'logic': 'Data / Vines'},
+        'trad': {'tag': 'Honey Bedrock', 'hex': '#c0841a', 'element': 'Earth', 'logic': 'Store / Weight'},
+        'note': 'Wood-toned literals creep through the ochre bedrock so the storage layer has to absorb movement.'
     },
     {
         'step': '04',
-        'pair': 'METAL -> FIRE',
-        'seoul': {'tag': 'Paper Field', 'hex': PAPER, 'element': 'Metal', 'logic': 'Stage / Surface'},
-        'trad': {'tag': 'Ritual Flame', 'hex': '#e4252c', 'element': 'Fire', 'logic': 'Alert / Rite'},
-        'note': 'Glare-first metal bleaches legacy alarms so Fire has to over-saturate to register.'
+        'pair': 'FIRE -> METAL',
+        'seoul': {'tag': 'Ritual Type', 'hex': '#b0231b', 'element': 'Fire', 'logic': 'Structure / Heat'},
+        'trad': {'tag': 'Paper Field', 'hex': PAPER, 'element': 'Metal', 'logic': 'Stage / Surface'},
+        'note': 'Fire-bright types scar the metal grid, so the paper field has to recover after each declaration.'
     },
     {
         'step': '05',
-        'pair': 'WATER -> EARTH',
-        'seoul': {'tag': 'Graphite Ink', 'hex': GRAPHITE, 'element': 'Water', 'logic': 'Comment / Drift'},
-        'trad': {'tag': 'Ochre Archive', 'hex': '#7a4b1c', 'element': 'Earth', 'logic': 'Store / Terrain'},
-        'note': 'Graphite-toned documentation seeps into earthy stores, so data blocks stay porous.'
+        'pair': 'EARTH -> WATER',
+        'seoul': {'tag': 'Ochre Annotation', 'hex': '#d29d3f', 'element': 'Earth', 'logic': 'Context / Memory'},
+        'trad': {'tag': 'Ink Basin', 'hex': '#111111', 'element': 'Water', 'logic': 'Void / Archive'},
+        'note': 'Earthy annotations now cake over the ink basin so Water documentation has to seep upward.'
     },
 ]
 
@@ -63,7 +63,7 @@ def draw_seoulism_blueprint():
     ax.axis('off')
 
     ax.text(8, 93, 'SEOULISM COUNTER-CHAIN BLUEPRINT', color=INK, fontsize=20, weight='bold')
-    ax.text(8, 89, 'Seoul colors attack the element that used to control them. Tradition is now on defense.',
+    ax.text(8, 89, 'Every role moved into its opposite seat; tradition is now the one being answered.',
             color=ACCENT, fontsize=10, style='italic')
 
     row_height = 18
@@ -115,11 +115,11 @@ def draw_seoulism_blueprint():
                     arrowprops=dict(arrowstyle='->', color=ACCENT,
                                     lw=1.4, mutation_scale=18))
         ax.text((left_x + right_x) / 2 + 5, y + block_height / 2 + 2,
-                'Seoul hit ➜ former anchor', color=GRAPHITE, fontsize=8, ha='center')
+                'Swapped seat ➜ displaced anchor', color=GRAPHITE, fontsize=8, ha='center')
 
         ax.plot([left_x, 90], [y - 4, y - 4], color=DIVIDER, linewidth=0.6)
 
-    ax.text(8, 10, 'Order: Wood→Metal → Fire→Water → Earth→Wood → Metal→Fire → Water→Earth',
+    ax.text(8, 10, 'Order: Metal→Wood → Water→Fire → Wood→Earth → Fire→Metal → Earth→Water',
             color=GRAPHITE, fontsize=8.5)
 
     plt.tight_layout()

@@ -14,14 +14,14 @@ STAR_ARROW = '#2f3b8f'
 NODE_OUTLINE = '#bfae95'
 
 ELEMENTS = [
-    ('WOOD',  '#0000FF', '#147a72', 'Cuts Metal first'),
-    ('FIRE',  '#FF0000', '#b0231b', 'Overwrites Water'),
-    ('EARTH', '#FFFF00', '#c0841a', 'Pins Wood'),
-    ('METAL', '#FFFFFF', '#fdfbf5', 'Bleaches Fire'),
-    ('WATER', '#000000', '#111111', 'Erodes Earth'),
+    ('WOOD',  '#0000FF', '#8a8f9f', 'Metal skin redirects growth'),
+    ('FIRE',  '#FF0000', GRAPHITE, 'Water soot smothers sparks'),
+    ('EARTH', '#FFFF00', '#2b4cc2', 'Wood vines encircle mass'),
+    ('METAL', '#FFFFFF', '#b0231b', 'Fire glyphs scorch the grid'),
+    ('WATER', '#000000', '#d29d3f', 'Earth crust dams the basin'),
 ]
 
-COUNTER_PAIRS = [(0, 3), (1, 4), (2, 0), (3, 1), (4, 2)]
+COUNTER_PAIRS = [(3, 0), (4, 1), (0, 2), (1, 3), (2, 4)]
 
 
 def _contrast(color: str) -> str:
@@ -70,7 +70,7 @@ def draw_systemic_divergence():
                 color=GRAPHITE)
 
     ax.text(0, -1.45,
-            'Red arrows: Wood→Metal → Fire→Water → Earth→Wood → Metal→Fire → Water→Earth | Dotted star = tradition order',
+            'Red arrows: Metal→Wood → Water→Fire → Wood→Earth → Fire→Metal → Earth→Water | Dotted star = tradition order',
             color=GRAPHITE, fontsize=9, ha='center')
 
     plt.savefig("pentagon_cycle.png")

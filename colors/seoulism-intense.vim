@@ -97,7 +97,7 @@ let s:p.cursor_insert = '#6b8e23' " Muted Olive Green (Insert)
 call s:hi('Cursor', s:p.bg, s:p.cursor_normal, '231', '167', 'NONE')
 call s:hi('lCursor', s:p.bg, s:p.cursor_normal, '231', '167', 'NONE')
 call s:hi('TermCursor', s:p.bg, s:p.cursor_normal, '231', '167', 'NONE')
-
+call s:hi('CursorIM', s:p.bg, s:p.cursor_insert, '231', '64', 'NONE')
 " Inactive or specific UI cursors
 call s:hi('TermCursorNC', s:p.fg_sub, s:p.bg_alt, '235', '188', 'NONE')
 call s:hi('CursorLine', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
@@ -261,4 +261,10 @@ if has("gui_running") || &termguicolors
 
     " Reset cursor color to default when exiting Vim
     autocmd VimLeave * silent !echo -ne "\e]112\a"
+endif
+
+if has("gui_running") || &termguicolors
+    " 'i-ci' handles Insert and Command-line Insert (where IME works)
+    " We point them to use the Cursor highlight or a specific CursorInsert group
+    set guicursor=n-v-c:block-Cursor,i-ci-ve:block-CursorIM,r-cr-o:hor20
 endif

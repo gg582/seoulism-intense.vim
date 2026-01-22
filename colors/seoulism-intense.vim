@@ -217,3 +217,29 @@ call s:hi('LspWarningText', s:p.wood_link, 'NONE', '33', 'NONE', 'underline')
 highlight vimVar guifg=#b0231b gui=italic
 highlight vimFBVar guifg=#b0231b gui=italic
 highlight vimAmbiguousVimVar guifg=#b0231b gui=italic
+" --- Cursor Color Definitions for Light Mode ---
+
+" Normal Mode: Muted Red (Soft Terracotta)
+" We use a white foreground for better contrast against the colored block
+highlight Cursor guifg=#ffffff guibg=#cd5c5c
+highlight CursorIM guifg=#ffffff guibg=#cd5c5c
+
+" Define colors as variables for easy maintenance
+let s:insert_cursor_color = "#6b8e23" " Muted Olive Green
+let s:normal_cursor_color = "#cd5c5c" " Soft Terracotta
+
+" --- Dynamic Cursor Switching Logic ---
+
+if has("gui_running") || &termguicolors
+    " Change cursor color when entering Insert Mode
+    autocmd InsertEnter * execute 'highlight Cursor guibg=' . s:insert_cursor_color
+    " Restore cursor color when leaving Insert Mode
+    autocmd InsertLeave * execute 'highlight Cursor guibg=' . s:normal_cursor_color
+
+    " Terminal escape sequences for broader compatibility
+    let &t_SI = "\e]12;" . s:insert_cursor_color . "\a"
+    let &t_EI = "\e]12;" . s:normal_cursor_color . "\a"
+
+    " Reset cursor color to default when exiting Vim
+    autocmd VimLeave * silent !echo -ne "\e]112\a"
+endif

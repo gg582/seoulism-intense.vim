@@ -89,27 +89,44 @@ call s:hi('Todo', s:p.bg, s:p.wood_link, '231', '33', 'bold')
 " =============================================================================
 " Editor UI
 " =============================================================================
-call s:hi('Cursor', s:p.fg, s:p.cursor_blue, '16', '117', 'NONE')
-call s:hi('lCursor', s:p.fg, s:p.cursor_blue, '16', '117', 'NONE')
-call s:hi('TermCursor', s:p.fg, s:p.cursor_blue, '16', '117', 'NONE')
+" Define muted colors for light mode cursor
+let s:p.cursor_normal = '#cd5c5c' " Soft Terracotta (Normal/Exit)
+let s:p.cursor_insert = '#6b8e23' " Muted Olive Green (Insert)
+
+" Cursor settings - Using foreground from background (s:p.bg) for maximum legibility
+call s:hi('Cursor', s:p.bg, s:p.cursor_normal, '231', '167', 'NONE')
+call s:hi('lCursor', s:p.bg, s:p.cursor_normal, '231', '167', 'NONE')
+call s:hi('TermCursor', s:p.bg, s:p.cursor_normal, '231', '167', 'NONE')
+
+" Inactive or specific UI cursors
 call s:hi('TermCursorNC', s:p.fg_sub, s:p.bg_alt, '235', '188', 'NONE')
 call s:hi('CursorLine', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
 call s:hi('LineNr', s:p.earth_gold, s:p.bg, '178', '231', 'NONE')
 call s:hi('CursorLineNr', s:p.wood_link, s:p.bg_alt, '33', '188', 'bold')
+
+" Statusline and Dividers
 call s:hi('StatusLine', s:p.fg, s:p.bg_alt, '16', '188', 'bold')
 call s:hi('StatusLineNC', s:p.fg_sub, s:p.bg_sub, '235', '230', 'NONE')
 call s:hi('VertSplit', '#d7cbb9', '#d7cbb9', '187', '187', 'NONE')
+
+" Menus and Selection
 call s:hi('Pmenu', s:p.fg, s:p.bg_line, '16', '254', 'NONE')
 call s:hi('PmenuSel', s:p.bg, s:p.wood_link, '231', '26', 'bold')
 call s:hi('PmenuSbar', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
 call s:hi('PmenuThumb', 'NONE', s:p.earth_gold, 'NONE', '178', 'NONE')
 call s:hi('Visual', 'NONE', s:p.bg_sel, 'NONE', '153', 'NONE')
+
+" Search and Navigation
 call s:hi('Search', s:p.bg, s:p.wood_link, '231', '33', 'bold')
 call s:hi('IncSearch', s:p.bg, s:p.wood_jade, '231', '29', 'NONE')
 call s:hi('NonText', s:p.earth_gold, 'NONE', '178', 'NONE', 'NONE')
+
+" Folds and Columns
 call s:hi('Folded', s:p.earth_literal, s:p.bg_alt, '172', '188', 'italic')
 call s:hi('FoldColumn', s:p.earth_gold, s:p.bg, '178', '231', 'NONE')
 call s:hi('ColorColumn', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
+
+" Messages and Others
 call s:hi('MatchParen', s:p.fire_alarm, '#cfd7f2', '124', '189', 'bold')
 call s:hi('Directory', s:p.wood_link, 'NONE', '33', 'NONE', 'bold')
 call s:hi('Title', s:p.graphite, 'NONE', '238', 'NONE', 'bold')
@@ -118,8 +135,10 @@ call s:hi('ModeMsg', s:p.graphite, 'NONE', '238', 'NONE', 'bold')
 call s:hi('Question', s:p.graphite, 'NONE', '238', 'NONE', 'bold')
 call s:hi('WarningMsg', s:p.wood_link, 'NONE', '33', 'NONE', 'bold')
 call s:hi('ErrorMsg', s:p.graphite, s:p.bg, '238', '231', 'bold')
+"
 
-" =============================================================================
+
+=============================================================================
 " Diagnostics & Diff
 " =============================================================================
 if has('nvim')

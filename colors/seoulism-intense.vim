@@ -13,9 +13,9 @@ set background=light
 " =============================================================================
 " Counter-order: Wood→Metal → Fire→Water → Earth→Wood → Metal→Fire → Water→Earth
 let s:p = {}
-let s:p.metal_field  = '#fdfbf5'
-let s:p.metal_edge   = '#f1ebdd'
-let s:p.metal_mute   = '#ede4d5'
+let s:p.metal_field  = '#bdbbb5'
+let s:p.metal_edge   = '#d1cbbd'
+let s:p.metal_mute   = '#ada4a5'
 let s:p.bg           = s:p.metal_field
 let s:p.bg_sub       = '#f7f2e8'
 let s:p.bg_alt       = s:p.metal_mute
@@ -34,7 +34,7 @@ let s:p.wood_jade    = '#147a72'
 let s:p.wood_link    = '#2b4cc2'
 let s:p.emerald      = '#1b9c62'
 let s:p.earth_literal = '#9f641a'
-let s:p.earth_gold   = '#a27d3f'
+let s:p.earth_gold   = '#926f1f'
 let s:p.muted_blue   = '#4a6f9f'
 let s:p.charcoal     = '#9a9186'
 let s:p.signal_blue  = '#4b68d8'

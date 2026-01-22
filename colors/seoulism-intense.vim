@@ -248,32 +248,61 @@ let s:insert_cursor_color = "#6b8e23" " Muted Olive Green
 let s:normal_cursor_color = "#cd5c5c" " Soft Terracotta
 
 " --- Advanced Cursor & IME Logic for Light Mode ---
-
+"
 if has("gui_running") || &termguicolors
-    " 1. Integrated Cursor Control
-    " Ensure i-ci (Insert/Command-line) uses CursorIM group
+    " Force guicursor to use CursorIM for Insert/Command-line modes
     set guicursor=n-v-c:block-Cursor,i-ci-ve:block-CursorIM,r-cr-o:hor20
 
-    " 2. Force Highlight Groups
-    " Synchronize all cursor-related groups to your theme variables
+    " Synchronize highlight groups
     execute 'hi Cursor guifg=' . s:p.bg . ' guibg=' . s:p.cursor_normal
     execute 'hi CursorIM guifg=' . s:p.bg . ' guibg=' . s:p.cursor_insert
-    execute 'hi TermCursor guifg=' . s:p.bg . ' guibg=' . s:p.cursor_normal
 
-    " 3. fcitx5 Preedit & Mode Switching Fix
-    augroup SeoulismLinuxIME
+    augroup SeoulismKonsoleIME
         autocmd!
-        " On entering Insert mode, force both Cursor and CursorIM to Green
-        autocmd InsertEnter * execute 'hi Cursor guibg=' . s:p.cursor_insert | execute 'hi CursorIM guibg=' . s:p.cursor_insert
-        " On leaving, restore to Red
-        autocmd InsertLeave * execute 'hi Cursor guibg=' . s:p.cursor_normal
+        " Force-update CursorIM background on InsertEnter
+        autocmd InsertEnter * execute 'hi CursorIM guibg=' . s:p.cursor_insert
     augroup END
 
-    " 4. Linux Terminal Escape Sequences (Xterm/Alacritty/Kitty/GNOME Terminal)
-    " This tells the terminal emulator itself to change the cursor color
+    " Konsole specific: OS window title/color sequences
+    " \e]12; sets the cursor color in many Xterm-compliant terminals including Konsole
     let &t_SI = "\e]12;" . s:p.cursor_insert . "\a"
     let &t_EI = "\e]12;" . s:p.cursor_normal . "\a"
-    
-    " Reset cursor to system default on Exit
+
+    " Prevent Konsole from overriding cursor color during IME composition
+    " This is a 'soft' reset sequence that works well with Qt-based terminals
     autocmd VimLeave * silent !echo -ne "\e]112\a"
+endif
+
+
+" --- Kitty Compatibility ---
+
+" 1. Fast UI Response (Lowers delays for key sequences)
+set updatetime=100
+set ttimeoutlen=10
+
+" 2. Smart Redraw (GPU optimization for large files)
+set lazyredraw
+set synmaxcol=300
+
+" 3. Kitty Protocol Integration
+" Enable bracketed paste and focus reporting
+if &term =~# 'kitty'
+    let &t_FE = "\e[?1004h"
+    let &t_FD = "\e[?1004l"
+    execute "set <FocusGained>=\e[I"
+    execute "set <FocusLost>=\e[O"
+endif
+
+" 4. Enhanced Visual Feedback for Search
+" Temporarily highlight search results, then fade out
+augroup DynamicSearch
+    autocmd!
+    autocmd CmdlineEnter /,\? set hlsearch
+    autocmd CursorMoved * set nohlsearch
+augroup END
+
+" 5. Advanced Cursor Logic (Overriding Everything)
+" This ensures that even under heavy load, the cursor remains responsive
+if has('nvim')
+    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci-ve:ver25-CursorIM-blinkwait10-blinkoff100-blinkon100,r-cr:hor20,o:hor50
 endif

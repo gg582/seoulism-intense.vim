@@ -89,7 +89,10 @@ call s:hi('Todo', s:p.bg, s:p.wood_link, '231', '33', 'bold')
 " =============================================================================
 " Editor UI
 " =============================================================================
-call s:hi('Cursor', s:p.bg, s:p.cursor_blue, '231', '153', 'NONE')
+call s:hi('Cursor', s:p.fg, s:p.cursor_blue, '16', '117', 'NONE')
+call s:hi('lCursor', s:p.fg, s:p.cursor_blue, '16', '117', 'NONE')
+call s:hi('TermCursor', s:p.fg, s:p.cursor_blue, '16', '117', 'NONE')
+call s:hi('TermCursorNC', s:p.fg_sub, s:p.bg_alt, '235', '188', 'NONE')
 call s:hi('CursorLine', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
 call s:hi('LineNr', s:p.earth_gold, s:p.bg, '178', '231', 'NONE')
 call s:hi('CursorLineNr', s:p.wood_link, s:p.bg_alt, '33', '188', 'bold')

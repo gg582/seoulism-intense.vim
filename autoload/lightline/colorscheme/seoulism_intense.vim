@@ -7,6 +7,7 @@ let s:paper      = ['#fdfbf5', 231]
 let s:paper_mid  = ['#f1ebdd', 254]
 let s:paper_alt  = ['#ede4d5', 223]
 let s:paper_deep = ['#e4d6c4', 187]
+let s:cursor_blue = ['#add8e6', 153]
 
 let s:red        = ['#b0231b', 124]
 let s:blue       = ['#2b4cc2', 26]
@@ -40,12 +41,12 @@ let s:p.normal.special = [ s:seg(s:ink, s:paper_mid, 'bold') ]
 " --- Insert Mode ---
 let s:p.insert = {}
 let s:p.insert.left = [
-      \ s:seg(s:paper, s:jade, 'bold'),
+      \ s:seg(s:ink, s:cursor_blue, 'bold'),
       \ s:seg(s:ink, s:paper_mid),
       \ ]
 let s:p.insert.middle = s:p.normal.middle
 let s:p.insert.right = [
-      \ s:seg(s:paper, s:jade, 'bold'),
+      \ s:seg(s:ink, s:cursor_blue, 'bold'),
       \ s:seg(s:ink, s:paper_mid),
       \ s:seg(s:ink_soft, s:paper),
       \ ]

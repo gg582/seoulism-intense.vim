@@ -35,7 +35,7 @@ let s:p.wood_link    = '#2b4cc2'
 let s:p.emerald      = '#1b9c62'
 let s:p.earth_literal = '#c0841a'
 let s:p.earth_gold   = '#d29d3f'
-let s:p.muted_blue   = '#8a8f9f'
+let s:p.muted_blue   = '#4a6f9f'
 let s:p.charcoal     = '#9a9186'
 let s:p.signal_blue  = '#4b68d8'
 

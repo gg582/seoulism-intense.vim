@@ -35,7 +35,7 @@ The canvas uses `#fdfbf5`, a slight-warm hanji tone. The default text is `#11111
 
 ### 상극: reversing the chain
 
-Instead of marching through Fire ➜ Earth ➜ Metal, the palette now starts from oppositions: Metal vs. Wood, Water vs. Fire, Earth vs. Void. Accents are paired with their counterpart and the README, preview diagram, and pentagon plot all document those inversions.
+Instead of marching through Fire ➜ Earth ➜ Metal, the palette now fires in reverse: **Wood → Metal**, **Fire → Water**, **Earth → Wood**, **Metal → Fire**, **Water → Earth**. Each Seoulism color now attacks the element that traditionally kept it in check. The preview diagram, visualizer, and pentagon all share this exact order so the flipped 상극 logic is impossible to miss.
 
 ### Emotion before scene
 
@@ -56,7 +56,17 @@ This is still an interpretation of 오방색, just expressed as a modern daytime
 ![Visualizer](./visualizer.png)
 ![Pentagon](./pentagon_cycle.png)
 
-The updated diagrams document the new order. Each chain now starts from cognitive role ➜ Seoulism token ➜ traditional anchor so you can read how each counter-color is wired.
+The updated diagrams document the flipped order. Each chain now starts from cognitive role ➜ Seoulism token ➜ the traditional anchor it now suppresses so you can read how each counter-color is wired.
+
+| Step | Seoul element (color) | Traditional target | Palette effect |
+| ---- | --------------------- | ------------------ | -------------- |
+| 01   | **WOOD** · Jade/Indigo (`#147a72` / `#2b4cc2`) | **METAL** · Pale script (`#f7f3e8`) | Functions and links cut into the metal lattice, so structure responds after invocation. |
+| 02   | **FIRE** · Vermilion (`#b0231b`) | **WATER** · Ink mass (`#111111`) | Branches and statements ignite before ink can record them, forcing Water to archive the decision late. |
+| 03   | **EARTH** · Honey literal (`#c0841a`) | **WOOD** · Jade route (`#004281`) | Dense data pins the navigation layer so routes must grow around the payload. |
+| 04   | **METAL** · Paper field (`#fdfbf5`) | **FIRE** · Ritual flame (`#e4252c`) | Paper glare bleaches historic warnings, so Fire over-saturates diagnostics to be seen. |
+| 05   | **WATER** · Graphite (`#4c4943`) | **EARTH** · Ochre archive (`#7a4b1c`) | Documentation seeps into the earthy store so constants never calcify. |
+
+That counter-table is the same sequence the Python visualizers render (Wood→Metal → Fire→Water → Earth→Wood → Metal→Fire → Water→Earth).
 
 ---
 

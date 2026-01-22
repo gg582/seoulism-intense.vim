@@ -14,11 +14,11 @@ STAR_ARROW = '#2f3b8f'
 NODE_OUTLINE = '#bfae95'
 
 ELEMENTS = [
-    ('WOOD',  '#0000FF', '#147a72', 'Counter Metal'),
-    ('FIRE',  '#FF0000', '#b0231b', 'Counter Water'),
-    ('EARTH', '#FFFF00', '#c0841a', 'Counter Void'),
-    ('METAL', '#FFFFFF', '#fdfbf5', 'Counter Wood'),
-    ('WATER', '#000000', '#111111', 'Counter Fire'),
+    ('WOOD',  '#0000FF', '#147a72', 'Cuts Metal first'),
+    ('FIRE',  '#FF0000', '#b0231b', 'Overwrites Water'),
+    ('EARTH', '#FFFF00', '#c0841a', 'Pins Wood'),
+    ('METAL', '#FFFFFF', '#fdfbf5', 'Bleaches Fire'),
+    ('WATER', '#000000', '#111111', 'Erodes Earth'),
 ]
 
 COUNTER_PAIRS = [(0, 3), (1, 4), (2, 0), (3, 1), (4, 2)]
@@ -69,7 +69,8 @@ def draw_systemic_divergence():
         ax.text(x, y - 0.3, trad + ' trad', ha='center', va='center', fontsize=7,
                 color=GRAPHITE)
 
-    ax.text(0, -1.5, 'Red arrows = Counter-Rotation pairs (modern hit) | Dotted star = tradition order',
+    ax.text(0, -1.45,
+            'Red arrows: Wood→Metal → Fire→Water → Earth→Wood → Metal→Fire → Water→Earth | Dotted star = tradition order',
             color=GRAPHITE, fontsize=9, ha='center')
 
     plt.savefig("pentagon_cycle.png")

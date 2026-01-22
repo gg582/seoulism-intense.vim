@@ -8,30 +8,41 @@ GRAPHITE = '#4c4943'
 DIVIDER = '#d8cbb7'
 ACCENT = '#b0231b'
 
-PAIRS = [
+COUNTER_CHAIN = [
     {
-        'pair': 'METAL ↔ WOOD',
-        'seoul': {'tag': 'Paper Grid', 'hex': PAPER, 'element': 'Metal', 'logic': 'Field / Stage'},
-        'trad': {'tag': 'Jade Anchor', 'hex': '#004281', 'element': 'Wood', 'logic': 'Lineage / Direction'},
-        'note': 'Paper-first Metal clamps the Jade lineage so navigation must carve through glare.'
+        'step': '01',
+        'pair': 'WOOD -> METAL',
+        'seoul': {'tag': 'Jade Function', 'hex': '#147a72', 'element': 'Wood', 'logic': 'Declares / Breaths'},
+        'trad': {'tag': 'Metal Script', 'hex': '#f7f3e8', 'element': 'Metal', 'logic': 'Law / Frame'},
+        'note': 'Wood-first functions now cleave into pale metal scaffolding, so structure happens after the breath.'
     },
     {
-        'pair': 'WATER ↔ FIRE',
-        'seoul': {'tag': 'Ink Flow', 'hex': '#111111', 'element': 'Water', 'logic': 'Content / Stroke'},
-        'trad': {'tag': 'Vermilion Alarm', 'hex': '#e4252c', 'element': 'Fire', 'logic': 'Warning / Ritual'},
-        'note': 'Ink (Water) now initiates, forcing vermilion fire to answer as a counter-punch.'
+        'step': '02',
+        'pair': 'FIRE -> WATER',
+        'seoul': {'tag': 'Vermilion Statement', 'hex': '#b0231b', 'element': 'Fire', 'logic': 'Decision / Heat'},
+        'trad': {'tag': 'Ink Mass', 'hex': '#111111', 'element': 'Water', 'logic': 'Stroke / Memory'},
+        'note': 'Statements ignite before ink settles; Water has to archive what Fire already committed.'
     },
     {
-        'pair': 'EARTH ↔ VOID',
-        'seoul': {'tag': 'Honey Earth', 'hex': '#c0841a', 'element': 'Earth', 'logic': 'Literal / Data'},
-        'trad': {'tag': 'Shadow Void', 'hex': '#1b1a17', 'element': 'Void', 'logic': 'Silence / Margin'},
-        'note': 'Warm literals invade the space normally reserved for void, keeping whitespace under tension.'
+        'step': '03',
+        'pair': 'EARTH -> WOOD',
+        'seoul': {'tag': 'Honey Literal', 'hex': '#c0841a', 'element': 'Earth', 'logic': 'Data / Weight'},
+        'trad': {'tag': 'Jade Direction', 'hex': '#004281', 'element': 'Wood', 'logic': 'Route / Hierarchy'},
+        'note': 'Literal tables pin the navigation layer, forcing wayfinding to grow around dense data.'
     },
     {
-        'pair': 'WOOD(LINK) ↔ METAL(LINE)',
-        'seoul': {'tag': 'Indigo Link', 'hex': '#2b4cc2', 'element': 'Wood(Link)', 'logic': 'Reference / Jump'},
-        'trad': {'tag': 'Metal Script', 'hex': '#f7f3e8', 'element': 'Metal', 'logic': 'Structure / Law'},
-        'note': 'Navigation blue slices across bright scripts so structure never relaxes.'
+        'step': '04',
+        'pair': 'METAL -> FIRE',
+        'seoul': {'tag': 'Paper Field', 'hex': PAPER, 'element': 'Metal', 'logic': 'Stage / Surface'},
+        'trad': {'tag': 'Ritual Flame', 'hex': '#e4252c', 'element': 'Fire', 'logic': 'Alert / Rite'},
+        'note': 'Glare-first metal bleaches legacy alarms so Fire has to over-saturate to register.'
+    },
+    {
+        'step': '05',
+        'pair': 'WATER -> EARTH',
+        'seoul': {'tag': 'Graphite Ink', 'hex': GRAPHITE, 'element': 'Water', 'logic': 'Comment / Drift'},
+        'trad': {'tag': 'Ochre Archive', 'hex': '#7a4b1c', 'element': 'Earth', 'logic': 'Store / Terrain'},
+        'note': 'Graphite-toned documentation seeps into earthy stores, so data blocks stay porous.'
     },
 ]
 
@@ -51,8 +62,8 @@ def draw_seoulism_blueprint():
     ax.set_ylim(0, 100)
     ax.axis('off')
 
-    ax.text(8, 93, 'SEOULISM SANGGEUK BLUEPRINT', color=INK, fontsize=20, weight='bold')
-    ax.text(8, 89, 'Every pair is drawn as its own opposition. No neutral ground.',
+    ax.text(8, 93, 'SEOULISM COUNTER-CHAIN BLUEPRINT', color=INK, fontsize=20, weight='bold')
+    ax.text(8, 89, 'Seoul colors attack the element that used to control them. Tradition is now on defense.',
             color=ACCENT, fontsize=10, style='italic')
 
     row_height = 18
@@ -60,11 +71,13 @@ def draw_seoulism_blueprint():
     left_x = 10
     right_x = 58
 
-    for idx, pair in enumerate(PAIRS):
+    for idx, pair in enumerate(COUNTER_CHAIN):
         y = 80 - idx * row_height
         pair_label_y = y + block_height + 3
 
-        ax.text(left_x, pair_label_y, pair['pair'], color=ACCENT,
+        ax.text(left_x, pair_label_y,
+                f"{pair['step']} {pair['pair']}",
+                color=ACCENT,
                 fontsize=12, weight='bold')
         ax.text(left_x, y - 2, pair['note'], color=GRAPHITE,
                 fontsize=9, alpha=0.95)
@@ -102,9 +115,12 @@ def draw_seoulism_blueprint():
                     arrowprops=dict(arrowstyle='->', color=ACCENT,
                                     lw=1.4, mutation_scale=18))
         ax.text((left_x + right_x) / 2 + 5, y + block_height / 2 + 2,
-                'counter-rotation', color=GRAPHITE, fontsize=8, ha='center')
+                'Seoul hit ➜ former anchor', color=GRAPHITE, fontsize=8, ha='center')
 
         ax.plot([left_x, 90], [y - 4, y - 4], color=DIVIDER, linewidth=0.6)
+
+    ax.text(8, 10, 'Order: Wood→Metal → Fire→Water → Earth→Wood → Metal→Fire → Water→Earth',
+            color=GRAPHITE, fontsize=8.5)
 
     plt.tight_layout()
     plt.savefig('preview.png', facecolor=PAPER_EDGE, dpi=300)

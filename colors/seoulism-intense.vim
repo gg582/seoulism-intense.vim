@@ -38,6 +38,7 @@ let s:p.earth_gold   = '#926f1f'
 let s:p.muted_blue   = '#4a6f9f'
 let s:p.charcoal     = '#9a9186'
 let s:p.signal_blue  = '#4b68d8'
+let s:p.cursor_blue  = '#add8e6'
 
 function! s:hi(group, guifg, guibg, ctermfg, ctermbg, attr) abort
   execute 'hi' a:group
@@ -88,7 +89,7 @@ call s:hi('Todo', s:p.bg, s:p.wood_link, '231', '33', 'bold')
 " =============================================================================
 " Editor UI
 " =============================================================================
-call s:hi('Cursor', s:p.bg, s:p.fg, '231', '16', 'NONE')
+call s:hi('Cursor', s:p.bg, s:p.cursor_blue, '231', '153', 'NONE')
 call s:hi('CursorLine', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
 call s:hi('LineNr', s:p.earth_gold, s:p.bg, '178', '231', 'NONE')
 call s:hi('CursorLineNr', s:p.wood_link, s:p.bg_alt, '33', '188', 'bold')

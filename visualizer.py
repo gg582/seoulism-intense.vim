@@ -72,7 +72,7 @@ def draw_seoulism_chain():
     ax.set_ylim(0, 140)
     ax.axis('off')
 
-    ax.text(12, 132, 'Inverted 상극 Visualizer', color=INK, fontsize=19, weight='bold')
+    ax.text(12, 132, 'Inverted Visualizer', color=INK, fontsize=19, weight='bold')
     ax.text(12, 129, 'Left column = swapped Seoul role | Right column = the displaced controller',
             color=ACCENT, fontsize=10, style='italic')
     ax.text(12, 126, 'Arrows follow Metal→Wood → Water→Fire → Wood→Earth → Fire→Metal → Earth→Water.',

@@ -59,20 +59,20 @@ def draw_seoulism_blueprint():
     fig, ax = plt.subplots(figsize=(12, 10), facecolor=PAPER_EDGE)
     ax.set_facecolor(PAPER)
     ax.set_xlim(0, 100)
-    ax.set_ylim(0, 100)
+    ax.set_ylim(0, 140)
     ax.axis('off')
 
-    ax.text(8, 93, 'SEOULISM COUNTER-CHAIN BLUEPRINT', color=INK, fontsize=20, weight='bold')
-    ax.text(8, 89, 'Every role moved into its opposite seat; tradition is now the one being answered.',
+    ax.text(8, 133, 'SEOULISM COUNTER-CHAIN BLUEPRINT', color=INK, fontsize=20, weight='bold')
+    ax.text(8, 129, 'Every role moved into its opposite seat; tradition is now the one being answered.',
             color=ACCENT, fontsize=10, style='italic')
 
-    row_height = 18
+    row_height = 25
     block_height = 10
     left_x = 10
     right_x = 58
 
     for idx, pair in enumerate(COUNTER_CHAIN):
-        y = 80 - idx * row_height
+        y = 120 - idx * row_height
         pair_label_y = y + block_height + 3
 
         ax.text(left_x, pair_label_y,

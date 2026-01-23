@@ -69,21 +69,21 @@ def draw_seoulism_chain():
     fig, ax = plt.subplots(figsize=(14, 10), facecolor=EDGE)
     ax.set_facecolor(PAPER)
     ax.set_xlim(0, 100)
-    ax.set_ylim(0, 100)
+    ax.set_ylim(0, 140)
     ax.axis('off')
 
-    ax.text(12, 92, 'Inverted 상극 Visualizer', color=INK, fontsize=19, weight='bold')
-    ax.text(12, 89, 'Left column = swapped Seoul role | Right column = the displaced controller',
+    ax.text(12, 132, 'Inverted 상극 Visualizer', color=INK, fontsize=19, weight='bold')
+    ax.text(12, 129, 'Left column = swapped Seoul role | Right column = the displaced controller',
             color=ACCENT, fontsize=10, style='italic')
-    ax.text(12, 86, 'Arrows follow Metal→Wood → Water→Fire → Wood→Earth → Fire→Metal → Earth→Water.',
+    ax.text(12, 126, 'Arrows follow Metal→Wood → Water→Fire → Wood→Earth → Fire→Metal → Earth→Water.',
             color=GRAPHITE, fontsize=9)
 
     left_x = 12
     right_x = 70
-    row_gap = 16
+    row_gap = 25
 
     for idx, pair in enumerate(COUNTER_CHAIN):
-        y = 78 - idx * row_gap
+        y = 115 - idx * row_gap
         ax.text(left_x, y + 9.5, pair['name'], color=ACCENT,
                 fontsize=11, weight='bold')
         ax.text(left_x + 32, y + 9.5, pair['step'], color=GRAPHITE,

@@ -30,6 +30,7 @@ let s:p.fg_bright    = '#000000'
 let s:p.graphite     = s:p.water_graphite
 
 let s:p.fire_alarm   = '#b0231b'
+let s:p.fire_busy    = '#d32f2f'
 let s:p.wood_jade    = '#147a72'
 let s:p.wood_link    = '#2b4cc2'
 let s:p.emerald      = '#1b9c62'
@@ -53,13 +54,13 @@ endfunction
 call s:hi('Normal', s:p.fg, s:p.bg, '16', '231', 'NONE')
 call s:hi('NormalNC', s:p.fg_sub, s:p.bg, '235', '231', 'NONE')
 call s:hi('Comment', s:p.earth_gold, 'NONE', '178', 'NONE', 'italic')
-call s:hi('Constant', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
+call s:hi('Constant', s:p.signal_blue, 'NONE', '33', 'NONE', 'NONE')
 call s:hi('String', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
 call s:hi('Character', s:p.wood_jade, 'NONE', '29', 'NONE', 'NONE')
-call s:hi('Number', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
+call s:hi('Number', s:p.emerald, 'NONE', '33', 'NONE', 'NONE')
 call s:hi('Boolean', s:p.wood_jade, 'NONE', '29', 'NONE', 'NONE')
-call s:hi('Float', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
-call s:hi('Identifier', s:p.fg_sub, 'NONE', '235', 'NONE', 'NONE')
+call s:hi('Float', s:p.emerald, 'NONE', '33', 'NONE', 'NONE')
+call s:hi('Identifier', s:p.fg, 'NONE', '235', 'NONE', 'NONE')
 call s:hi('Function', s:p.muted_blue, 'NONE', '103', 'NONE', 'bold')
 
 call s:hi('Statement', s:p.graphite, 'NONE', '238', 'NONE', 'bold')
@@ -69,22 +70,23 @@ call s:hi('Keyword', s:p.graphite, 'NONE', '238', 'NONE', 'bold')
 call s:hi('Label', s:p.graphite, 'NONE', '238', 'NONE', 'NONE')
 call s:hi('Exception', s:p.graphite, 'NONE', '238', 'NONE', 'bold')
 
-call s:hi('Operator', s:p.fg_sub, 'NONE', '235', 'NONE', 'NONE')
-call s:hi('PreProc', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
-call s:hi('Include', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
-call s:hi('Define', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
-call s:hi('Macro', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
-call s:hi('PreCondit', s:p.wood_link, 'NONE', '33', 'NONE', 'NONE')
+call s:hi('Operator', s:p.graphite, 'NONE', '238', 'NONE', 'NONE')
+call s:hi('PreProc', s:p.wood_jade, 'NONE', '33', 'NONE', 'NONE')
+call s:hi('Include', s:p.wood_jade, 'NONE', '33', 'NONE', 'NONE')
+call s:hi('Define', s:p.wood_jade, 'NONE', '33', 'NONE', 'NONE')
+call s:hi('Macro', s:p.wood_jade, 'NONE', '33', 'NONE', 'NONE')
+call s:hi('PreCondit', s:p.wood_jade, 'NONE', '33', 'NONE', 'NONE')
 call s:hi('Type', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
 call s:hi('StorageClass', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
 call s:hi('Structure', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
 call s:hi('Typedef', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
-call s:hi('Special', s:p.muted_blue, 'NONE', '103', 'NONE', 'NONE')
+call s:hi('Special', s:p.wood_jade, 'NONE', '29', 'NONE', 'NONE')
 call s:hi('Delimiter', s:p.earth_gold, 'NONE', '178', 'NONE', 'NONE')
 call s:hi('Underlined', s:p.wood_link, 'NONE', '33', 'NONE', 'underline')
 call s:hi('Ignore', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE')
-call s:hi('Error', s:p.graphite, s:p.bg, '238', '231', 'bold')
+call s:hi('Error', s:p.fire_busy, s:p.bg, '160', '231', 'bold')
 call s:hi('Todo', s:p.bg, s:p.wood_link, '231', '33', 'bold')
+call s:hi('ErrorMsg', s:p.fire_busy, s:p.bg, '160', '231', 'bold')
 
 " =============================================================================
 " Editor UI

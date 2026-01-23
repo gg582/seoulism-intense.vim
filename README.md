@@ -25,6 +25,7 @@ colorscheme seoulism-intense
 
 ---
 
+
 ## Paper-first, flow reversed
 
 Seoulism originally staged the code inside pine-ink darkness. The new build reverses that direction. The white field (Metal) loads first, Water (ink) draws the structure, and the chromatic accents fire back from the edges. Every highlight is now described as its counter-element.
@@ -47,7 +48,8 @@ Selections behave like burnished paper being scraped, cursor lines are beige not
 
 ### Still a living system
 
-This is still an interpretation of 오방색, just expressed as a modern daytime UI. The hierarchy is systemic, not nostalgic: a theme for people who want the same Seoul logic but need the paper-bright workspace.
+This is still an interpretation of five-color hierarchy(오방색), just expressed as a modern daytime UI. The hierarchy is systemic, not nostalgic: a theme for people who want the same Seoul logic but need the paper-bright workspace.
+
 
 ---
 

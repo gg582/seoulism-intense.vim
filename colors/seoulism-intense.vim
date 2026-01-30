@@ -199,12 +199,18 @@ if has('nvim')
   hi! link @lsp.type.class Type
 endif
 
-augroup Seoulism
-  autocmd!
-  autocmd FileType c,cpp,go,rust,java,python,typescript call s:ForceSeoulismTypes()
-  autocmd BufEnter,WinEnter * if &filetype =~# 'c\|cpp\|go\|rust\|java\|python\|typescript' | call s:ForceSeoulismTypes() | endif
-  autocmd BufEnter,WinEnter,Syntax go,c,cpp,rust,python call s:hi('FuncKey', s:p.muted_blue, 'NONE', '103', 'NONE', 'bold') | call s:ForceSeoulismJade()
-augroup END
+" --- Forced Highlighting Logic ---
+
+if get(g:, 'seoulism_rigorous', 1)
+    augroup SeoulismIntenseForce
+        autocmd!
+        autocmd FileType c,cpp,go,rust,java,python,typescript call s:ForceSeoulismTypes()
+        autocmd BufEnter,WinEnter * if &filetype =~# 'c\|cpp\|go\|rust\|java\|python\|typescript' | call s:ForceSeoulismTypes() | endif
+        autocmd BufEnter,WinEnter,Syntax go,c,cpp,rust,python call s:hi('FuncKey', s:p.muted_blue, 'NONE', '103', 'NONE', 'bold') | call s:ForceSeoulismJade()
+    augroup END
+endif
+
+
 
 " Terminal colors
 if has('nvim')
@@ -220,9 +226,9 @@ if has('nvim')
   let g:terminal_color_9 = '#c93f2f'
 endif
 
-call s:ForceSeoulismTypes()
-
-" =============================================================================
+if get(g:, 'seoulism_rigorous', 1)
+  call s:ForceSeoulismTypes()
+endif
 " Semantic & Language Server Protocol Groups
 " =============================================================================
 call s:hi('LspVariable', s:p.fg_sub, 'NONE', '235', 'NONE', 'NONE')
@@ -252,9 +258,6 @@ let s:normal_cursor_color = "#cd5c5c" " Soft Terracotta
 " --- Advanced Cursor & IME Logic for Light Mode ---
 "
 if has("gui_running") || &termguicolors
-    " Force guicursor to use CursorIM for Insert/Command-line modes
-    set guicursor=n-v-c:block-Cursor,i-ci-ve:block-CursorIM,r-cr-o:hor20
-
     " Synchronize highlight groups
     execute 'hi Cursor guifg=' . s:p.bg . ' guibg=' . s:p.cursor_normal
     execute 'hi CursorIM guifg=' . s:p.bg . ' guibg=' . s:p.cursor_insert
@@ -276,35 +279,13 @@ if has("gui_running") || &termguicolors
 endif
 
 
-" --- Kitty Compatibility ---
+" --- Compatibility & Performance ---
 
-" 1. Fast UI Response (Lowers delays for key sequences)
-set updatetime=100
-set ttimeoutlen=10
+" 1. Fast UI Response
+" (Defaults kept to user preference)
 
-" 2. Smart Redraw (GPU optimization for large files)
-set lazyredraw
-set synmaxcol=300
+" 2. Smart Redraw
+" (Defaults kept to user preference)
 
-" 3. Kitty Protocol Integration
-" Enable bracketed paste and focus reporting
-if &term =~# 'kitty'
-    let &t_FE = "\e[?1004h"
-    let &t_FD = "\e[?1004l"
-    execute "set <FocusGained>=\e[I"
-    execute "set <FocusLost>=\e[O"
-endif
-
-" 4. Enhanced Visual Feedback for Search
-" Temporarily highlight search results, then fade out
-augroup DynamicSearch
-    autocmd!
-    autocmd CmdlineEnter /,\? set hlsearch
-    autocmd CursorMoved * set nohlsearch
-augroup END
-
-" 5. Advanced Cursor Logic (Overriding Everything)
-" This ensures that even under heavy load, the cursor remains responsive
-if has('nvim')
-    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci-ve:ver25-CursorIM-blinkwait10-blinkoff100-blinkon100,r-cr:hor20,o:hor50
-endif
+" 3. Terminal Integration
+" (Removed intrusive focus reporting)

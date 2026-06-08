@@ -252,7 +252,7 @@ function! s:RealTimeCheck() abort
                 execute 'sign place ' . s:NextSignId() . ' group=SeoulismOpp line=' . line('.') . ' name=SeoulismSign buffer=' . bufnr('%')
             endif
 
-            let l:dom_msg = printf(' | 상극 %s: %s > %s (Δ%.1f%%)',
+            let l:dom_msg = printf(' | CONTRAST %s: %s > %s (Δ%.1f%%)',
                         \ l:axis.label, s:TrendLabel(l:leader), s:TrendLabel(l:follower), l:diff)
             break
         endif

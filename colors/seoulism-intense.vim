@@ -13,48 +13,49 @@ set background=light
 " =============================================================================
 " Counter-order: Wood→Metal → Fire→Water → Earth→Wood → Metal→Fire → Water→Earth
 let s:p = {}
-" Ergonomic revision: every accent keeps its original OKLCH hue, but chroma is
-" lowered (~0.4-0.7x) and lightness is equalized so syntax sits at WCAG ~5:1
-" on the field (comments ~4:1, gutter ~2.7:1). Low-contrast-but-saturated
-" pairs (the main source of glare/vibration) are removed.
+" Ergonomic revision mirrored from seoulism (dark): every accent keeps its
+" original OKLCH hue and (near) full chroma, but lightness is pulled down so
+" syntax sits at WCAG ~6:1 on a lighter field (ink ~12.5:1, comments ~5.2:1,
+" delimiters ~4.5:1, gutter ~3.3:1). Bright-but-low-contrast accents, the
+" main source of glare, are removed rather than desaturated.
 let s:p.metal_field  = '#e9e6df'
 let s:p.metal_edge   = '#f1ebdd'
-let s:p.metal_mute   = '#ded3d4'
+let s:p.metal_mute   = '#dccfd0'
 let s:p.bg           = s:p.metal_field
 let s:p.bg_sub       = '#f4efe6'
 let s:p.bg_alt       = s:p.metal_mute
-let s:p.bg_sel       = '#cad0e9'
+let s:p.bg_sel       = '#bbc5ef'
 let s:p.bg_line      = s:p.metal_edge
 
-let s:p.water_ink    = '#302e29'
-let s:p.water_graphite = '#524f4a'
+let s:p.water_ink    = '#25231f'
+let s:p.water_graphite = '#403d36'
 let s:p.fg           = s:p.water_ink
-let s:p.fg_sub       = '#423f3a'
-let s:p.fg_bright    = '#1e1c19'
+let s:p.fg_sub       = '#33302b'
+let s:p.fg_bright    = '#151411'
 let s:p.graphite     = s:p.water_graphite
 
-let s:p.fire_alarm   = '#94473d'
-let s:p.fire_busy    = '#ad433d'
-let s:p.wood_jade    = '#366964'
-let s:p.wood_link    = '#445c99'
-let s:p.emerald      = '#386d4f'
-let s:p.earth_literal = '#7f5c39'
-let s:p.earth_gold   = '#715e36'
-let s:p.earth_comment = '#7e6f54'
-let s:p.earth_delim  = '#77694c'
-let s:p.earth_gutter = '#978a73'
-let s:p.earth_dust   = '#ada38f'
-let s:p.muted_blue   = '#496283'
-let s:p.charcoal     = '#968d83'
-let s:p.signal_blue  = '#4e619b'
+let s:p.fire_alarm   = '#a81813'
+let s:p.fire_busy    = '#b80216'
+let s:p.wood_jade    = '#005f58'
+let s:p.wood_link    = '#2949bf'
+let s:p.emerald      = '#006530'
+let s:p.earth_literal = '#854b00'
+let s:p.earth_gold   = '#6b5420'
+let s:p.earth_comment = '#745a26'
+let s:p.earth_delim  = '#79653e'
+let s:p.earth_gutter = '#8b7b5e'
+let s:p.earth_dust   = '#9d9079'
+let s:p.muted_blue   = '#325685'
+let s:p.charcoal     = '#8b8378'
+let s:p.signal_blue  = '#364fbc'
 let s:p.cursor_blue  = '#add8e6'
 let s:p.split        = '#d2c9bd'
 
 " Soft tints (same hues) for filled highlights instead of solid saturated blocks
-let s:p.tint_search  = '#b7c7ec'
-let s:p.tint_inc     = '#a3d2cc'
-let s:p.tint_pmsel   = '#acbde5'
-let s:p.tint_todo    = '#c0ceec'
+let s:p.tint_search  = '#9db9fc'
+let s:p.tint_inc     = '#71cec4'
+let s:p.tint_pmsel   = '#8eacf4'
+let s:p.tint_todo    = '#adc3f9'
 
 function! s:hi(group, guifg, guibg, ctermfg, ctermbg, attr) abort
   execute 'hi' a:group
@@ -66,42 +67,42 @@ endfunction
 " =============================================================================
 " Core Syntax
 " =============================================================================
-call s:hi('Normal', s:p.fg, s:p.bg, '236', '254', 'NONE')
-call s:hi('NormalNC', s:p.fg_sub, s:p.bg, '238', '254', 'NONE')
-call s:hi('Comment', s:p.earth_comment, 'NONE', '101', 'NONE', 'italic')
-call s:hi('Constant', s:p.signal_blue, 'NONE', '61', 'NONE', 'NONE')
-call s:hi('String', s:p.wood_link, 'NONE', '60', 'NONE', 'NONE')
+call s:hi('Normal', s:p.fg, s:p.bg, '235', '254', 'NONE')
+call s:hi('NormalNC', s:p.fg_sub, s:p.bg, '236', '254', 'NONE')
+call s:hi('Comment', s:p.earth_comment, 'NONE', '94', 'NONE', 'italic')
+call s:hi('Constant', s:p.signal_blue, 'NONE', '25', 'NONE', 'NONE')
+call s:hi('String', s:p.wood_link, 'NONE', '26', 'NONE', 'NONE')
 call s:hi('Character', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
-call s:hi('Number', s:p.emerald, 'NONE', '29', 'NONE', 'NONE')
+call s:hi('Number', s:p.emerald, 'NONE', '22', 'NONE', 'NONE')
 call s:hi('Boolean', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
-call s:hi('Float', s:p.emerald, 'NONE', '29', 'NONE', 'NONE')
-call s:hi('Identifier', s:p.fg, 'NONE', '236', 'NONE', 'NONE')
+call s:hi('Float', s:p.emerald, 'NONE', '22', 'NONE', 'NONE')
+call s:hi('Identifier', s:p.fg, 'NONE', '235', 'NONE', 'NONE')
 call s:hi('Function', s:p.muted_blue, 'NONE', '24', 'NONE', 'bold')
 
-call s:hi('Statement', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('Conditional', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('Repeat', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('Keyword', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('Label', s:p.graphite, 'NONE', '239', 'NONE', 'NONE')
-call s:hi('Exception', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
+call s:hi('Statement', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('Conditional', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('Repeat', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('Keyword', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('Label', s:p.graphite, 'NONE', '237', 'NONE', 'NONE')
+call s:hi('Exception', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
 
-call s:hi('Operator', s:p.graphite, 'NONE', '239', 'NONE', 'NONE')
+call s:hi('Operator', s:p.graphite, 'NONE', '237', 'NONE', 'NONE')
 call s:hi('PreProc', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
 call s:hi('Include', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
 call s:hi('Define', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
 call s:hi('Macro', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
 call s:hi('PreCondit', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
-call s:hi('Type', s:p.fire_alarm, 'NONE', '95', 'NONE', 'italic')
-call s:hi('StorageClass', s:p.fire_alarm, 'NONE', '95', 'NONE', 'italic')
-call s:hi('Structure', s:p.fire_alarm, 'NONE', '95', 'NONE', 'italic')
-call s:hi('Typedef', s:p.fire_alarm, 'NONE', '95', 'NONE', 'italic')
+call s:hi('Type', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
+call s:hi('StorageClass', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
+call s:hi('Structure', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
+call s:hi('Typedef', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
 call s:hi('Special', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
-call s:hi('Delimiter', s:p.earth_delim, 'NONE', '101', 'NONE', 'NONE')
-call s:hi('Underlined', s:p.wood_link, 'NONE', '60', 'NONE', 'underline')
+call s:hi('Delimiter', s:p.earth_delim, 'NONE', '94', 'NONE', 'NONE')
+call s:hi('Underlined', s:p.wood_link, 'NONE', '26', 'NONE', 'underline')
 call s:hi('Ignore', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE')
-call s:hi('Error', s:p.fire_busy, s:p.bg, '131', '254', 'bold')
-call s:hi('Todo', s:p.wood_link, s:p.tint_todo, '60', '153', 'bold')
-call s:hi('ErrorMsg', s:p.fire_busy, s:p.bg, '131', '254', 'bold')
+call s:hi('Error', s:p.fire_busy, s:p.bg, '124', '254', 'bold')
+call s:hi('Todo', s:p.wood_link, s:p.tint_todo, '26', '153', 'bold')
+call s:hi('ErrorMsg', s:p.fire_busy, s:p.bg, '124', '254', 'bold')
 
 " =============================================================================
 " Editor UI
@@ -116,42 +117,42 @@ call s:hi('lCursor', s:p.bg, s:p.cursor_normal, '254', '167', 'NONE')
 call s:hi('TermCursor', s:p.bg, s:p.cursor_normal, '254', '167', 'NONE')
 call s:hi('CursorIM', s:p.bg, s:p.cursor_insert, '254', '64', 'NONE')
 " Inactive or specific UI cursors
-call s:hi('TermCursorNC', s:p.fg_sub, s:p.bg_alt, '238', '188', 'NONE')
+call s:hi('TermCursorNC', s:p.fg_sub, s:p.bg_alt, '236', '188', 'NONE')
 call s:hi('CursorLine', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
-call s:hi('LineNr', s:p.earth_gutter, s:p.bg, '246', '254', 'NONE')
-call s:hi('CursorLineNr', s:p.wood_link, s:p.bg_alt, '60', '188', 'bold')
+call s:hi('LineNr', s:p.earth_gutter, s:p.bg, '101', '254', 'NONE')
+call s:hi('CursorLineNr', s:p.wood_link, s:p.bg_alt, '26', '188', 'bold')
 
 " Statusline and Dividers
-call s:hi('StatusLine', s:p.fg, s:p.bg_alt, '236', '188', 'bold')
-call s:hi('StatusLineNC', s:p.fg_sub, s:p.bg_sub, '238', '255', 'NONE')
+call s:hi('StatusLine', s:p.fg, s:p.bg_alt, '235', '188', 'bold')
+call s:hi('StatusLineNC', s:p.fg_sub, s:p.bg_sub, '236', '255', 'NONE')
 call s:hi('VertSplit', s:p.split, s:p.split, '251', '251', 'NONE')
 
 " Menus and Selection
-call s:hi('Pmenu', s:p.fg, s:p.bg_line, '236', '255', 'NONE')
-call s:hi('PmenuSel', s:p.fg_bright, s:p.tint_pmsel, '235', '146', 'bold')
+call s:hi('Pmenu', s:p.fg, s:p.bg_line, '235', '255', 'NONE')
+call s:hi('PmenuSel', s:p.fg_bright, s:p.tint_pmsel, '233', '111', 'bold')
 call s:hi('PmenuSbar', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
-call s:hi('PmenuThumb', 'NONE', s:p.earth_gutter, 'NONE', '246', 'NONE')
-call s:hi('Visual', 'NONE', s:p.bg_sel, 'NONE', '189', 'NONE')
+call s:hi('PmenuThumb', 'NONE', s:p.earth_gutter, 'NONE', '101', 'NONE')
+call s:hi('Visual', 'NONE', s:p.bg_sel, 'NONE', '153', 'NONE')
 
 " Search and Navigation
-call s:hi('Search', s:p.fg_bright, s:p.tint_search, '235', '153', 'NONE')
-call s:hi('IncSearch', s:p.fg_bright, s:p.tint_inc, '235', '152', 'bold')
-call s:hi('NonText', s:p.earth_dust, 'NONE', '248', 'NONE', 'NONE')
+call s:hi('Search', s:p.fg_bright, s:p.tint_search, '233', '147', 'NONE')
+call s:hi('IncSearch', s:p.fg_bright, s:p.tint_inc, '233', '80', 'bold')
+call s:hi('NonText', s:p.earth_dust, 'NONE', '246', 'NONE', 'NONE')
 
 " Folds and Columns
 call s:hi('Folded', s:p.earth_literal, s:p.bg_alt, '94', '188', 'italic')
-call s:hi('FoldColumn', s:p.earth_gutter, s:p.bg, '246', '254', 'NONE')
+call s:hi('FoldColumn', s:p.earth_gutter, s:p.bg, '101', '254', 'NONE')
 call s:hi('ColorColumn', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
 
 " Messages and Others
-call s:hi('MatchParen', s:p.fire_alarm, '#cfd5ea', '95', '189', 'bold')
-call s:hi('Directory', s:p.wood_link, 'NONE', '60', 'NONE', 'bold')
-call s:hi('Title', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('MoreMsg', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('ModeMsg', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('Question', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('WarningMsg', s:p.wood_link, 'NONE', '60', 'NONE', 'bold')
-call s:hi('ErrorMsg', s:p.graphite, s:p.bg, '239', '254', 'bold')
+call s:hi('MatchParen', s:p.fire_alarm, '#c6cff0', '124', '189', 'bold')
+call s:hi('Directory', s:p.wood_link, 'NONE', '26', 'NONE', 'bold')
+call s:hi('Title', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('MoreMsg', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('ModeMsg', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('Question', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('WarningMsg', s:p.wood_link, 'NONE', '26', 'NONE', 'bold')
+call s:hi('ErrorMsg', s:p.graphite, s:p.bg, '237', '254', 'bold')
 "
 
 
@@ -165,10 +166,10 @@ if has('nvim')
   execute 'hi DiagnosticUnderlineHint  gui=undercurl guisp=' . s:p.emerald
 endif
 
-call s:hi('DiffAdd', s:p.fg, '#dff3e4', '236', '194', 'NONE')
-call s:hi('DiffChange', s:p.fg, '#dfe5fb', '236', '189', 'NONE')
-call s:hi('DiffDelete', s:p.fg, '#f8d6d4', '236', '217', 'NONE')
-call s:hi('DiffText', s:p.fg, '#f5e5c7', '236', '223', 'bold')
+call s:hi('DiffAdd', s:p.fg, '#dff3e4', '235', '194', 'NONE')
+call s:hi('DiffChange', s:p.fg, '#dfe5fb', '235', '189', 'NONE')
+call s:hi('DiffDelete', s:p.fg, '#f8d6d4', '235', '217', 'NONE')
+call s:hi('DiffText', s:p.fg, '#f5e5c7', '235', '223', 'bold')
 
 " =============================================================================
 " Forced Highlighting Logic
@@ -246,16 +247,16 @@ if get(g:, 'seoulism_rigorous', 1)
 endif
 " Semantic & Language Server Protocol Groups
 " =============================================================================
-call s:hi('LspVariable', s:p.fg_sub, 'NONE', '238', 'NONE', 'NONE')
+call s:hi('LspVariable', s:p.fg_sub, 'NONE', '236', 'NONE', 'NONE')
 call s:hi('LspParameter', s:p.muted_blue, 'NONE', '24', 'NONE', 'italic')
-call s:hi('LspKeyword', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('LspControlFlow', s:p.graphite, 'NONE', '239', 'NONE', 'bold')
-call s:hi('LspStaticVariable', s:p.wood_link, 'NONE', '60', 'NONE', 'bold')
-call s:hi('LspEnumMember', s:p.wood_link, 'NONE', '60', 'NONE', 'NONE')
-call s:hi('LspInterface', s:p.fire_alarm, 'NONE', '95', 'NONE', 'bold')
-call s:hi('LspStruct', s:p.fire_alarm, 'NONE', '95', 'NONE', 'italic')
-call s:hi('LspErrorText', s:p.graphite, 'NONE', '239', 'NONE', 'underline')
-call s:hi('LspWarningText', s:p.wood_link, 'NONE', '60', 'NONE', 'underline')
+call s:hi('LspKeyword', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('LspControlFlow', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
+call s:hi('LspStaticVariable', s:p.wood_link, 'NONE', '26', 'NONE', 'bold')
+call s:hi('LspEnumMember', s:p.wood_link, 'NONE', '26', 'NONE', 'NONE')
+call s:hi('LspInterface', s:p.fire_alarm, 'NONE', '124', 'NONE', 'bold')
+call s:hi('LspStruct', s:p.fire_alarm, 'NONE', '124', 'NONE', 'italic')
+call s:hi('LspErrorText', s:p.graphite, 'NONE', '237', 'NONE', 'underline')
+call s:hi('LspWarningText', s:p.wood_link, 'NONE', '26', 'NONE', 'underline')
 execute 'highlight vimVar guifg=' . s:p.fire_alarm . ' gui=italic'
 execute 'highlight vimFBVar guifg=' . s:p.fire_alarm . ' gui=italic'
 execute 'highlight vimAmbiguousVimVar guifg=' . s:p.fire_alarm . ' gui=italic'

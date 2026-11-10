@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-PAPER = '#fdfbf5'
-EDGE = '#f1ebdd'
-INK = '#111111'
-GRAPHITE = '#4c4943'
-DIVIDER = '#cdbb9b'
-ACCENT = '#b0231b'
+PAPER = '#e9e6df'
+EDGE = '#f4efe6'
+INK = '#25231f'
+GRAPHITE = '#403d36'
+DIVIDER = '#d2c9bd'
+ACCENT = '#a81813'
 
 COUNTER_CHAIN = [
     {
@@ -26,21 +26,21 @@ COUNTER_CHAIN = [
     {
         'step': '03',
         'name': 'WOOD -> EARTH',
-        'seoul': {'label': 'Indigo Literal', 'hex': '#2b4cc2', 'element': 'Wood'},
+        'seoul': {'label': 'Indigo Literal', 'hex': '#2949bf', 'element': 'Wood'},
         'trad': {'label': 'Ochre Archive', 'hex': '#c0841a', 'element': 'Earth'},
         'logic': 'Indigo literals snake through the ochre archive so storage has to flex around the vines.'
     },
     {
         'step': '04',
         'name': 'FIRE -> METAL',
-        'seoul': {'label': 'Ritual Type', 'hex': '#b0231b', 'element': 'Fire'},
+        'seoul': {'label': 'Ritual Type', 'hex': '#a81813', 'element': 'Fire'},
         'trad': {'label': 'Paper Field', 'hex': PAPER, 'element': 'Metal'},
         'logic': 'Fire-soaked type edges scar the paper field so the metal grid must heal every time.'
     },
     {
         'step': '05',
         'name': 'EARTH -> WATER',
-        'seoul': {'label': 'Ochre Annotation', 'hex': '#d29d3f', 'element': 'Earth'},
+        'seoul': {'label': 'Ochre Annotation', 'hex': '#745a26', 'element': 'Earth'},
         'trad': {'label': 'Ink Basin', 'hex': '#111111', 'element': 'Water'},
         'logic': 'Earthy annotations crust over the ink basin so Water commentary seeps up slowly.'
     }
@@ -83,7 +83,7 @@ def draw_seoulism_chain():
     row_gap = 25
 
     for idx, pair in enumerate(COUNTER_CHAIN):
-        y = 115 - idx * row_gap
+        y = 111 - idx * row_gap
         ax.text(left_x, y + 9.5, pair['name'], color=ACCENT,
                 fontsize=11, weight='bold')
         ax.text(left_x + 32, y + 9.5, pair['step'], color=GRAPHITE,
@@ -91,8 +91,8 @@ def draw_seoulism_chain():
         ax.text(left_x, y - 1.5, pair['logic'], color=GRAPHITE,
                 fontsize=9)
 
-        _draw_block(ax, left_x, y, f"{pair['seoul']['label']}\\n{pair['seoul']['element']}", pair['seoul']['hex'])
-        _draw_block(ax, right_x, y, f"{pair['trad']['label']}\\n{pair['trad']['element']}", pair['trad']['hex'])
+        _draw_block(ax, left_x, y, f"{pair['seoul']['label']}\n{pair['seoul']['element']}", pair['seoul']['hex'])
+        _draw_block(ax, right_x, y, f"{pair['trad']['label']}\n{pair['trad']['element']}", pair['trad']['hex'])
 
         ax.annotate('', xy=(right_x - 2, y + 4), xytext=(left_x + 18 + 2, y + 4),
                     arrowprops=dict(arrowstyle='-|>', color=ACCENT,

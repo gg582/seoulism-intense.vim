@@ -5,20 +5,20 @@ import matplotlib as mpl
 mpl.rcParams['font.family'] = 'Noto Sans CJK KR'
 mpl.rcParams['axes.unicode_minus'] = False # To prevent minus signs from breaking with Korean fonts
 
-PAPER = '#fdfbf5'
-EDGE = '#f1ebdd'
-INK = '#111111'
-GRAPHITE = '#4c4943'
-PAIR_ARROW = '#b0231b'
-STAR_ARROW = '#2f3b8f'
-NODE_OUTLINE = '#bfae95'
+PAPER = '#e9e6df'
+EDGE = '#f4efe6'
+INK = '#25231f'
+GRAPHITE = '#403d36'
+PAIR_ARROW = '#a81813'
+STAR_ARROW = '#4a5584'
+NODE_OUTLINE = '#c2b6a4'
 
 ELEMENTS = [
     ('WOOD',  '#0000FF', '#8a8f9f', 'Metal skin redirects growth'),
     ('FIRE',  '#FF0000', GRAPHITE, 'Water soot smothers sparks'),
-    ('EARTH', '#FFFF00', '#2b4cc2', 'Wood vines encircle mass'),
-    ('METAL', '#FFFFFF', '#b0231b', 'Fire glyphs scorch the grid'),
-    ('WATER', '#000000', '#d29d3f', 'Earth crust dams the basin'),
+    ('EARTH', '#FFFF00', '#2949bf', 'Wood vines encircle mass'),
+    ('METAL', '#FFFFFF', '#a81813', 'Fire glyphs scorch the grid'),
+    ('WATER', '#000000', '#745a26', 'Earth crust dams the basin'),
 ]
 
 COUNTER_PAIRS = [(3, 0), (4, 1), (0, 2), (1, 3), (2, 4)]
@@ -29,7 +29,7 @@ def _contrast(color: str) -> str:
     g = int(color[3:5], 16)
     b = int(color[5:7], 16)
     brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b
-    return INK if brightness > 160 else '#fdfbf5'
+    return INK if brightness > 160 else '#f4efe6'
 
 
 def draw_systemic_divergence():

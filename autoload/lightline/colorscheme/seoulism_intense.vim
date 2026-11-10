@@ -1,18 +1,18 @@
 " autoload/lightline/colorscheme/seoulism_intense.vim
 scriptencoding utf-8
 
-let s:ink        = ['#302e29', 236]
-let s:ink_soft   = ['#4a463f', 238]
+let s:ink        = ['#25231f', 235]
+let s:ink_soft   = ['#3a3731', 237]
 let s:paper      = ['#f4efe6', 255]
 let s:paper_mid  = ['#f1ebdd', 254]
 let s:paper_alt  = ['#ede4d5', 223]
 let s:paper_deep = ['#e4d6c4', 187]
 let s:cursor_blue = ['#add8e6', 153]
 
-let s:red        = ['#dea8a0', 181]
-let s:blue       = ['#aebde2', 146]
-let s:jade       = ['#9ac9c3', 116]
-let s:honey      = ['#d7b88f', 180]
+let s:red        = ['#e28376', 174]
+let s:blue       = ['#91acee', 111]
+let s:jade       = ['#64c1b7', 73]
+let s:honey      = ['#d79f4c', 179]
 let s:graphite   = ['#9a9186', 250]
 
 function! s:seg(fg, bg, ...) abort
@@ -104,16 +104,16 @@ let s:p.tabline.right = [ s:seg(s:ink_soft, s:paper_mid) ]
 let s:p.tabline.tabsel = [ s:seg(s:ink, s:jade, 'bold') ]
 
 " Command area keeps the paper glow
-highlight CommandModeMsg guifg=#302e29 guibg=#f4efe6 gui=bold
-highlight ModeMsg guifg=#302e29 gui=bold
+highlight CommandModeMsg guifg=#25231f guibg=#f4efe6 gui=bold
+highlight ModeMsg guifg=#25231f gui=bold
 
 augroup SeoulismCommandLogic
   autocmd!
-  autocmd CmdLineEnter * highlight StatusLine guifg=#302e29 guibg=#f4efe6 gui=bold
-  autocmd CmdLineLeave * highlight StatusLine guifg=#302e29 guibg=#ede4d5 gui=bold
+  autocmd CmdLineEnter * highlight StatusLine guifg=#25231f guibg=#f4efe6 gui=bold
+  autocmd CmdLineLeave * highlight StatusLine guifg=#25231f guibg=#ede4d5 gui=bold
 augroup END
 
-highlight SpecialKey guifg=#968d83
-highlight NonText guifg=#968d83
+highlight SpecialKey guifg=#8b8378
+highlight NonText guifg=#8b8378
 
 let g:lightline#colorscheme#seoulism_intense#palette = lightline#colorscheme#fill(s:p)

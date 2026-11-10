@@ -213,6 +213,8 @@ A practical starting point:
 
 ![Code Example](./code_example.png)
 
+The code example is rendered from the live colorscheme: `python3 code_example.py` opens `edge-case.c` in headless Vim, reads each character's resolved highlight, and redraws `code_example.png`. The diagrams are regenerated with `preview.py`, `visualizer.py`, and `pentagon.py`.
+
 ---
 
 ## Notes

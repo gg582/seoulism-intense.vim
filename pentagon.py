@@ -5,8 +5,8 @@ import matplotlib as mpl
 mpl.rcParams['font.family'] = 'Noto Sans CJK KR'
 mpl.rcParams['axes.unicode_minus'] = False # To prevent minus signs from breaking with Korean fonts
 
-PAPER = '#e9e6df'
-EDGE = '#f4efe6'
+PAPER = '#f2f0ed'
+EDGE = '#f8f6f4'
 INK = '#25231f'
 GRAPHITE = '#403d36'
 PAIR_ARROW = '#a81813'
@@ -29,7 +29,7 @@ def _contrast(color: str) -> str:
     g = int(color[3:5], 16)
     b = int(color[5:7], 16)
     brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b
-    return INK if brightness > 160 else '#f4efe6'
+    return INK if brightness > 160 else '#f8f6f4'
 
 
 def draw_systemic_divergence():

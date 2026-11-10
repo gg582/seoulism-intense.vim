@@ -32,7 +32,7 @@ Seoulism originally staged the code inside pine-ink darkness. The new build reve
 
 ### White paper, black ink
 
-The canvas uses `#e9e6df`, a slight-warm hanji tone. The default text is `#25231f`, a softened pine soot ink (~12.5:1 contrast instead of near-pure black, to reduce halation). Comments drift into ochre (`#745a26`, ~5.2:1) so the code line always starts as ink on paper.
+The canvas uses `#f2f0ed`, a barely-warm off-white hanji tone (yellow cast kept below OKLCH chroma 0.005). The default text is `#25231f`, a softened pine soot ink (~12.5:1 contrast instead of near-pure black, to reduce halation). Comments drift into ochre (`#745a26`, ~5.2:1) so the code line always starts as ink on paper.
 
 ### Ergonomic tuning
 

@@ -3,10 +3,10 @@ scriptencoding utf-8
 
 let s:ink        = ['#25231f', 235]
 let s:ink_soft   = ['#3a3731', 237]
-let s:paper      = ['#f4efe6', 255]
-let s:paper_mid  = ['#f1ebdd', 254]
-let s:paper_alt  = ['#ede4d5', 223]
-let s:paper_deep = ['#e4d6c4', 187]
+let s:paper      = ['#f8f6f4', 255]
+let s:paper_mid  = ['#e9e6e2', 254]
+let s:paper_alt  = ['#e3dfda', 254]
+let s:paper_deep = ['#dbd5cd', 188]
 let s:cursor_blue = ['#add8e6', 153]
 
 let s:red        = ['#e28376', 174]
@@ -104,13 +104,13 @@ let s:p.tabline.right = [ s:seg(s:ink_soft, s:paper_mid) ]
 let s:p.tabline.tabsel = [ s:seg(s:ink, s:jade, 'bold') ]
 
 " Command area keeps the paper glow
-highlight CommandModeMsg guifg=#25231f guibg=#f4efe6 gui=bold
+highlight CommandModeMsg guifg=#25231f guibg=#f8f6f4 gui=bold
 highlight ModeMsg guifg=#25231f gui=bold
 
 augroup SeoulismCommandLogic
   autocmd!
-  autocmd CmdLineEnter * highlight StatusLine guifg=#25231f guibg=#f4efe6 gui=bold
-  autocmd CmdLineLeave * highlight StatusLine guifg=#25231f guibg=#ede4d5 gui=bold
+  autocmd CmdLineEnter * highlight StatusLine guifg=#25231f guibg=#f8f6f4 gui=bold
+  autocmd CmdLineLeave * highlight StatusLine guifg=#25231f guibg=#e3dfda gui=bold
 augroup END
 
 highlight SpecialKey guifg=#8b8378

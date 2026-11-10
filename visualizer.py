@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-PAPER = '#e9e6df'
-EDGE = '#f4efe6'
+PAPER = '#f2f0ed'
+EDGE = '#f8f6f4'
 INK = '#25231f'
 GRAPHITE = '#403d36'
-DIVIDER = '#d2c9bd'
+DIVIDER = '#d5d0ca'
 ACCENT = '#a81813'
 
 COUNTER_CHAIN = [

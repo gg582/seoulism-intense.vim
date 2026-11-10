@@ -18,11 +18,11 @@ let s:p = {}
 " syntax sits at WCAG ~6:1 on a lighter field (ink ~12.5:1, comments ~5.2:1,
 " delimiters ~4.5:1, gutter ~3.3:1). Bright-but-low-contrast accents, the
 " main source of glare, are removed rather than desaturated.
-let s:p.metal_field  = '#e9e6df'
-let s:p.metal_edge   = '#f1ebdd'
-let s:p.metal_mute   = '#dccfd0'
+let s:p.metal_field  = '#f2f0ed'
+let s:p.metal_edge   = '#e9e6e2'
+let s:p.metal_mute   = '#ebe0e1'
 let s:p.bg           = s:p.metal_field
-let s:p.bg_sub       = '#f4efe6'
+let s:p.bg_sub       = '#f8f6f4'
 let s:p.bg_alt       = s:p.metal_mute
 let s:p.bg_sel       = '#bbc5ef'
 let s:p.bg_line      = s:p.metal_edge
@@ -49,7 +49,7 @@ let s:p.muted_blue   = '#325685'
 let s:p.charcoal     = '#8b8378'
 let s:p.signal_blue  = '#364fbc'
 let s:p.cursor_blue  = '#add8e6'
-let s:p.split        = '#d2c9bd'
+let s:p.split        = '#d5d0ca'
 
 " Soft tints (same hues) for filled highlights instead of solid saturated blocks
 let s:p.tint_search  = '#9db9fc'
@@ -67,8 +67,8 @@ endfunction
 " =============================================================================
 " Core Syntax
 " =============================================================================
-call s:hi('Normal', s:p.fg, s:p.bg, '235', '254', 'NONE')
-call s:hi('NormalNC', s:p.fg_sub, s:p.bg, '236', '254', 'NONE')
+call s:hi('Normal', s:p.fg, s:p.bg, '235', '255', 'NONE')
+call s:hi('NormalNC', s:p.fg_sub, s:p.bg, '236', '255', 'NONE')
 call s:hi('Comment', s:p.earth_comment, 'NONE', '94', 'NONE', 'italic')
 call s:hi('Constant', s:p.signal_blue, 'NONE', '25', 'NONE', 'NONE')
 call s:hi('String', s:p.wood_link, 'NONE', '26', 'NONE', 'NONE')
@@ -100,9 +100,9 @@ call s:hi('Special', s:p.wood_jade, 'NONE', '23', 'NONE', 'NONE')
 call s:hi('Delimiter', s:p.earth_delim, 'NONE', '94', 'NONE', 'NONE')
 call s:hi('Underlined', s:p.wood_link, 'NONE', '26', 'NONE', 'underline')
 call s:hi('Ignore', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE')
-call s:hi('Error', s:p.fire_busy, s:p.bg, '124', '254', 'bold')
+call s:hi('Error', s:p.fire_busy, s:p.bg, '124', '255', 'bold')
 call s:hi('Todo', s:p.wood_link, s:p.tint_todo, '26', '153', 'bold')
-call s:hi('ErrorMsg', s:p.fire_busy, s:p.bg, '124', '254', 'bold')
+call s:hi('ErrorMsg', s:p.fire_busy, s:p.bg, '124', '255', 'bold')
 
 " =============================================================================
 " Editor UI
@@ -112,25 +112,25 @@ let s:p.cursor_normal = '#cd5c5c' " Soft Terracotta (Normal/Exit)
 let s:p.cursor_insert = '#6b8e23' " Muted Olive Green (Insert)
 
 " Cursor settings - Using foreground from background (s:p.bg) for maximum legibility
-call s:hi('Cursor', s:p.bg, s:p.cursor_normal, '254', '167', 'NONE')
-call s:hi('lCursor', s:p.bg, s:p.cursor_normal, '254', '167', 'NONE')
-call s:hi('TermCursor', s:p.bg, s:p.cursor_normal, '254', '167', 'NONE')
-call s:hi('CursorIM', s:p.bg, s:p.cursor_insert, '254', '64', 'NONE')
+call s:hi('Cursor', s:p.bg, s:p.cursor_normal, '255', '167', 'NONE')
+call s:hi('lCursor', s:p.bg, s:p.cursor_normal, '255', '167', 'NONE')
+call s:hi('TermCursor', s:p.bg, s:p.cursor_normal, '255', '167', 'NONE')
+call s:hi('CursorIM', s:p.bg, s:p.cursor_insert, '255', '64', 'NONE')
 " Inactive or specific UI cursors
-call s:hi('TermCursorNC', s:p.fg_sub, s:p.bg_alt, '236', '188', 'NONE')
-call s:hi('CursorLine', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
-call s:hi('LineNr', s:p.earth_gutter, s:p.bg, '101', '254', 'NONE')
-call s:hi('CursorLineNr', s:p.wood_link, s:p.bg_alt, '26', '188', 'bold')
+call s:hi('TermCursorNC', s:p.fg_sub, s:p.bg_alt, '236', '254', 'NONE')
+call s:hi('CursorLine', 'NONE', s:p.bg_alt, 'NONE', '254', 'NONE')
+call s:hi('LineNr', s:p.earth_gutter, s:p.bg, '101', '255', 'NONE')
+call s:hi('CursorLineNr', s:p.wood_link, s:p.bg_alt, '26', '254', 'bold')
 
 " Statusline and Dividers
-call s:hi('StatusLine', s:p.fg, s:p.bg_alt, '235', '188', 'bold')
+call s:hi('StatusLine', s:p.fg, s:p.bg_alt, '235', '254', 'bold')
 call s:hi('StatusLineNC', s:p.fg_sub, s:p.bg_sub, '236', '255', 'NONE')
-call s:hi('VertSplit', s:p.split, s:p.split, '251', '251', 'NONE')
+call s:hi('VertSplit', s:p.split, s:p.split, '252', '252', 'NONE')
 
 " Menus and Selection
-call s:hi('Pmenu', s:p.fg, s:p.bg_line, '235', '255', 'NONE')
+call s:hi('Pmenu', s:p.fg, s:p.bg_line, '235', '254', 'NONE')
 call s:hi('PmenuSel', s:p.fg_bright, s:p.tint_pmsel, '233', '111', 'bold')
-call s:hi('PmenuSbar', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
+call s:hi('PmenuSbar', 'NONE', s:p.bg_alt, 'NONE', '254', 'NONE')
 call s:hi('PmenuThumb', 'NONE', s:p.earth_gutter, 'NONE', '101', 'NONE')
 call s:hi('Visual', 'NONE', s:p.bg_sel, 'NONE', '153', 'NONE')
 
@@ -140,9 +140,9 @@ call s:hi('IncSearch', s:p.fg_bright, s:p.tint_inc, '233', '80', 'bold')
 call s:hi('NonText', s:p.earth_dust, 'NONE', '246', 'NONE', 'NONE')
 
 " Folds and Columns
-call s:hi('Folded', s:p.earth_literal, s:p.bg_alt, '94', '188', 'italic')
-call s:hi('FoldColumn', s:p.earth_gutter, s:p.bg, '101', '254', 'NONE')
-call s:hi('ColorColumn', 'NONE', s:p.bg_alt, 'NONE', '188', 'NONE')
+call s:hi('Folded', s:p.earth_literal, s:p.bg_alt, '94', '254', 'italic')
+call s:hi('FoldColumn', s:p.earth_gutter, s:p.bg, '101', '255', 'NONE')
+call s:hi('ColorColumn', 'NONE', s:p.bg_alt, 'NONE', '254', 'NONE')
 
 " Messages and Others
 call s:hi('MatchParen', s:p.fire_alarm, '#c6cff0', '124', '189', 'bold')
@@ -152,7 +152,7 @@ call s:hi('MoreMsg', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
 call s:hi('ModeMsg', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
 call s:hi('Question', s:p.graphite, 'NONE', '237', 'NONE', 'bold')
 call s:hi('WarningMsg', s:p.wood_link, 'NONE', '26', 'NONE', 'bold')
-call s:hi('ErrorMsg', s:p.graphite, s:p.bg, '237', '254', 'bold')
+call s:hi('ErrorMsg', s:p.graphite, s:p.bg, '237', '255', 'bold')
 "
 
 
